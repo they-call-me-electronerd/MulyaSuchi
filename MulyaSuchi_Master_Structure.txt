@@ -1,0 +1,1690 @@
+# 🏔️ मूल्यसूची (MULYASUCHI) - MASTER PROJECT STRUCTURE
+## Nepal's Official Price Index Platform
+
+**Project Name:** मूल्यसूची (MulyaSuchi) - Nepal's Price Intelligence Platform
+**Version:** 2.0  
+**Stack:** PHP 8.2+ | MySQL 8.0+ | Vanilla JS (ES6+) | SCSS  
+**Architecture:** MVC Pattern | RESTful API | Progressive Web App (PWA)  
+**Deployment:** NGINX | PHP-FPM | Redis Cache | Cloudflare CDN
+**Domain:** mulyasuchi.com.np
+**Tagline:** "Nepal's Official Price Index" | "नेपालको आधिकारिक मूल्यसूची"
+
+**Created by:** @jasminesharmakuok
+**Date:** 2025-11-21
+
+---
+
+## 📋 PROJECT OVERVIEW
+
+MulyaSuchi (मूल्यसूची) is a centralized market intelligence platform designed to provide 
+the general public with accurate, daily average market prices for a wide range of items 
+in the Nepali market.
+
+**Core Mission:**
+Bridge the information gap between market hubs and consumers by providing instant access 
+to current valuations of items ranging from daily essentials to high-end tech products, 
+fostering transparency in Nepal's economy.
+
+**Key Features:**
+- Real-time price tracking across 8+ categories
+- Bilingual support (English/Nepali - Devanagari)
+- Contributor-based data collection with Master Admin validation
+- Historical price trends and analytics
+- Mobile-first responsive design
+- SEO-optimized for maximum reach
+- PWA capabilities for offline access
+
+---
+
+## 📁 COMPLETE PROJECT ROOT STRUCTURE
+
+mulyasuchi/
+├── 📂 public/                          # Public web root (DocumentRoot)
+│   ├── index.php                       # Application entry point
+│   ├── .htaccess                       # Apache rewrite rules
+│   ├── robots.txt                      # SEO crawler instructions
+│   ├── sitemap.xml                     # Auto-generated sitemap
+│   ├── manifest.json                   # PWA manifest
+│   ├── sw.js                           # Service Worker for offline
+│   │
+│   ├── 📂 assets/
+│   │   ├── 📂 css/
+│   │   │   ├── main.min.css            # Compiled & minified
+│   │   │   ├── admin.min.css
+│   │   │   └── contributor.min.css
+│   │   │
+│   │   ├── 📂 js/
+│   │   │   ├── app.min.js              # Core application JS
+│   │   │   ├── search.min.js           # Real-time search
+│   │   │   ├── chart.min.js            # Price trend charts
+│   │   │   └── alpine.min.js           # Alpine.js for reactivity
+│   │   │
+│   │   ├── 📂 images/
+│   │   │   ├── logo.svg                # MulyaSuchi vector logo
+│   │   │   ├── logo-white.svg
+│   │   │   ├── favicon.ico
+│   │   │   ├── og-image.jpg            # Open Graph image
+│   │   │   └── 📂 categories/          # Category icons
+│   │   │
+│   │   ├── 📂 fonts/
+│   │   │   ├── NotoSansDevanagari-Regular.woff2
+│   │   │   ├── NotoSansDevanagari-Bold.woff2
+│   │   │   └── Inter-Variable.woff2    # Latin font
+│   │   │
+│   │   └── 📂 uploads/
+│   │       ├── 📂 items/               # Item images (WebP optimized)
+│   │       └── 📂 temp/                # Temporary uploads
+│   │
+│   └── 📂 api/                         # RESTful API endpoints
+│       ├── v1/
+│       │   ├── items.php               # GET /api/v1/items
+│       │   ├── search.php              # GET /api/v1/search?q=
+│       │   ├── categories.php          # GET /api/v1/categories
+│       │   ├── trends.php              # GET /api/v1/trends
+│       │   └── validate.php            # POST (Admin only)
+│       └── docs.php                    # API documentation
+│
+├── 📂 app/                             # Application core (MVC)
+│   ├── 📂 Controllers/
+│   │   ├── HomeController.php          # Public landing page
+│   │   ├── SearchController.php        # Search & filters
+│   │   ├── ItemController.php          # Item details
+│   │   ├── ContributorController.php   # Contributor panel
+│   │   ├── AdminController.php         # Admin panel
+│   │   └── AuthController.php          # Login/Logout/2FA
+│   │
+│   ├── 📂 Models/
+│   │   ├── Item.php                    # Item CRUD + validation
+│   │   ├── Price.php                   # Price history
+│   │   ├── Category.php                # Category management
+│   │   ├── User.php                    # User management
+│   │   ├── PriceUpdate.php             # Pending updates queue
+│   │   ├── Log.php                     # System audit logs
+│   │   └── Notification.php            # In-app notifications
+│   │
+│   ├── 📂 Views/
+│   │   ├── 📂 layouts/
+│   │   │   ├── header.php              # Global header with MulyaSuchi branding
+│   │   │   ├── footer.php              # Global footer
+│   │   │   ├── nav-public.php          # Public navigation
+│   │   │   ├── nav-contributor.php
+│   │   │   └── nav-admin.php
+│   │   │
+│   │   ├── 📂 public/
+│   │   │   ├── home.php                # Landing page
+│   │   │   ├── category.php            # Category listing
+│   │   │   ├── item-detail.php         # Item detail page
+│   │   │   ├── search-results.php
+│   │   │   ├── about.php
+│   │   │   └── how-it-works.php
+│   │   │
+│   │   ├── 📂 contributor/
+│   │   │   ├── dashboard.php
+│   │   │   ├── add-item.php
+│   │   │   ├── update-price.php
+│   │   │   ├── my-logs.php
+│   │   │   └── profile.php
+│   │   │
+│   │   ├── 📂 admin/
+│   │   │   ├── dashboard.php
+│   │   │   ├── validation-queue.php    # ⭐ Critical page
+│   │   │   ├── item-management.php
+│   │   │   ├── user-management.php
+│   │   │   ├── category-management.php
+│   │   │   ├── system-logs.php
+│   │   │   ├── analytics.php           # Price trends & stats
+│   │   │   └── settings.php
+│   │   │
+│   │   └── 📂 auth/
+│   │       ├── login.php
+│   │       ├── 2fa-verify.php
+│   │       └── forgot-password.php
+│   │
+│   ├── 📂 Middleware/
+│   │   ├── AuthMiddleware.php          # Session validation
+│   │   ├── RoleMiddleware.php          # Role-based access
+│   │   ├── RateLimitMiddleware.php     # API rate limiting
+│   │   └── CSRFMiddleware.php          # CSRF protection
+│   │
+│   ├── 📂 Helpers/
+│   │   ├── ValidationHelper.php        # Input validation
+│   │   ├── ImageHelper.php             # Image upload/resize/WebP
+│   │   ├── SEOHelper.php               # Meta tags generator
+│   │   ├── CacheHelper.php             # Redis cache wrapper
+│   │   ├── NepaliHelper.php            # Nepali date/number utils
+│   │   └── SecurityHelper.php          # XSS/SQL injection prevention
+│   │
+│   └── 📂 Services/
+│       ├── PriceAnalytics.php          # Trend calculation
+│       ├── NotificationService.php     # Email/Push notifications
+│       ├── SearchService.php           # Elasticsearch integration
+│       ├── ExportService.php           # CSV/PDF export
+│       └── BackupService.php           # Database backup
+│
+├── 📂 config/
+│   ├── database.php                    # DB credentials
+│   ├── app.php                         # App settings
+│   ├── mail.php                        # SMTP config
+│   ├── cache.php                       # Redis config
+│   └── constants.php                   # Global constants
+│
+├── 📂 database/
+│   ├── 📂 migrations/
+│   │   ├── 001_create_users_table.sql
+│   │   ├── 002_create_categories_table.sql
+│   │   ├── 003_create_items_table.sql
+│   │   ├── 004_create_prices_table.sql
+│   │   ├── 005_create_price_updates_table.sql
+│   │   ├── 006_create_logs_table.sql
+│   │   └── 007_create_notifications_table.sql
+│   │
+│   ├── 📂 seeds/
+│   │   ├── categories_seed.sql         # Default categories
+│   │   └── admin_user_seed.sql         # Initial admin
+│   │
+│   └── schema.sql                      # Complete DB schema
+│
+├── 📂 storage/
+│   ├── 📂 logs/
+│   │   ├── app.log                     # Application logs
+│   │   ├── error.log                   # PHP errors
+│   │   └── security.log                # Security events
+│   │
+│   ├── 📂 cache/                       # File-based cache
+│   └── 📂 sessions/                    # PHP sessions
+│
+├── 📂 tests/                           # PHPUnit tests
+│   ├── Unit/
+│   ├── Integration/
+│   └── Feature/
+│
+├── 📂 scripts/
+│   ├── deploy.sh                       # Deployment script
+│   ├── backup.sh                       # Automated backup
+│   ├── optimize.sh                     # Image optimization
+│   └── sitemap-generator.php           # Sitemap automation
+│
+├── 📂 docs/
+│   ├── API.md                          # API documentation
+│   ├── DATABASE.md                     # Database schema docs
+│   ├── DEPLOYMENT.md                   # Server setup guide
+│   └── CONTRIBUTING.md                 # Contributor guidelines
+│
+├── .env.example                        # Environment template
+├── .env                                # Environment variables (gitignored)
+├── .gitignore
+├── composer.json                       # PHP dependencies
+├── composer.lock
+├── package.json                        # Node.js build tools
+├── gulpfile.js                         # Gulp task runner
+└── README.md
+
+---
+
+## 🗄️ DATABASE SCHEMA (MySQL 8.0+)
+
+### TABLE 1: users
+Purpose: Store contributor and admin user accounts
+
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'contributor') NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
+    avatar VARCHAR(255) DEFAULT NULL,
+    phone VARCHAR(15) DEFAULT NULL,
+    status ENUM('active', 'suspended', 'inactive') DEFAULT 'active',
+    email_verified_at TIMESTAMP NULL,
+    two_factor_secret VARCHAR(255) DEFAULT NULL,
+    last_login_at TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_role (role),
+    INDEX idx_status (status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+### TABLE 2: categories
+Purpose: Store market categories (Vegetables, Fruits, Tech, etc.)
+
+CREATE TABLE categories (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name_en VARCHAR(100) NOT NULL,
+    name_ne VARCHAR(100) NOT NULL,
+    slug VARCHAR(100) UNIQUE NOT NULL,
+    icon VARCHAR(100) DEFAULT NULL,
+    description TEXT,
+    display_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_slug (slug),
+    INDEX idx_active (is_active)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- SEED DATA: Default Categories
+INSERT INTO categories (name_en, name_ne, slug, display_order) VALUES
+('Vegetables', 'तरकारी', 'vegetables', 1),
+('Fruits', 'फलफूल', 'fruits', 2),
+('Kitchen Appliances', 'भान्साका सामान', 'kitchen-appliances', 3),
+('Study Material', 'अध्ययन सामग्री', 'study-material', 4),
+('Clothing', 'कपडा', 'clothing', 5),
+('Tools', 'औजार', 'tools', 6),
+('Electrical Appliances', 'विद्युतीय उपकरण', 'electrical-appliances', 7),
+('Tech/Gadgets', 'प्रविधि/ग्याजेट', 'tech-gadgets', 8),
+('Miscellaneous', 'विविध', 'miscellaneous', 9);
+
+
+### TABLE 3: items
+Purpose: Store all market items with current prices
+
+CREATE TABLE items (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    item_id VARCHAR(20) UNIQUE NOT NULL,
+    name_en VARCHAR(150) NOT NULL,
+    name_ne VARCHAR(150) NOT NULL,
+    slug VARCHAR(150) UNIQUE NOT NULL,
+    category_id INT UNSIGNED NOT NULL,
+    description TEXT,
+    unit ENUM('kg', 'piece', 'liter', 'dozen', 'packet', 'meter', 'gram') NOT NULL,
+    current_price DECIMAL(10,2) NOT NULL,
+    previous_price DECIMAL(10,2) DEFAULT NULL,
+    market_location VARCHAR(100) DEFAULT NULL,
+    image_url VARCHAR(255) DEFAULT NULL,
+    tags JSON,
+    view_count INT DEFAULT 0,
+    status ENUM('active', 'inactive', 'pending') DEFAULT 'pending',
+    created_by INT UNSIGNED NOT NULL,
+    last_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE CASCADE,
+    FULLTEXT INDEX ft_search (name_en, name_ne, tags),
+    INDEX idx_category (category_id),
+    INDEX idx_status (status),
+    INDEX idx_slug (slug)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+### TABLE 4: price_history
+Purpose: Track historical price changes for trend analysis
+
+CREATE TABLE price_history (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    item_id INT UNSIGNED NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    market_location VARCHAR(100) DEFAULT NULL,
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE,
+    INDEX idx_item_date (item_id, recorded_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+### TABLE 5: price_updates ⭐ (VALIDATION QUEUE)
+Purpose: Store pending price updates awaiting admin validation
+
+CREATE TABLE price_updates (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    item_id INT UNSIGNED NOT NULL,
+    old_price DECIMAL(10,2) NOT NULL,
+    new_price DECIMAL(10,2) NOT NULL,
+    price_change_percent DECIMAL(5,2) GENERATED ALWAYS AS (
+        ((new_price - old_price) / old_price) * 100
+    ) STORED,
+    source_info VARCHAR(255),
+    market_location VARCHAR(100),
+    submitted_by INT UNSIGNED NOT NULL,
+    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+    reviewed_by INT UNSIGNED DEFAULT NULL,
+    review_note TEXT DEFAULT NULL,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    reviewed_at TIMESTAMP NULL,
+    FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE,
+    FOREIGN KEY (submitted_by) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (reviewed_by) REFERENCES users(id) ON DELETE SET NULL,
+    INDEX idx_status (status),
+    INDEX idx_submitted_by (submitted_by)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+### TABLE 6: system_logs
+Purpose: Audit trail for all system actions
+
+CREATE TABLE system_logs (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED DEFAULT NULL,
+    action VARCHAR(100) NOT NULL,
+    entity_type VARCHAR(50),
+    entity_id INT UNSIGNED DEFAULT NULL,
+    old_value TEXT,
+    new_value TEXT,
+    ip_address VARCHAR(45),
+    user_agent VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    INDEX idx_user (user_id),
+    INDEX idx_action (action),
+    INDEX idx_created (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+### TABLE 7: notifications
+Purpose: In-app notifications for users
+
+CREATE TABLE notifications (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    type ENUM('info', 'success', 'warning', 'error') DEFAULT 'info',
+    title VARCHAR(150) NOT NULL,
+    message TEXT NOT NULL,
+    link VARCHAR(255) DEFAULT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_user_read (user_id, is_read)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+---
+
+## 🎨 DESIGN SYSTEM & UI/UX SPECIFICATIONS
+
+### COLOR PALETTE (Nepal-Inspired Professional)
+
+Primary Colors:
+$nepal-crimson: #DC143C;        // Nepal flag red
+$nepal-blue: #003893;           // Deep professional blue
+$himalayan-white: #FFFFFF;
+$temple-gold: #FFD700;
+
+Semantic Colors:
+$success: #059669;              // Emerald green
+$warning: #F59E0B;              // Amber
+$error: #DC2626;                // Red
+$info: #3B82F6;                 // Blue
+
+Neutrals:
+$gray-50: #F9FAFB;
+$gray-100: #F3F4F6;
+$gray-200: #E5E7EB;
+$gray-600: #4B5563;
+$gray-900: #111827;
+
+Gradients:
+$hero-gradient: linear-gradient(135deg, $nepal-blue 0%, $nepal-crimson 100%);
+$card-gradient: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
+
+
+### TYPOGRAPHY
+
+Primary Font Stack (Bilingual Support):
+font-family: 'Noto Sans Devanagari', 'Inter', -apple-system, BlinkMacSystemFont, 
+             'Segoe UI', sans-serif;
+
+Font Sizes (Responsive Scale):
+$text-xs: 0.75rem;      // 12px
+$text-sm: 0.875rem;     // 14px
+$text-base: 1rem;       // 16px
+$text-lg: 1.125rem;     // 18px
+$text-xl: 1.25rem;      // 20px
+$text-2xl: 1.5rem;      // 24px
+$text-3xl: 1.875rem;    // 30px
+$text-4xl: 2.25rem;     // 36px
+$text-5xl: 3rem;        // 48px
+
+Font Weights:
+$font-regular: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+
+### SPACING SYSTEM (8px Base Grid)
+
+$spacing-0: 0;
+$spacing-1: 0.25rem;    // 4px
+$spacing-2: 0.5rem;     // 8px
+$spacing-3: 0.75rem;    // 12px
+$spacing-4: 1rem;       // 16px
+$spacing-6: 1.5rem;     // 24px
+$spacing-8: 2rem;       // 32px
+$spacing-12: 3rem;      // 48px
+$spacing-16: 4rem;      // 64px
+$spacing-24: 6rem;      // 96px
+
+
+### COMPONENT LIBRARY
+
+1. BUTTONS
+   - Primary Button: Solid nepal-crimson background, white text
+   - Secondary Button: Outlined nepal-blue border, blue text
+   - Ghost Button: Transparent, gray text, hover background
+   - Danger Button: Solid error red background
+
+2. CARDS
+   - Elevated Card: box-shadow, rounded corners (8px)
+   - Outlined Card: 1px border, no shadow
+   - Interactive Card: Hover scale(1.02) transition
+
+3. FORMS
+   - Floating Labels: Label moves up on focus
+   - Inline Validation: Real-time error messages
+   - Input Heights: 44px minimum (touch-friendly)
+
+4. NAVIGATION
+   - Top Navigation: Fixed position, blur backdrop
+   - Breadcrumbs: Home > Category > Item
+   - Pagination: Numbered with prev/next
+
+5. MODALS
+   - Slide-up Animation: transform translateY(100%) to 0
+   - Backdrop Blur: backdrop-filter: blur(4px)
+   - Close on ESC key
+
+
+---
+
+## 🚀 API ENDPOINTS DOCUMENTATION
+
+Base URL: https://mulyasuchi.com.np/api/v1/
+
+### PUBLIC ENDPOINTS (No Authentication Required)
+
+1. GET /items
+   Description: List all active items with pagination
+   Parameters:
+     - page (integer, default: 1)
+     - limit (integer, default: 20, max: 100)
+     - category (string, optional)
+     - sort (string, optional: 'price_asc', 'price_desc', 'popular')
+   Response:
+   {
+     "success": true,
+     "data": {
+       "items": [...],
+       "pagination": {
+         "current_page": 1,
+         "total_pages": 15,
+         "total_items": 285
+       }
+     }
+   }
+
+2. GET /items/{id}
+   Description: Get detailed information for a specific item
+   Response:
+   {
+     "success": true,
+     "data": {
+       "id": 123,
+       "name_en": "Red Onion",
+       "name_ne": "रातो प्याज",
+       "current_price": 120.00,
+       "unit": "kg",
+       "trend": "up",
+       "price_change_percent": 8.5
+     }
+   }
+
+3. GET /search?q={query}
+   Description: Search items by name or tags
+   Parameters:
+     - q (string, required, min: 2 characters)
+     - category (string, optional)
+   Response:
+   {
+     "success": true,
+     "data": {
+       "results": [...],
+       "count": 12
+     }
+   }
+
+4. GET /categories
+   Description: List all active categories
+   Response:
+   {
+     "success": true,
+     "data": [
+       {"id": 1, "name_en": "Vegetables", "name_ne": "तरकारी", "slug": "vegetables"},
+       ...
+     ]
+   }
+
+5. GET /trends
+   Description: Get top 10 items with significant price changes
+   Response:
+   {
+     "success": true,
+     "data": {
+       "trending_up": [...],
+       "trending_down": [...]
+     }
+   }
+
+6. GET /items/{id}/history
+   Description: Get price history for chart visualization
+   Parameters:
+     - period (string, optional: '7d', '30d', '90d', default: '30d')
+   Response:
+   {
+     "success": true,
+     "data": [
+       {"date": "2025-11-01", "price": 110.00},
+       {"date": "2025-11-08", "price": 115.00},
+       ...
+     ]
+   }
+
+
+### CONTRIBUTOR ENDPOINTS (Authentication Required)
+
+7. POST /items
+   Description: Add a new item (status: pending)
+   Headers: Authorization: Bearer {token}
+   Request Body:
+   {
+     "name_en": "Green Apple",
+     "name_ne": "हरियो स्याउ",
+     "category_id": 2,
+     "unit": "kg",
+     "current_price": 250.00,
+     "market_location": "Kalimati",
+     "tags": ["apple", "fruit", "imported"],
+     "image": "base64_encoded_image"
+   }
+
+8. PUT /items/{id}/price
+   Description: Submit price update (pending validation)
+   Headers: Authorization: Bearer {token}
+   Request Body:
+   {
+     "new_price": 135.00,
+     "source_info": "Kalimati Market Survey",
+     "market_location": "Kalimati"
+   }
+
+9. GET /contributor/logs
+   Description: Get submission history for logged-in contributor
+   Response:
+   {
+     "success": true,
+     "data": {
+       "pending": 5,
+       "approved": 142,
+       "rejected": 3,
+       "recent": [...]
+     }
+   }
+
+
+### ADMIN ENDPOINTS (Admin Role Required)
+
+10. GET /admin/queue
+    Description: Get validation queue (pending updates)
+    Response:
+    {
+      "success": true,
+      "data": [
+        {
+          "update_id": 456,
+          "item_name": "Red Onion",
+          "old_price": 110.00,
+          "new_price": 125.00,
+          "change_percent": 13.6,
+          "contributor": "ram_sharma",
+          "submitted_at": "2025-11-21T10:30:00Z"
+        },
+        ...
+      ]
+    }
+
+11. POST /admin/validate/{update_id}
+    Description: Approve or reject a price update
+    Request Body:
+    {
+      "action": "approve",  // or "reject"
+      "review_note": "Verified with market data"
+    }
+
+12. GET /admin/users
+    Description: List all contributors with stats
+    Response:
+    {
+      "success": true,
+      "data": [
+        {
+          "id": 5,
+          "username": "ram_sharma",
+          "full_name": "Ram Sharma",
+          "status": "active",
+          "total_submissions": 145,
+          "approval_rate": 97.2
+        },
+        ...
+      ]
+    }
+
+13. PUT /admin/users/{id}
+    Description: Update contributor status
+    Request Body:
+    {
+      "status": "suspended",  // or "active"
+      "reason": "Repeated inaccurate submissions"
+    }
+
+14. GET /admin/logs
+    Description: System audit logs
+    Parameters:
+      - user_id (integer, optional)
+      - action (string, optional)
+      - start_date (date, optional)
+      - end_date (date, optional)
+
+15. GET /admin/analytics
+    Description: Dashboard statistics
+    Response:
+    {
+      "success": true,
+      "data": {
+        "total_items": 285,
+        "pending_validations": 12,
+        "daily_updates": 47,
+        "active_contributors": 8,
+        "monthly_views": 45230
+      }
+    }
+
+
+### ERROR RESPONSES
+
+Standard Error Format:
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Invalid price format",
+    "details": {"field": "new_price", "constraint": "must be positive decimal"}
+  }
+}
+
+Common HTTP Status Codes:
+200 - OK
+201 - Created
+400 - Bad Request (validation errors)
+401 - Unauthorized (missing/invalid token)
+403 - Forbidden (insufficient permissions)
+404 - Not Found
+429 - Too Many Requests (rate limit)
+500 - Internal Server Error
+
+
+---
+
+## 🔐 SECURITY IMPLEMENTATION
+
+### AUTHENTICATION FLOW
+
+1. Login Process:
+   - User submits username/password
+   - System validates credentials (bcrypt verification)
+   - If 2FA enabled: Generate and verify TOTP code
+   - Create session token (64-char random string)
+   - Store in Redis with 24-hour expiry
+   - Return token in secure HttpOnly cookie
+
+2. Session Validation Middleware:
+   - Check token exists in cookie
+   - Verify token in Redis (not expired)
+   - Load user data and role
+   - Attach user object to request
+
+3. Role-Based Access Control:
+   - Public routes: No authentication
+   - Contributor routes: Require 'contributor' or 'admin' role
+   - Admin routes: Require 'admin' role only
+
+
+### INPUT VALIDATION & SANITIZATION
+
+PHP Validation Helper Example:
+
+class ValidationHelper {
+    public static function validatePrice($price) {
+        if (!is_numeric($price)) {
+            throw new ValidationException("Price must be numeric");
+        }
+        if ($price <= 0) {
+            throw new ValidationException("Price must be positive");
+        }
+        if ($price > 99999999.99) {
+            throw new ValidationException("Price exceeds maximum value");
+        }
+        return number_format($price, 2, '.', '');
+    }
+    
+    public static function sanitizeText($text) {
+        // Remove HTML tags
+        $text = strip_tags($text);
+        // Convert special characters to HTML entities (XSS prevention)
+        $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+        // Trim whitespace
+        return trim($text);
+    }
+}
+
+
+### SQL INJECTION PREVENTION
+
+ALWAYS use PDO prepared statements:
+
+// CORRECT ✅
+$stmt = $pdo->prepare("SELECT * FROM items WHERE id = ? AND status = ?");
+$stmt->execute([$item_id, 'active']);
+
+// WRONG ❌ - Never do this!
+$query = "SELECT * FROM items WHERE id = $item_id";
+
+
+### FILE UPLOAD SECURITY
+
+Image Upload Helper Example:
+
+class ImageHelper {
+    public static function uploadItemImage($file) {
+        // 1. Validate file type
+        $allowed_types = ['image/jpeg', 'image/png', 'image/webp'];
+        if (!in_array($file['type'], $allowed_types)) {
+            throw new Exception("Invalid file type");
+        }
+        
+        // 2. Validate file size (max 2MB)
+        if ($file['size'] > 2 * 1024 * 1024) {
+            throw new Exception("File too large");
+        }
+        
+        // 3. Generate unique filename
+        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $filename = bin2hex(random_bytes(16)) . '.' . $extension;
+        
+        // 4. Convert to WebP and resize
+        $image = imagecreatefromstring(file_get_contents($file['tmp_name']));
+        $resized = imagescale($image, 800, 800);
+        
+        // 5. Save to upload directory
+        $path = __DIR__ . '/../../public/assets/uploads/items/' . $filename;
+        imagewebp($resized, $path, 85);
+        
+        return '/assets/uploads/items/' . $filename;
+    }
+}
+
+
+### CSRF PROTECTION
+
+Generate and validate CSRF tokens:
+
+// Generate token on form load
+$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+// Validate on form submission
+if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+    die("CSRF token validation failed");
+}
+
+
+### RATE LIMITING
+
+Prevent brute force attacks:
+
+class RateLimitMiddleware {
+    public static function checkLoginAttempts($ip_address) {
+        $key = "login_attempts:" . $ip_address;
+        $attempts = Redis::get($key) ?? 0;
+        
+        if ($attempts >= 5) {
+            throw new Exception("Too many login attempts. Try again in 15 minutes.");
+        }
+        
+        Redis::incr($key);
+        Redis::expire($key, 900); // 15 minutes
+    }
+}
+
+
+---
+
+## 📱 RESPONSIVE DESIGN BREAKPOINTS
+
+/* Mobile First Approach */
+
+/* Extra Small (Portrait Mobile) */
+@media (min-width: 0) {
+    .container { max-width: 100%; padding: 0 16px; }
+    .grid { grid-template-columns: 1fr; }
+}
+
+/* Small (Landscape Mobile) */
+@media (min-width: 640px) {
+    .container { max-width: 640px; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Medium (Tablet) */
+@media (min-width: 768px) {
+    .container { max-width: 768px; }
+    .hero-title { font-size: 3rem; }
+}
+
+/* Large (Desktop) */
+@media (min-width: 1024px) {
+    .container { max-width: 1024px; }
+    .grid { grid-template-columns: repeat(3, 1fr); }
+    .sidebar { display: block; }
+}
+
+/* Extra Large (Wide Desktop) */
+@media (min-width: 1280px) {
+    .container { max-width: 1280px; }
+    .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* 2XL (Ultra Wide) */
+@media (min-width: 1536px) {
+    .container { max-width: 1536px; }
+}
+
+
+### MOBILE OPTIMIZATION CHECKLIST
+
+✅ Touch targets minimum 44x44px
+✅ Swipeable cards for categories
+✅ Bottom navigation on mobile
+✅ Hamburger menu with smooth slide-in
+✅ Sticky search bar on scroll
+✅ Collapsible filters on mobile
+✅ One-handed thumb-friendly layout
+
+
+---
+
+## ⚡ PERFORMANCE OPTIMIZATION
+
+### CACHING STRATEGY (Redis)
+
+class CacheHelper {
+    // Homepage: Cache for 5 minutes
+    public static function getHomePage() {
+        return self::remember('homepage', 300, function() {
+            // Generate homepage data
+        });
+    }
+    
+    // Category pages: Cache for 10 minutes
+    public static function getCategoryItems($slug) {
+        return self::remember("category:{$slug}", 600, function() use ($slug) {
+            // Query items
+        });
+    }
+    
+    // Item details: Cache for 1 minute (frequent updates)
+    public static function getItemDetail($id) {
+        return self::remember("item:{$id}", 60, function() use ($id) {
+            // Query item details
+        });
+    }
+    
+    // Search results: Cache for 30 seconds
+    public static function search($query) {
+        $key = "search:" . md5($query);
+        return self::remember($key, 30, function() use ($query) {
+            // Execute search
+        });
+    }
+    
+    private static function remember($key, $ttl, $callback) {
+        $value = Redis::get($key);
+        if ($value === null) {
+            $value = $callback();
+            Redis::setex($key, $ttl, serialize($value));
+        } else {
+            $value = unserialize($value);
+        }
+        return $value;
+    }
+}
+
+
+### DATABASE QUERY OPTIMIZATION
+
+1. Use Indexes Effectively:
+   - slug (for URL lookups)
+   - status (for filtering active items)
+   - category_id (for category filtering)
+   - Full-text index on name_en, name_ne, tags
+
+2. Avoid N+1 Queries:
+   Instead of:
+     foreach ($items as $item) {
+         $category = Category::find($item->category_id);
+     }
+   
+   Use eager loading:
+     $items = Item::with('category')->get();
+
+3. Use Query Result Caching:
+   Cache frequently accessed queries in Redis
+
+
+### IMAGE OPTIMIZATION
+
+1. Convert all uploads to WebP:
+   - Original: JPEG/PNG (2MB)
+   - WebP: 85% quality (~200KB)
+   - Savings: 90% reduction
+
+2. Generate Multiple Sizes:
+   - Thumbnail: 150x150px (for lists)
+   - Medium: 400x400px (for cards)
+   - Large: 800x800px (for detail page)
+
+3. Lazy Loading:
+   <img src="placeholder.jpg" 
+        data-src="actual-image.webp" 
+        loading="lazy" 
+        alt="Item name">
+
+4. Use <picture> for Responsive Images:
+   <picture>
+     <source media="(max-width: 640px)" srcset="item-400.webp">
+     <source media="(max-width: 1024px)" srcset="item-600.webp">
+     <img src="item-800.webp" alt="Item">
+   </picture>
+
+
+### FRONTEND OPTIMIZATION
+
+1. Critical CSS Inlining:
+   - Inline above-the-fold CSS in <head>
+   - Defer non-critical stylesheets
+
+2. JavaScript Optimization:
+   - Defer non-critical scripts
+   - Use async for independent scripts
+   - Minimize third-party scripts
+
+3. Service Worker (PWA):
+   // sw.js
+   self.addEventListener('install', (event) => {
+     event.waitUntil(
+       caches.open('mulyasuchi-v1').then((cache) => {
+         return cache.addAll([
+           '/',
+           '/assets/css/main.min.css',
+           '/assets/js/app.min.js',
+           '/assets/images/logo.svg'
+         ]);
+       })
+     );
+   });
+
+4. Compression:
+   - Enable Gzip/Brotli compression in NGINX
+   - Minify CSS/JS in production
+
+
+---
+
+## 🔍 SEO OPTIMIZATION STRATEGY
+
+### ON-PAGE SEO IMPLEMENTATION
+
+PHP SEO Helper Class:
+
+class SEOHelper {
+    public static function generateMeta($page, $data = []) {
+        $defaults = [
+            'site_name' => 'मूल्यसूची (MulyaSuchi)',
+            'site_url' => 'https://mulyasuchi.com.np',
+            'og_image' => 'https://mulyasuchi.com.np/assets/images/og-image.jpg'
+        ];
+        
+        switch($page) {
+            case 'home':
+                return [
+                    'title' => 'मूल्यसूची | Nepal\'s Official Price Index',
+                    'description' => 'Real-time market prices for vegetables, fruits, tech, and daily essentials in Nepal. Updated daily by verified contributors. नेपालको आधिकारिक मूल्यसूची।',
+                    'keywords' => 'nepal market price, मूल्यसूची, तरकारी मूल्य, daily price nepal, kalimati price, nepal price index',
+                    'canonical' => $defaults['site_url'],
+                    'og:type' => 'website',
+                    'og:title' => 'मूल्यसूची - Nepal\'s Official Price Index',
+                    'og:description' => 'Check real-time market prices across Nepal',
+                    'og:image' => $defaults['og_image']
+                ];
+                
+            case 'item':
+                return [
+                    'title' => $data['name_en'] . ' Price in Nepal | मूल्यसूची',
+                    'description' => "Current market price of {$data['name_en']} ({$data['name_ne']}) is NPR {$data['price']} per {$data['unit']}. Updated: " . date('d M Y'),
+                    'keywords' => "{$data['name_en']}, {$data['name_ne']}, price, nepal",
+                    'canonical' => $defaults['site_url'] . '/item/' . $data['slug'],
+                    'og:type' => 'product',
+                    'og:image' => $defaults['site_url'] . $data['image_url']
+                ];
+                
+            case 'category':
+                return [
+                    'title' => $data['name_en'] . ' Prices in Nepal | मूल्यसूची',
+                    'description' => "Browse current market prices for all {$data['name_en']} items in Nepal. Daily updated prices from verified sources.",
+                    'keywords' => "{$data['name_en']}, {$data['name_ne']}, prices, nepal",
+                    'canonical' => $defaults['site_url'] . '/category/' . $data['slug']
+                ];
+        }
+    }
+}
+
+
+### STRUCTURED DATA (JSON-LD)
+
+Product Schema for Item Pages:
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Red Onion (रातो प्याज)",
+  "image": "https://mulyasuchi.com.np/assets/uploads/items/red-onion.webp",
+  "description": "Current market price of Red Onion in Nepal",
+  "offers": {
+    "@type": "Offer",
+    "price": "120.00",
+    "priceCurrency": "NPR",
+    "availability": "https://schema.org/InStock",
+    "priceValidUntil": "2025-11-22"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "reviewCount": "89"
+  }
+}
+</script>
+
+
+Organization Schema for Homepage:
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "मूल्यसूची (MulyaSuchi)",
+  "url": "https://mulyasuchi.com.np",
+  "logo": "https://mulyasuchi.com.np/assets/images/logo.svg",
+  "description": "Nepal's official market price intelligence platform",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "NP"
+  },
+  "sameAs": [
+    "https://facebook.com/mulyasuchi",
+    "https://twitter.com/mulyasuchi"
+  ]
+}
+</script>
+
+
+### URL STRUCTURE (SEO-Friendly)
+
+Homepage:
+https://mulyasuchi.com.np/
+
+Category Pages:
+https://mulyasuchi.com.np/category/vegetables
+https://mulyasuchi.com.np/category/fruits
+
+Item Detail Pages:
+https://mulyasuchi.com.np/item/red-onion-rato-pyaj
+https://mulyasuchi.com.np/item/iphone-15-pro
+
+Search Results:
+https://mulyasuchi.com.np/search?q=tomato
+
+About Pages:
+https://mulyasuchi.com.np/about
+https://mulyasuchi.com.np/how-it-works
+
+
+### SITEMAP GENERATION
+
+PHP Sitemap Generator Script:
+
+<?php
+// scripts/sitemap-generator.php
+
+$base_url = 'https://mulyasuchi.com.np';
+$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
+
+// Homepage
+$url = $xml->addChild('url');
+$url->addChild('loc', $base_url . '/');
+$url->addChild('changefreq', 'daily');
+$url->addChild('priority', '1.0');
+
+// Category pages
+$categories = Category::all();
+foreach ($categories as $category) {
+    $url = $xml->addChild('url');
+    $url->addChild('loc', $base_url . '/category/' . $category->slug);
+    $url->addChild('changefreq', 'daily');
+    $url->addChild('priority', '0.8');
+}
+
+// Item pages
+$items = Item::where('status', 'active')->get();
+foreach ($items as $item) {
+    $url = $xml->addChild('url');
+    $url->addChild('loc', $base_url . '/item/' . $item->slug);
+    $url->addChild('lastmod', $item->last_updated_at);
+    $url->addChild('changefreq', 'weekly');
+    $url->addChild('priority', '0.6');
+}
+
+// Save sitemap
+file_put_contents(__DIR__ . '/../public/sitemap.xml', $xml->asXML());
+echo "Sitemap generated successfully!\n";
+
+
+### ROBOTS.TXT
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /contributor/
+Disallow: /api/
+Disallow: /assets/uploads/temp/
+
+Sitemap: https://mulyasuchi.com.np/sitemap.xml
+
+
+---
+
+## 🌐 NEPALI LOCALIZATION
+
+### BILINGUAL SUPPORT IMPLEMENTATION
+
+class NepaliHelper {
+    // Convert English numbers to Nepali (Devanagari)
+    public static function toNepaliNumber($number) {
+        $english = ['0','1','2','3','4','5','6','7','8','9'];
+        $nepali = ['०','१','२','३','४','५','६','७','८','९'];
+        return str_replace($english, $nepali, $number);
+    }
+    
+    // Convert Nepali numbers back to English
+    public static function toEnglishNumber($number) {
+        $nepali = ['०','१','२','३','४','५','६','७','८','९'];
+        $english = ['0','1','2','3','4','5','6','7','8','9'];
+        return str_replace($nepali, $english, $number);
+    }
+    
+    // Convert Gregorian date to Bikram Sambat (BS)
+    public static function toBikramSambat($gregorian_date) {
+        // Use: https://github.com/j4m35f15h/nepali-date-converter-php
+        // Example implementation:
+        require_once 'vendor/nepali-date-converter/NepaliDateConverter.php';
+        $converter = new NepaliDateConverter();
+        return $converter->engToNep($gregorian_date);
+    }
+    
+    // Format currency in Nepali style
+    public static function formatCurrency($amount, $lang = 'en') {
+        $formatted = 'NPR ' . number_format($amount, 2);
+        if ($lang === 'ne') {
+            $formatted = 'रु ' . self::toNepaliNumber(number_format($amount, 2));
+        }
+        return $formatted;
+    }
+}
+
+
+### LANGUAGE TOGGLE
+
+HTML Implementation:
+
+<div class="language-toggle">
+    <button onclick="switchLanguage('en')" class="lang-btn" data-lang="en">
+        English
+    </button>
+    <button onclick="switchLanguage('ne')" class="lang-btn active" data-lang="ne">
+        नेपाली
+    </button>
+</div>
+
+<script>
+function switchLanguage(lang) {
+    // Store preference
+    localStorage.setItem('preferred_language', lang);
+    
+    // Toggle active class
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    
+    // Update content
+    document.querySelectorAll('[data-lang-en]').forEach(el => {
+        el.textContent = lang === 'en' ? el.dataset.langEn : el.dataset.langNe;
+    });
+    
+    // Reload page with language parameter
+    window.location.href = '?lang=' + lang;
+}
+</script>
+
+
+### DATABASE STRUCTURE FOR BILINGUAL CONTENT
+
+All text fields have both English and Nepali columns:
+- name_en / name_ne
+- description_en / description_ne
+
+Display logic:
+
+$lang = $_GET['lang'] ?? $_SESSION['lang'] ?? 'ne'; // Default to Nepali
+$item_name = $lang === 'en' ? $item->name_en : $item->name_ne;
+
+
+---
+
+## 📊 ADMIN DASHBOARD WIDGETS
+
+### STATISTICS OVERVIEW
+
+Dashboard Metrics to Display:
+
+1. Total Active Items: 285
+2. Pending Validations: 12 (Red badge if > 10)
+3. Today's Price Updates: 47
+4. Active Contributors: 8
+5. Monthly Page Views: 45,230
+6. Average Validation Time: 2.3 hours
+
+
+### PRICE FLUCTUATION ALERTS
+
+SQL Query for Significant Changes:
+
+SELECT 
+    i.name_en,
+    i.name_ne,
+    p.old_price,
+    p.new_price,
+    p.price_change_percent,
+    p.submitted_at,
+    u.username as contributor
+FROM price_updates p
+JOIN items i ON p.item_id = i.id
+JOIN users u ON p.submitted_by = u.id
+WHERE p.price_change_percent > 20
+  AND p.submitted_at > DATE_SUB(NOW(), INTERVAL 7 DAY)
+  AND p.status = 'pending'
+ORDER BY ABS(p.price_change_percent) DESC
+LIMIT 10;
+
+
+### VALIDATION QUEUE TABLE
+
+Admin Dashboard Table Layout:
+
+| Item Name              | Old Price | New Price | Change  | Contributor | Source        | Actions      |
+|------------------------|-----------|-----------|---------|-------------|---------------|--------------|
+| Red Onion (रातो प्याज)  | NPR 110   | NPR 125   | +13.6%  | ram_sharma  | Kalimati      | ✅ Approve ❌ Reject |
+| Tomato (गोलभेंडा)       | NPR 80    | NPR 65    | -18.8%  | sita_KC     | New Road      | ✅ Approve ❌ Reject |
+| iPhone 15 Pro          | NPR 185k  | NPR 175k  | -5.4%   | tech_guru   | Durbar Marg   | ✅ Approve ❌ Reject |
+
+
+HTML Implementation:
+
+<div class="validation-queue">
+    <h2>Pending Validations <span class="badge">12</span></h2>
+    
+    <table class="queue-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Old Price</th>
+                <th>New Price</th>
+                <th>Change</th>
+                <th>Contributor</th>
+                <th>Source</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($pending_updates as $update): ?>
+            <tr>
+                <td>
+                    <strong><?= $update->item_name_en ?></strong><br>
+                    <small><?= $update->item_name_ne ?></small>
+                </td>
+                <td>NPR <?= number_format($update->old_price, 2) ?></td>
+                <td>NPR <?= number_format($update->new_price, 2) ?></td>
+                <td class="<?= $update->price_change_percent > 0 ? 'text-danger' : 'text-success' ?>">
+                    <?= $update->price_change_percent > 0 ? '↑' : '↓' ?>
+                    <?= abs($update->price_change_percent) ?>%
+                </td>
+                <td>@<?= $update->contributor_username ?></td>
+                <td><?= $update->source_info ?></td>
+                <td>
+                    <button onclick="validateUpdate(<?= $update->id ?>, 'approve')" 
+                            class="btn btn-success btn-sm">
+                        ✅ Approve
+                    </button>
+                    <button onclick="validateUpdate(<?= $update->id ?>, 'reject')" 
+                            class="btn btn-danger btn-sm">
+                        ❌ Reject
+                    </button>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<script>
+function validateUpdate(updateId, action) {
+    if (!confirm(`Are you sure you want to ${action} this update?`)) {
+        return;
+    }
+    
+    fetch(`/api/v1/admin/validate/${updateId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getAuthToken()
+        },
+        body: JSON.stringify({ action: action })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Update ' + action + 'd successfully!');
+            location.reload();
+        } else {
+            alert('Error: ' + data.error.message);
+        }
+    });
+}
+</script>
+
+
+### CONTRIBUTOR PERFORMANCE METRICS
+
+Display for each contributor:
+
+- Total Submissions: 145
+- Approved: 141 (97.2%)
+- Rejected: 4 (2.8%)
+- Pending: 5
+- Reputation Level: Gold ⭐⭐⭐
+- Last Active: 2 hours ago
+
+
+---
+
+## 🛠️ DEVELOPMENT WORKFLOW
+
+### ENVIRONMENT SETUP
+
+Step 1: System Requirements
+- PHP 8.2 or higher
+- MySQL 8.0 or higher
+- Composer (PHP dependency manager)
+- Node.js 18+ and npm
+- Redis 6.0+
+- Git
+
+Step 2: Clone Repository
+git clone https://github.com/jasminesharmakuok/mulyasuchi.git
+cd mulyasuchi
+
+Step 3: Install PHP Dependencies
+composer install
+
+Step 4: Install Node.js Dependencies
+npm install
+
+Step 5: Environment Configuration
+cp .env.example .env
+
+Edit .env file:
+APP_NAME=MulyaSuchi
+APP_URL=http://localhost:8000
+APP_ENV=development
+
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=mulyasuchi
+DB_USERNAME=root
+DB_PASSWORD=your_password
+
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
+
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_app_password
+
+Step 6: Database Setup
+mysql -u root -p
+
+In MySQL console:
+CREATE DATABASE mulyasuchi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+EXIT;
+
+Run migrations:
+php artisan migrate
+
+Seed initial data:
+php artisan db:seed
+
+Step 7: Build Frontend Assets
+npm run dev       # For development
+npm run build     # For production
+
+Step 8: Start Development Server
+php -S localhost:8000 -t public/
+
+Or using PHP built-in server:
+php artisan serve
+
+Visit: http://localhost:8000
+
+
+### GIT WORKFLOW
+
+Branch Structure:
+
+main (production)
+  ├── develop (staging)
+  │   ├── feature/add-export-csv
+  │   ├── feature/push-notifications
+  │   ├── feature/price-alerts
+  │   └── bugfix/search-pagination
+
+
+Git Commands:
+
+# Create feature branch
+git checkout develop
+git pull origin develop
+git checkout -b feature/add-export-csv
+
+# Make changes and commit
+git add .
+git commit -m "Add CSV export functionality for price history"
+
+# Push to remote
+git push origin feature/add-export-csv
+
+# Create Pull Request on GitHub
+# After review and approval, merge to develop
+
+# Deploy to staging
+git checkout develop
+git merge feature/add-export-csv
+git push origin develop
+
+# After testing on staging, merge to production
+git checkout main
+git merge develop
+git push origin main
+
+
+### CODE QUALITY STANDARDS
+
+1. PHP Coding Standards (PSR-12)
+   - Use 4 spaces for indentation
+   - Maximum line length: 120 characters
+   - Class names: PascalCase
+   - Method names: camelCase
+   - Constants: UPPER_CASE
+
+2. JavaScript Standards (ES6+)
+   - Use const/let (never var)
+   - Arrow functions for callbacks
+   - Template literals for strings
+   - Async/await for asynchronous code
+
+3. SQL Standards
+   - Use uppercase for SQL keywords
+   - Always use prepared statements
+   - Add indexes for frequently queried columns
+   - Use transactions for multi-step operations
+
+
+---
+
+## 🚢 DEPLOYMENT GUIDE
+
+### PRE-DEPLOYMENT CHECKLIST
+
+□ Run all tests: vendor/bin/phpunit
+□ Check PHP syntax errors: find . -name "*.php" -exec php -l {} \;
+□ Optimize Composer autoloader: composer dump-autoload -o
+□ Minify CSS/JS: npm run production
+□ Generate sitemap: php scripts/sitemap-generator.php
+□ Database backup: php scripts/backup.sh
+□ Update .env with production values
+□ Enable maintenance mode: php artisan down
+
+
+### SERVER REQUIREMENTS
+
+Operating System: Ubuntu 22.04 LTS
+
+Software Stack:
+- NGINX 1.22+
+- PHP 8.2+ with extensions:
+  * php-fpm
+  * php-mysql
+  * php-redis
+  * php-mbstring
+  * php-xml
+  * php-curl
+  * php-gd
+  * php-zip
+  * php-intl
+- MySQL 8.0+
+- Redis 6.0+
+- Certbot (Let's Encrypt SSL)
+
+
+### NGINX CONFIGURATION
+
+File: /etc/nginx/sites-available/mulyasuchi
+
+server {
+    listen 80;
+    server_name mulyasuchi.com.np www.mulyasuchi.com.np;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name mulyasuchi.com.np www.mulyasuchi.com.np;
+    
+    root /var/www/mulyasuchi/public;
+    index index.php index.html;
+    
+    # SSL Certificates (Let's Encrypt)
+    ssl_certificate /etc/letsencrypt/live/mulyasuchi.com.np/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/mulyasuchi.com.np/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    
+    # Security Headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "no-referrer-when-downgrade" always;
+    add_header Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';" always;
+    
+    # Gzip Compression
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types text/plain text/css text/xml text/javascript application/json application/javascript application/xml+rss application/rss+xml font/truetype font/opentype application/vnd.ms-fontobject image/svg+xml;
+    
+    # Client body size (for image uploads)
+    client_max_body_size 5M;
+    
+    # Main location block
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    
+    # PHP-FPM configuration
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_hide_header X-Powered-By;
+    }
+    
+    # Cache static assets
+    location ~* \.(jpg|jpeg|png|gif|webp|ico|svg|css|js|woff|woff2|ttf|eot)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+    
+    # Deny access to hidden files
+    location ~ /\. {
+        deny all;
+    }
+    
+    # Deny access to sensitive files
+    location ~ /\.(env|git|htaccess) {
+        deny all;
+    }
+}
+
+Enable site:
+ln -s /etc/nginx/sites-available/mulyasuchi /etc/nginx/sites-enabled/
+nginx -t
+systemctl reload nginx
+
+
+### SSL CERTIFICATE SETUP (Let's Encrypt)
+
+# Install Certbot
+sudo apt update
+sudo apt install certbot python3-certbot-nginx
+
+# Obtain SSL certificate
+sudo certbot --nginx -d mulyasuchi.com.np -d www.mulyasuchi.com.np
+
+# Auto-renewal (runs twice daily
