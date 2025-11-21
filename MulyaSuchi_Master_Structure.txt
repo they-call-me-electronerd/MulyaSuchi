@@ -1,1690 +1,1749 @@
-# 🏔️ मूल्यसूची (MULYASUCHI) - MASTER PROJECT STRUCTURE
-## Nepal's Official Price Index Platform
+================================================================================
+MULYASUCHI - COMPLETE TECHNICAL SPECIFICATION & DELIVERABLE PACKAGE
+================================================================================
+Project: Mulyasuchi (Market Intelligence Platform for Nepal)
+Version: 1.0.0
+Date: 2025-11-21
+Prepared for: Professional Web Development Implementation
+Technology Stack: PHP 8.x, MySQL 8.x, HTML5, CSS3, JavaScript (ES6+)
+================================================================================
 
-**Project Name:** मूल्यसूची (MulyaSuchi) - Nepal's Price Intelligence Platform
-**Version:** 2.0  
-**Stack:** PHP 8.2+ | MySQL 8.0+ | Vanilla JS (ES6+) | SCSS  
-**Architecture:** MVC Pattern | RESTful API | Progressive Web App (PWA)  
-**Deployment:** NGINX | PHP-FPM | Redis Cache | Cloudflare CDN
-**Domain:** mulyasuchi.com.np
-**Tagline:** "Nepal's Official Price Index" | "नेपालको आधिकारिक मूल्यसूची"
+TABLE OF CONTENTS
+================================================================================
+1. PROJECT OVERVIEW
+2. SYSTEM ARCHITECTURE
+3. DATABASE SCHEMA
+4. FILE STRUCTURE
+5. DETAILED FILE SPECIFICATIONS
+6. API ENDPOINTS
+7. SECURITY REQUIREMENTS
+8. WORKFLOW LOGIC
+9. UI/UX SPECIFICATIONS
+10. DEPLOYMENT GUIDE
+11. TESTING REQUIREMENTS
+12. MAINTENANCE & SCALING
 
-**Created by:** @jasminesharmakuok
-**Date:** 2025-11-21
+================================================================================
+1. PROJECT OVERVIEW
+================================================================================
 
----
+1.1 PROJECT DESCRIPTION
+-----------------------
+Mulyasuchi (meaning "Price Information" in Nepali) is a centralized market 
+intelligence platform providing real-time, accurate market prices for items 
+across Nepal. The platform serves three distinct user types:
 
-## 📋 PROJECT OVERVIEW
+- Public Users: Browse and search current market prices
+- Contributors: Submit and update price information
+- Master Admin: Validate submissions and manage the system
 
-MulyaSuchi (मूल्यसूची) is a centralized market intelligence platform designed to provide 
-the general public with accurate, daily average market prices for a wide range of items 
-in the Nepali market.
+1.2 CORE OBJECTIVES
+-------------------
+- Bridge information gap between market hubs and consumers
+- Provide transparent, validated pricing data
+- Enable daily/weekly price updates by Contributors
+- Ensure "Gold Standard" accuracy through admin validation
+- Support Nepali language and cultural context
 
-**Core Mission:**
-Bridge the information gap between market hubs and consumers by providing instant access 
-to current valuations of items ranging from daily essentials to high-end tech products, 
-fostering transparency in Nepal's economy.
+1.3 KEY FEATURES
+----------------
+- Real-time price search and browsing
+- Category-based item organization (8+ categories)
+- Live price change ticker
+- Contributor submission system
+- Admin validation workflow
+- Price trend indicators
+- Multi-market location support
+- Comprehensive tagging system
+- Audit trail and system logs
 
-**Key Features:**
-- Real-time price tracking across 8+ categories
-- Bilingual support (English/Nepali - Devanagari)
-- Contributor-based data collection with Master Admin validation
-- Historical price trends and analytics
-- Mobile-first responsive design
-- SEO-optimized for maximum reach
-- PWA capabilities for offline access
+================================================================================
+2. SYSTEM ARCHITECTURE
+================================================================================
 
----
+2.1 TECHNOLOGY STACK
+--------------------
+Backend:
+- PHP 8.1+ (with OOP, PDO, prepared statements)
+- MySQL 8.0+ (InnoDB engine)
+- Apache 2.4+ / Nginx 1.18+
 
-## 📁 COMPLETE PROJECT ROOT STRUCTURE
+Frontend:
+- HTML5 (semantic markup)
+- CSS3 (with CSS Grid and Flexbox)
+- JavaScript ES6+ (vanilla JS, no framework requirement)
+- AJAX for dynamic content loading
 
+Additional:
+- Session management for authentication
+- CSRF protection
+- Input validation and sanitization
+- Password hashing (bcrypt/argon2)
+
+2.2 DIRECTORY STRUCTURE
+-----------------------
 mulyasuchi/
-├── 📂 public/                          # Public web root (DocumentRoot)
-│   ├── index.php                       # Application entry point
-│   ├── .htaccess                       # Apache rewrite rules
-│   ├── robots.txt                      # SEO crawler instructions
-│   ├── sitemap.xml                     # Auto-generated sitemap
-│   ├── manifest.json                   # PWA manifest
-│   ├── sw.js                           # Service Worker for offline
-│   │
-│   ├── 📂 assets/
-│   │   ├── 📂 css/
-│   │   │   ├── main.min.css            # Compiled & minified
-│   │   │   ├── admin.min.css
-│   │   │   └── contributor.min.css
-│   │   │
-│   │   ├── 📂 js/
-│   │   │   ├── app.min.js              # Core application JS
-│   │   │   ├── search.min.js           # Real-time search
-│   │   │   ├── chart.min.js            # Price trend charts
-│   │   │   └── alpine.min.js           # Alpine.js for reactivity
-│   │   │
-│   │   ├── 📂 images/
-│   │   │   ├── logo.svg                # MulyaSuchi vector logo
-│   │   │   ├── logo-white.svg
-│   │   │   ├── favicon.ico
-│   │   │   ├── og-image.jpg            # Open Graph image
-│   │   │   └── 📂 categories/          # Category icons
-│   │   │
-│   │   ├── 📂 fonts/
-│   │   │   ├── NotoSansDevanagari-Regular.woff2
-│   │   │   ├── NotoSansDevanagari-Bold.woff2
-│   │   │   └── Inter-Variable.woff2    # Latin font
-│   │   │
-│   │   └── 📂 uploads/
-│   │       ├── 📂 items/               # Item images (WebP optimized)
-│   │       └── 📂 temp/                # Temporary uploads
-│   │
-│   └── 📂 api/                         # RESTful API endpoints
-│       ├── v1/
-│       │   ├── items.php               # GET /api/v1/items
-│       │   ├── search.php              # GET /api/v1/search?q=
-│       │   ├── categories.php          # GET /api/v1/categories
-│       │   ├── trends.php              # GET /api/v1/trends
-│       │   └── validate.php            # POST (Admin only)
-│       └── docs.php                    # API documentation
 │
-├── 📂 app/                             # Application core (MVC)
-│   ├── 📂 Controllers/
-│   │   ├── HomeController.php          # Public landing page
-│   │   ├── SearchController.php        # Search & filters
-│   │   ├── ItemController.php          # Item details
-│   │   ├── ContributorController.php   # Contributor panel
-│   │   ├── AdminController.php         # Admin panel
-│   │   └── AuthController.php          # Login/Logout/2FA
-│   │
-│   ├── 📂 Models/
-│   │   ├── Item.php                    # Item CRUD + validation
-│   │   ├── Price.php                   # Price history
-│   │   ├── Category.php                # Category management
-│   │   ├── User.php                    # User management
-│   │   ├── PriceUpdate.php             # Pending updates queue
-│   │   ├── Log.php                     # System audit logs
-│   │   └── Notification.php            # In-app notifications
-│   │
-│   ├── 📂 Views/
-│   │   ├── 📂 layouts/
-│   │   │   ├── header.php              # Global header with MulyaSuchi branding
-│   │   │   ├── footer.php              # Global footer
-│   │   │   ├── nav-public.php          # Public navigation
-│   │   │   ├── nav-contributor.php
-│   │   │   └── nav-admin.php
-│   │   │
-│   │   ├── 📂 public/
-│   │   │   ├── home.php                # Landing page
-│   │   │   ├── category.php            # Category listing
-│   │   │   ├── item-detail.php         # Item detail page
-│   │   │   ├── search-results.php
-│   │   │   ├── about.php
-│   │   │   └── how-it-works.php
-│   │   │
-│   │   ├── 📂 contributor/
-│   │   │   ├── dashboard.php
-│   │   │   ├── add-item.php
-│   │   │   ├── update-price.php
-│   │   │   ├── my-logs.php
-│   │   │   └── profile.php
-│   │   │
-│   │   ├── 📂 admin/
-│   │   │   ├── dashboard.php
-│   │   │   ├── validation-queue.php    # ⭐ Critical page
-│   │   │   ├── item-management.php
-│   │   │   ├── user-management.php
-│   │   │   ├── category-management.php
-│   │   │   ├── system-logs.php
-│   │   │   ├── analytics.php           # Price trends & stats
-│   │   │   └── settings.php
-│   │   │
-│   │   └── 📂 auth/
-│   │       ├── login.php
-│   │       ├── 2fa-verify.php
-│   │       └── forgot-password.php
-│   │
-│   ├── 📂 Middleware/
-│   │   ├── AuthMiddleware.php          # Session validation
-│   │   ├── RoleMiddleware.php          # Role-based access
-│   │   ├── RateLimitMiddleware.php     # API rate limiting
-│   │   └── CSRFMiddleware.php          # CSRF protection
-│   │
-│   ├── 📂 Helpers/
-│   │   ├── ValidationHelper.php        # Input validation
-│   │   ├── ImageHelper.php             # Image upload/resize/WebP
-│   │   ├── SEOHelper.php               # Meta tags generator
-│   │   ├── CacheHelper.php             # Redis cache wrapper
-│   │   ├── NepaliHelper.php            # Nepali date/number utils
-│   │   └── SecurityHelper.php          # XSS/SQL injection prevention
-│   │
-│   └── 📂 Services/
-│       ├── PriceAnalytics.php          # Trend calculation
-│       ├── NotificationService.php     # Email/Push notifications
-│       ├── SearchService.php           # Elasticsearch integration
-│       ├── ExportService.php           # CSV/PDF export
-│       └── BackupService.php           # Database backup
+├── config/
+│   ├── database.php              # Database connection configuration
+│   ├── config.php                # Site-wide configuration
+│   └── constants.php             # System constants
 │
-├── 📂 config/
-│   ├── database.php                    # DB credentials
-│   ├── app.php                         # App settings
-│   ├── mail.php                        # SMTP config
-│   ├── cache.php                       # Redis config
-│   └── constants.php                   # Global constants
+├── includes/
+│   ├── header.php                # Common header
+│   ├── footer.php                # Common footer
+│   ├── nav.php                   # Navigation bar
+│   └── functions.php             # Helper functions
 │
-├── 📂 database/
-│   ├── 📂 migrations/
-│   │   ├── 001_create_users_table.sql
-│   │   ├── 002_create_categories_table.sql
-│   │   ├── 003_create_items_table.sql
-│   │   ├── 004_create_prices_table.sql
-│   │   ├── 005_create_price_updates_table.sql
-│   │   ├── 006_create_logs_table.sql
-│   │   └── 007_create_notifications_table.sql
+├── classes/
+│   ├── Database.php              # Database connection class
+│   ├── User.php                  # User management class
+│   ├── Item.php                  # Item management class
+│   ├── Price.php                 # Price management class
+│   ├── Category.php              # Category management class
+│   ├── Validation.php            # Validation queue class
+│   ├── Auth.php                  # Authentication class
+│   └── Logger.php                # System logging class
+│
+├── public/
+│   ├── index.php                 # Landing page
+│   ├── browse.php                # Browse categories
+│   ├── search.php                # Search functionality
+│   ├── item.php                  # Individual item view
+│   ├── about.php                 # About us page
+│   ├── how-it-works.php          # How it works page
+│   └── ajax/
+│       ├── search_items.php      # AJAX search handler
+│       ├── get_price_ticker.php  # Live ticker data
+│       └── get_item_details.php  # Item details
+│
+├── contributor/
+│   ├── login.php                 # Contributor login
+│   ├── dashboard.php             # Contributor dashboard
+│   ├── add_item.php              # Add new item form
+│   ├── update_price.php          # Update price form
+│   ├── my_logs.php               # Contributor activity logs
+│   └── logout.php                # Logout handler
+│
+├── admin/
+│   ├── login.php                 # Admin login
+│   ├── dashboard.php             # Admin dashboard
+│   ├── validation_queue.php     # Validation queue
+│   ├── item_management.php      # Item CRUD operations
+│   ├── user_management.php      # User CRUD operations
+│   ├── category_management.php  # Category management
+│   ├── system_logs.php          # System audit logs
+│   ├── settings.php             # Site settings
+│   └── logout.php               # Logout handler
+│
+├── assets/
+│   ├── css/
+│   │   ├── style.css            # Main stylesheet
+│   │   ├── public.css           # Public pages styles
+│   │   ├── contributor.css      # Contributor panel styles
+│   │   ├── admin.css            # Admin panel styles
+│   │   └── responsive.css       # Responsive design
 │   │
-│   ├── 📂 seeds/
-│   │   ├── categories_seed.sql         # Default categories
-│   │   └── admin_user_seed.sql         # Initial admin
+│   ├── js/
+│   │   ├── main.js              # Main JavaScript
+│   │   ├── search.js            # Search functionality
+│   │   ├── ticker.js            # Live ticker
+│   │   ├── contributor.js       # Contributor panel scripts
+│   │   ├── admin.js             # Admin panel scripts
+│   │   └── validation.js        # Form validation
 │   │
-│   └── schema.sql                      # Complete DB schema
-│
-├── 📂 storage/
-│   ├── 📂 logs/
-│   │   ├── app.log                     # Application logs
-│   │   ├── error.log                   # PHP errors
-│   │   └── security.log                # Security events
+│   ├── images/
+│   │   ├── logo.png             # Site logo
+│   │   ├── favicon.ico          # Favicon
+│   │   └── placeholders/        # Default item images
 │   │
-│   ├── 📂 cache/                       # File-based cache
-│   └── 📂 sessions/                    # PHP sessions
+│   └── uploads/
+│       └── items/               # Uploaded item images
 │
-├── 📂 tests/                           # PHPUnit tests
-│   ├── Unit/
-│   ├── Integration/
-│   └── Feature/
+├── logs/
+│   ├── system.log               # System activity log
+│   ├── error.log                # Error log
+│   └── access.log               # Access log
 │
-├── 📂 scripts/
-│   ├── deploy.sh                       # Deployment script
-│   ├── backup.sh                       # Automated backup
-│   ├── optimize.sh                     # Image optimization
-│   └── sitemap-generator.php           # Sitemap automation
+├── sql/
+│   ├── schema.sql               # Database schema
+│   ├── seed_data.sql            # Initial data
+│   └── migrations/              # Database migrations
 │
-├── 📂 docs/
-│   ├── API.md                          # API documentation
-│   ├── DATABASE.md                     # Database schema docs
-│   ├── DEPLOYMENT.md                   # Server setup guide
-│   └── CONTRIBUTING.md                 # Contributor guidelines
-│
-├── .env.example                        # Environment template
-├── .env                                # Environment variables (gitignored)
-├── .gitignore
-├── composer.json                       # PHP dependencies
-├── composer.lock
-├── package.json                        # Node.js build tools
-├── gulpfile.js                         # Gulp task runner
-└── README.md
+├── .htaccess                    # Apache configuration
+├── .env.example                 # Environment variables example
+├── README.md                    # Project documentation
+└── composer.json                # Dependencies (optional)
 
----
+================================================================================
+3. DATABASE SCHEMA
+================================================================================
 
-## 🗄️ DATABASE SCHEMA (MySQL 8.0+)
+3.1 DATABASE CREATION
+---------------------
+Database Name: mulyasuchi_db
+Character Set: utf8mb4
+Collation: utf8mb4_unicode_ci
 
-### TABLE 1: users
-Purpose: Store contributor and admin user accounts
+3.2 COMPLETE SQL SCHEMA
+-----------------------
+
+-- ===========================================================================
+-- DATABASE INITIALIZATION
+-- ===========================================================================
+
+CREATE DATABASE IF NOT EXISTS mulyasuchi_db
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+USE mulyasuchi_db;
+
+-- ===========================================================================
+-- TABLE: users
+-- Description: Stores all system users (Contributors and Admins)
+-- ===========================================================================
 
 CREATE TABLE users (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
+    user_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
-    role ENUM('admin', 'contributor') NOT NULL,
     full_name VARCHAR(100) NOT NULL,
-    avatar VARCHAR(255) DEFAULT NULL,
-    phone VARCHAR(15) DEFAULT NULL,
-    status ENUM('active', 'suspended', 'inactive') DEFAULT 'active',
-    email_verified_at TIMESTAMP NULL,
-    two_factor_secret VARCHAR(255) DEFAULT NULL,
-    last_login_at TIMESTAMP NULL,
+    role ENUM('contributor', 'admin') NOT NULL DEFAULT 'contributor',
+    status ENUM('active', 'suspended', 'inactive') NOT NULL DEFAULT 'active',
+    phone VARCHAR(20) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_login TIMESTAMP NULL DEFAULT NULL,
+    created_by INT UNSIGNED DEFAULT NULL,
+    
+    INDEX idx_username (username),
+    INDEX idx_email (email),
     INDEX idx_role (role),
-    INDEX idx_status (status)
+    INDEX idx_status (status),
+    FOREIGN KEY (created_by) REFERENCES users(user_id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-
-### TABLE 2: categories
-Purpose: Store market categories (Vegetables, Fruits, Tech, etc.)
+-- ===========================================================================
+-- TABLE: categories
+-- Description: Item categories (Vegetables, Fruits, Tech, etc.)
+-- ===========================================================================
 
 CREATE TABLE categories (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name_en VARCHAR(100) NOT NULL,
-    name_ne VARCHAR(100) NOT NULL,
-    slug VARCHAR(100) UNIQUE NOT NULL,
-    icon VARCHAR(100) DEFAULT NULL,
-    description TEXT,
-    display_order INT DEFAULT 0,
-    is_active BOOLEAN DEFAULT TRUE,
+    category_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL UNIQUE,
+    category_name_nepali VARCHAR(100) DEFAULT NULL,
+    slug VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT DEFAULT NULL,
+    icon_class VARCHAR(50) DEFAULT NULL,
+    display_order INT UNSIGNED DEFAULT 0,
+    is_active TINYINT(1) DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
     INDEX idx_slug (slug),
-    INDEX idx_active (is_active)
+    INDEX idx_active (is_active),
+    INDEX idx_display_order (display_order)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- SEED DATA: Default Categories
-INSERT INTO categories (name_en, name_ne, slug, display_order) VALUES
-('Vegetables', 'तरकारी', 'vegetables', 1),
-('Fruits', 'फलफूल', 'fruits', 2),
-('Kitchen Appliances', 'भान्साका सामान', 'kitchen-appliances', 3),
-('Study Material', 'अध्ययन सामग्री', 'study-material', 4),
-('Clothing', 'कपडा', 'clothing', 5),
-('Tools', 'औजार', 'tools', 6),
-('Electrical Appliances', 'विद्युतीय उपकरण', 'electrical-appliances', 7),
-('Tech/Gadgets', 'प्रविधि/ग्याजेट', 'tech-gadgets', 8),
-('Miscellaneous', 'विविध', 'miscellaneous', 9);
-
-
-### TABLE 3: items
-Purpose: Store all market items with current prices
+-- ===========================================================================
+-- TABLE: items
+-- Description: Core items in the marketplace
+-- ===========================================================================
 
 CREATE TABLE items (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    item_id VARCHAR(20) UNIQUE NOT NULL,
-    name_en VARCHAR(150) NOT NULL,
-    name_ne VARCHAR(150) NOT NULL,
-    slug VARCHAR(150) UNIQUE NOT NULL,
+    item_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    item_name VARCHAR(200) NOT NULL,
+    item_name_nepali VARCHAR(200) DEFAULT NULL,
+    slug VARCHAR(200) NOT NULL,
     category_id INT UNSIGNED NOT NULL,
-    description TEXT,
-    unit ENUM('kg', 'piece', 'liter', 'dozen', 'packet', 'meter', 'gram') NOT NULL,
-    current_price DECIMAL(10,2) NOT NULL,
-    previous_price DECIMAL(10,2) DEFAULT NULL,
+    base_price DECIMAL(10, 2) NOT NULL,
+    current_price DECIMAL(10, 2) NOT NULL,
+    unit ENUM('kg', 'piece', 'liter', 'dozen', 'gram', 'pack', 'meter', 'sq_meter') NOT NULL DEFAULT 'piece',
     market_location VARCHAR(100) DEFAULT NULL,
-    image_url VARCHAR(255) DEFAULT NULL,
-    tags JSON,
-    view_count INT DEFAULT 0,
-    status ENUM('active', 'inactive', 'pending') DEFAULT 'pending',
+    description TEXT DEFAULT NULL,
+    image_path VARCHAR(255) DEFAULT NULL,
+    status ENUM('active', 'pending', 'inactive') NOT NULL DEFAULT 'pending',
     created_by INT UNSIGNED NOT NULL,
-    last_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    validated_by INT UNSIGNED DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
-    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE CASCADE,
-    FULLTEXT INDEX ft_search (name_en, name_ne, tags),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    validated_at TIMESTAMP NULL DEFAULT NULL,
+    
+    INDEX idx_item_name (item_name),
+    INDEX idx_slug (slug),
     INDEX idx_category (category_id),
     INDEX idx_status (status),
-    INDEX idx_slug (slug)
+    INDEX idx_created_by (created_by),
+    FULLTEXT idx_fulltext_search (item_name, description),
+    
+    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE RESTRICT,
+    FOREIGN KEY (created_by) REFERENCES users(user_id) ON DELETE RESTRICT,
+    FOREIGN KEY (validated_by) REFERENCES users(user_id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-
-### TABLE 4: price_history
-Purpose: Track historical price changes for trend analysis
+-- ===========================================================================
+-- TABLE: price_history
+-- Description: Historical price tracking for trend analysis
+-- ===========================================================================
 
 CREATE TABLE price_history (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    history_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     item_id INT UNSIGNED NOT NULL,
-    price DECIMAL(10,2) NOT NULL,
+    old_price DECIMAL(10, 2) NOT NULL,
+    new_price DECIMAL(10, 2) NOT NULL,
+    price_change DECIMAL(10, 2) AS (new_price - old_price) STORED,
+    price_change_percent DECIMAL(5, 2) AS (((new_price - old_price) / old_price) * 100) STORED,
     market_location VARCHAR(100) DEFAULT NULL,
-    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE,
-    INDEX idx_item_date (item_id, recorded_at)
+    source VARCHAR(200) DEFAULT NULL,
+    updated_by INT UNSIGNED NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_item_id (item_id),
+    INDEX idx_updated_by (updated_by),
+    INDEX idx_updated_at (updated_at),
+    
+    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE,
+    FOREIGN KEY (updated_by) REFERENCES users(user_id) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- ===========================================================================
+-- TABLE: validation_queue
+-- Description: Pending validations for price updates and new items
+-- ===========================================================================
 
-### TABLE 5: price_updates ⭐ (VALIDATION QUEUE)
-Purpose: Store pending price updates awaiting admin validation
-
-CREATE TABLE price_updates (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    item_id INT UNSIGNED NOT NULL,
-    old_price DECIMAL(10,2) NOT NULL,
-    new_price DECIMAL(10,2) NOT NULL,
-    price_change_percent DECIMAL(5,2) GENERATED ALWAYS AS (
-        ((new_price - old_price) / old_price) * 100
-    ) STORED,
-    source_info VARCHAR(255),
-    market_location VARCHAR(100),
+CREATE TABLE validation_queue (
+    queue_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    item_id INT UNSIGNED DEFAULT NULL,
+    action_type ENUM('new_item', 'price_update') NOT NULL,
+    old_price DECIMAL(10, 2) DEFAULT NULL,
+    new_price DECIMAL(10, 2) NOT NULL,
+    item_name VARCHAR(200) DEFAULT NULL,
+    category_id INT UNSIGNED DEFAULT NULL,
+    unit VARCHAR(20) DEFAULT NULL,
+    market_location VARCHAR(100) DEFAULT NULL,
+    description TEXT DEFAULT NULL,
+    image_path VARCHAR(255) DEFAULT NULL,
+    source VARCHAR(200) DEFAULT NULL,
     submitted_by INT UNSIGNED NOT NULL,
-    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
-    reviewed_by INT UNSIGNED DEFAULT NULL,
-    review_note TEXT DEFAULT NULL,
     submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    reviewed_at TIMESTAMP NULL,
-    FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE,
-    FOREIGN KEY (submitted_by) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (reviewed_by) REFERENCES users(id) ON DELETE SET NULL,
+    status ENUM('pending', 'approved', 'rejected') NOT NULL DEFAULT 'pending',
+    validated_by INT UNSIGNED DEFAULT NULL,
+    validated_at TIMESTAMP NULL DEFAULT NULL,
+    rejection_reason TEXT DEFAULT NULL,
+    
+    INDEX idx_item_id (item_id),
     INDEX idx_status (status),
-    INDEX idx_submitted_by (submitted_by)
+    INDEX idx_submitted_by (submitted_by),
+    INDEX idx_submitted_at (submitted_at),
+    
+    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE SET NULL,
+    FOREIGN KEY (submitted_by) REFERENCES users(user_id) ON DELETE RESTRICT,
+    FOREIGN KEY (validated_by) REFERENCES users(user_id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- ===========================================================================
+-- TABLE: tags
+-- Description: Tags for enhanced search and categorization
+-- ===========================================================================
 
-### TABLE 6: system_logs
-Purpose: Audit trail for all system actions
+CREATE TABLE tags (
+    tag_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    tag_name VARCHAR(50) NOT NULL UNIQUE,
+    tag_name_nepali VARCHAR(50) DEFAULT NULL,
+    usage_count INT UNSIGNED DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_tag_name (tag_name),
+    INDEX idx_usage_count (usage_count)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ===========================================================================
+-- TABLE: item_tags
+-- Description: Many-to-many relationship between items and tags
+-- ===========================================================================
+
+CREATE TABLE item_tags (
+    item_id INT UNSIGNED NOT NULL,
+    tag_id INT UNSIGNED NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    PRIMARY KEY (item_id, tag_id),
+    INDEX idx_tag_id (tag_id),
+    
+    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE,
+    FOREIGN KEY (tag_id) REFERENCES tags(tag_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ===========================================================================
+-- TABLE: system_logs
+-- Description: Comprehensive audit trail
+-- ===========================================================================
 
 CREATE TABLE system_logs (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    log_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id INT UNSIGNED DEFAULT NULL,
-    action VARCHAR(100) NOT NULL,
-    entity_type VARCHAR(50),
+    action_type VARCHAR(50) NOT NULL,
+    entity_type VARCHAR(50) DEFAULT NULL,
     entity_id INT UNSIGNED DEFAULT NULL,
-    old_value TEXT,
-    new_value TEXT,
-    ip_address VARCHAR(45),
-    user_agent VARCHAR(255),
+    description TEXT NOT NULL,
+    ip_address VARCHAR(45) DEFAULT NULL,
+    user_agent VARCHAR(255) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
-    INDEX idx_user (user_id),
-    INDEX idx_action (action),
-    INDEX idx_created (created_at)
+    
+    INDEX idx_user_id (user_id),
+    INDEX idx_action_type (action_type),
+    INDEX idx_created_at (created_at),
+    
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- ===========================================================================
+-- TABLE: site_settings
+-- Description: Configurable site-wide settings
+-- ===========================================================================
 
-### TABLE 7: notifications
-Purpose: In-app notifications for users
+CREATE TABLE site_settings (
+    setting_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    setting_key VARCHAR(100) NOT NULL UNIQUE,
+    setting_value TEXT DEFAULT NULL,
+    setting_type ENUM('text', 'number', 'boolean', 'json') DEFAULT 'text',
+    description VARCHAR(255) DEFAULT NULL,
+    updated_by INT UNSIGNED DEFAULT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_setting_key (setting_key),
+    
+    FOREIGN KEY (updated_by) REFERENCES users(user_id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE notifications (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+-- ===========================================================================
+-- TABLE: sessions
+-- Description: User session management
+-- ===========================================================================
+
+CREATE TABLE sessions (
+    session_id VARCHAR(128) PRIMARY KEY,
     user_id INT UNSIGNED NOT NULL,
-    type ENUM('info', 'success', 'warning', 'error') DEFAULT 'info',
-    title VARCHAR(150) NOT NULL,
-    message TEXT NOT NULL,
-    link VARCHAR(255) DEFAULT NULL,
-    is_read BOOLEAN DEFAULT FALSE,
+    ip_address VARCHAR(45) NOT NULL,
+    user_agent VARCHAR(255) DEFAULT NULL,
+    last_activity TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_user_read (user_id, is_read)
+    
+    INDEX idx_user_id (user_id),
+    INDEX idx_last_activity (last_activity),
+    
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- ===========================================================================
+-- INITIAL DATA SEED
+-- ===========================================================================
 
----
+-- Default Admin User (Password: Admin@123 - MUST BE CHANGED)
+INSERT INTO users (username, email, password_hash, full_name, role, status) VALUES
+('admin', 'admin@mulyasuchi.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Master Admin', 'admin', 'active');
 
-## 🎨 DESIGN SYSTEM & UI/UX SPECIFICATIONS
+-- Default Categories
+INSERT INTO categories (category_name, category_name_nepali, slug, description, icon_class, display_order) VALUES
+('Vegetables', 'तरकारीहरू', 'vegetables', 'Fresh vegetables and produce', 'icon-vegetables', 1),
+('Fruits', 'फलफूलहरू', 'fruits', 'Fresh and seasonal fruits', 'icon-fruits', 2),
+('Kitchen Appliances', 'भान्साका सामानहरू', 'kitchen-appliances', 'Kitchen tools and appliances', 'icon-kitchen', 3),
+('Study Material', 'अध्ययन सामग्री', 'study-material', 'Books, stationery, and learning materials', 'icon-study', 4),
+('Clothing', 'लुगाफाटा', 'clothing', 'Garments and accessories', 'icon-clothing', 5),
+('Tools', 'औजारहरू', 'tools', 'Hardware and tools', 'icon-tools', 6),
+('Electrical Appliances', 'बिजुली उपकरणहरू', 'electrical-appliances', 'Electronic devices and appliances', 'icon-electrical', 7),
+('Tech/Gadgets', 'प्रविधि/ग्याजेट्स', 'tech-gadgets', 'Latest technology and gadgets', 'icon-tech', 8),
+('Miscellaneous', 'विविध', 'miscellaneous', 'Other items', 'icon-misc', 9);
 
-### COLOR PALETTE (Nepal-Inspired Professional)
+-- Default Site Settings
+INSERT INTO site_settings (setting_key, setting_value, setting_type, description) VALUES
+('site_name', 'Mulyasuchi', 'text', 'Site name'),
+('site_tagline', 'Your Trusted Market Intelligence Platform', 'text', 'Site tagline'),
+('contact_email', 'contact@mulyasuchi.com', 'text', 'Contact email'),
+('contact_phone', '+977-1-XXXXXXX', 'text', 'Contact phone'),
+('price_change_alert_threshold', '20', 'number', 'Price change alert threshold percentage'),
+('items_per_page', '20', 'number', 'Items per page in listings'),
+('enable_nepali_language', '1', 'boolean', 'Enable Nepali language support'),
+('ticker_update_interval', '5000', 'number', 'Live ticker update interval in milliseconds'),
+('max_tags_per_item', '10', 'number', 'Maximum tags allowed per item');
 
-Primary Colors:
-$nepal-crimson: #DC143C;        // Nepal flag red
-$nepal-blue: #003893;           // Deep professional blue
-$himalayan-white: #FFFFFF;
-$temple-gold: #FFD700;
+-- Default Tags
+INSERT INTO tags (tag_name, tag_name_nepali) VALUES
+('Seasonal', 'मौसमी'),
+('Imported', 'आयातित'),
+('Local', 'स्थानीय'),
+('Organic', 'अर्गानिक'),
+('Fresh', 'ताजा'),
+('Frozen', 'जमाएको'),
+('Discount', 'छुट'),
+('Premium', 'प्रिमियम'),
+('New', 'नयाँ'),
+('Popular', 'लोकप्रिय');
 
-Semantic Colors:
-$success: #059669;              // Emerald green
-$warning: #F59E0B;              // Amber
-$error: #DC2626;                // Red
-$info: #3B82F6;                 // Blue
+-- ===========================================================================
+-- VIEWS FOR COMMON QUERIES
+-- ===========================================================================
 
-Neutrals:
-$gray-50: #F9FAFB;
-$gray-100: #F3F4F6;
-$gray-200: #E5E7EB;
-$gray-600: #4B5563;
-$gray-900: #111827;
+-- Active Items with Category Info
+CREATE VIEW view_active_items AS
+SELECT 
+    i.item_id,
+    i.item_name,
+    i.item_name_nepali,
+    i.slug,
+    i.current_price,
+    i.unit,
+    i.market_location,
+    i.image_path,
+    i.updated_at,
+    c.category_name,
+    c.slug AS category_slug,
+    u.full_name AS contributor_name
+FROM items i
+JOIN categories c ON i.category_id = c.category_id
+JOIN users u ON i.created_by = u.user_id
+WHERE i.status = 'active' AND c.is_active = 1;
 
-Gradients:
-$hero-gradient: linear-gradient(135deg, $nepal-blue 0%, $nepal-crimson 100%);
-$card-gradient: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
+-- Pending Validations with Details
+CREATE VIEW view_pending_validations AS
+SELECT 
+    vq.queue_id,
+    vq.action_type,
+    vq.item_name,
+    vq.old_price,
+    vq.new_price,
+    vq.market_location,
+    vq.source,
+    vq.submitted_at,
+    u.username AS submitted_by_username,
+    u.full_name AS submitted_by_name,
+    c.category_name,
+    i.item_name AS existing_item_name
+FROM validation_queue vq
+JOIN users u ON vq.submitted_by = u.user_id
+LEFT JOIN categories c ON vq.category_id = c.category_id
+LEFT JOIN items i ON vq.item_id = i.item_id
+WHERE vq.status = 'pending'
+ORDER BY vq.submitted_at ASC;
 
+-- Price Trends (Last 30 Days)
+CREATE VIEW view_price_trends AS
+SELECT 
+    i.item_id,
+    i.item_name,
+    i.current_price,
+    ph.old_price,
+    ph.new_price,
+    ph.price_change,
+    ph.price_change_percent,
+    ph.updated_at
+FROM items i
+JOIN price_history ph ON i.item_id = ph.item_id
+WHERE ph.updated_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+ORDER BY ph.updated_at DESC;
 
-### TYPOGRAPHY
+-- ===========================================================================
+-- STORED PROCEDURES
+-- ===========================================================================
 
-Primary Font Stack (Bilingual Support):
-font-family: 'Noto Sans Devanagari', 'Inter', -apple-system, BlinkMacSystemFont, 
-             'Segoe UI', sans-serif;
+-- Procedure: Approve Validation
+DELIMITER $$
 
-Font Sizes (Responsive Scale):
-$text-xs: 0.75rem;      // 12px
-$text-sm: 0.875rem;     // 14px
-$text-base: 1rem;       // 16px
-$text-lg: 1.125rem;     // 18px
-$text-xl: 1.25rem;      // 20px
-$text-2xl: 1.5rem;      // 24px
-$text-3xl: 1.875rem;    // 30px
-$text-4xl: 2.25rem;     // 36px
-$text-5xl: 3rem;        // 48px
-
-Font Weights:
-$font-regular: 400;
-$font-medium: 500;
-$font-semibold: 600;
-$font-bold: 700;
-
-
-### SPACING SYSTEM (8px Base Grid)
-
-$spacing-0: 0;
-$spacing-1: 0.25rem;    // 4px
-$spacing-2: 0.5rem;     // 8px
-$spacing-3: 0.75rem;    // 12px
-$spacing-4: 1rem;       // 16px
-$spacing-6: 1.5rem;     // 24px
-$spacing-8: 2rem;       // 32px
-$spacing-12: 3rem;      // 48px
-$spacing-16: 4rem;      // 64px
-$spacing-24: 6rem;      // 96px
-
-
-### COMPONENT LIBRARY
-
-1. BUTTONS
-   - Primary Button: Solid nepal-crimson background, white text
-   - Secondary Button: Outlined nepal-blue border, blue text
-   - Ghost Button: Transparent, gray text, hover background
-   - Danger Button: Solid error red background
-
-2. CARDS
-   - Elevated Card: box-shadow, rounded corners (8px)
-   - Outlined Card: 1px border, no shadow
-   - Interactive Card: Hover scale(1.02) transition
-
-3. FORMS
-   - Floating Labels: Label moves up on focus
-   - Inline Validation: Real-time error messages
-   - Input Heights: 44px minimum (touch-friendly)
-
-4. NAVIGATION
-   - Top Navigation: Fixed position, blur backdrop
-   - Breadcrumbs: Home > Category > Item
-   - Pagination: Numbered with prev/next
-
-5. MODALS
-   - Slide-up Animation: transform translateY(100%) to 0
-   - Backdrop Blur: backdrop-filter: blur(4px)
-   - Close on ESC key
-
-
----
-
-## 🚀 API ENDPOINTS DOCUMENTATION
-
-Base URL: https://mulyasuchi.com.np/api/v1/
-
-### PUBLIC ENDPOINTS (No Authentication Required)
-
-1. GET /items
-   Description: List all active items with pagination
-   Parameters:
-     - page (integer, default: 1)
-     - limit (integer, default: 20, max: 100)
-     - category (string, optional)
-     - sort (string, optional: 'price_asc', 'price_desc', 'popular')
-   Response:
-   {
-     "success": true,
-     "data": {
-       "items": [...],
-       "pagination": {
-         "current_page": 1,
-         "total_pages": 15,
-         "total_items": 285
-       }
-     }
-   }
-
-2. GET /items/{id}
-   Description: Get detailed information for a specific item
-   Response:
-   {
-     "success": true,
-     "data": {
-       "id": 123,
-       "name_en": "Red Onion",
-       "name_ne": "रातो प्याज",
-       "current_price": 120.00,
-       "unit": "kg",
-       "trend": "up",
-       "price_change_percent": 8.5
-     }
-   }
-
-3. GET /search?q={query}
-   Description: Search items by name or tags
-   Parameters:
-     - q (string, required, min: 2 characters)
-     - category (string, optional)
-   Response:
-   {
-     "success": true,
-     "data": {
-       "results": [...],
-       "count": 12
-     }
-   }
-
-4. GET /categories
-   Description: List all active categories
-   Response:
-   {
-     "success": true,
-     "data": [
-       {"id": 1, "name_en": "Vegetables", "name_ne": "तरकारी", "slug": "vegetables"},
-       ...
-     ]
-   }
-
-5. GET /trends
-   Description: Get top 10 items with significant price changes
-   Response:
-   {
-     "success": true,
-     "data": {
-       "trending_up": [...],
-       "trending_down": [...]
-     }
-   }
-
-6. GET /items/{id}/history
-   Description: Get price history for chart visualization
-   Parameters:
-     - period (string, optional: '7d', '30d', '90d', default: '30d')
-   Response:
-   {
-     "success": true,
-     "data": [
-       {"date": "2025-11-01", "price": 110.00},
-       {"date": "2025-11-08", "price": 115.00},
-       ...
-     ]
-   }
-
-
-### CONTRIBUTOR ENDPOINTS (Authentication Required)
-
-7. POST /items
-   Description: Add a new item (status: pending)
-   Headers: Authorization: Bearer {token}
-   Request Body:
-   {
-     "name_en": "Green Apple",
-     "name_ne": "हरियो स्याउ",
-     "category_id": 2,
-     "unit": "kg",
-     "current_price": 250.00,
-     "market_location": "Kalimati",
-     "tags": ["apple", "fruit", "imported"],
-     "image": "base64_encoded_image"
-   }
-
-8. PUT /items/{id}/price
-   Description: Submit price update (pending validation)
-   Headers: Authorization: Bearer {token}
-   Request Body:
-   {
-     "new_price": 135.00,
-     "source_info": "Kalimati Market Survey",
-     "market_location": "Kalimati"
-   }
-
-9. GET /contributor/logs
-   Description: Get submission history for logged-in contributor
-   Response:
-   {
-     "success": true,
-     "data": {
-       "pending": 5,
-       "approved": 142,
-       "rejected": 3,
-       "recent": [...]
-     }
-   }
-
-
-### ADMIN ENDPOINTS (Admin Role Required)
-
-10. GET /admin/queue
-    Description: Get validation queue (pending updates)
-    Response:
-    {
-      "success": true,
-      "data": [
-        {
-          "update_id": 456,
-          "item_name": "Red Onion",
-          "old_price": 110.00,
-          "new_price": 125.00,
-          "change_percent": 13.6,
-          "contributor": "ram_sharma",
-          "submitted_at": "2025-11-21T10:30:00Z"
-        },
-        ...
-      ]
-    }
-
-11. POST /admin/validate/{update_id}
-    Description: Approve or reject a price update
-    Request Body:
-    {
-      "action": "approve",  // or "reject"
-      "review_note": "Verified with market data"
-    }
-
-12. GET /admin/users
-    Description: List all contributors with stats
-    Response:
-    {
-      "success": true,
-      "data": [
-        {
-          "id": 5,
-          "username": "ram_sharma",
-          "full_name": "Ram Sharma",
-          "status": "active",
-          "total_submissions": 145,
-          "approval_rate": 97.2
-        },
-        ...
-      ]
-    }
-
-13. PUT /admin/users/{id}
-    Description: Update contributor status
-    Request Body:
-    {
-      "status": "suspended",  // or "active"
-      "reason": "Repeated inaccurate submissions"
-    }
-
-14. GET /admin/logs
-    Description: System audit logs
-    Parameters:
-      - user_id (integer, optional)
-      - action (string, optional)
-      - start_date (date, optional)
-      - end_date (date, optional)
-
-15. GET /admin/analytics
-    Description: Dashboard statistics
-    Response:
-    {
-      "success": true,
-      "data": {
-        "total_items": 285,
-        "pending_validations": 12,
-        "daily_updates": 47,
-        "active_contributors": 8,
-        "monthly_views": 45230
-      }
-    }
-
-
-### ERROR RESPONSES
-
-Standard Error Format:
-{
-  "success": false,
-  "error": {
-    "code": "VALIDATION_ERROR",
-    "message": "Invalid price format",
-    "details": {"field": "new_price", "constraint": "must be positive decimal"}
-  }
-}
-
-Common HTTP Status Codes:
-200 - OK
-201 - Created
-400 - Bad Request (validation errors)
-401 - Unauthorized (missing/invalid token)
-403 - Forbidden (insufficient permissions)
-404 - Not Found
-429 - Too Many Requests (rate limit)
-500 - Internal Server Error
-
-
----
-
-## 🔐 SECURITY IMPLEMENTATION
-
-### AUTHENTICATION FLOW
-
-1. Login Process:
-   - User submits username/password
-   - System validates credentials (bcrypt verification)
-   - If 2FA enabled: Generate and verify TOTP code
-   - Create session token (64-char random string)
-   - Store in Redis with 24-hour expiry
-   - Return token in secure HttpOnly cookie
-
-2. Session Validation Middleware:
-   - Check token exists in cookie
-   - Verify token in Redis (not expired)
-   - Load user data and role
-   - Attach user object to request
-
-3. Role-Based Access Control:
-   - Public routes: No authentication
-   - Contributor routes: Require 'contributor' or 'admin' role
-   - Admin routes: Require 'admin' role only
-
-
-### INPUT VALIDATION & SANITIZATION
-
-PHP Validation Helper Example:
-
-class ValidationHelper {
-    public static function validatePrice($price) {
-        if (!is_numeric($price)) {
-            throw new ValidationException("Price must be numeric");
-        }
-        if ($price <= 0) {
-            throw new ValidationException("Price must be positive");
-        }
-        if ($price > 99999999.99) {
-            throw new ValidationException("Price exceeds maximum value");
-        }
-        return number_format($price, 2, '.', '');
-    }
+CREATE PROCEDURE sp_approve_validation(
+    IN p_queue_id INT UNSIGNED,
+    IN p_admin_id INT UNSIGNED
+)
+BEGIN
+    DECLARE v_item_id INT UNSIGNED;
+    DECLARE v_action_type VARCHAR(20);
+    DECLARE v_old_price DECIMAL(10,2);
+    DECLARE v_new_price DECIMAL(10,2);
     
-    public static function sanitizeText($text) {
-        // Remove HTML tags
-        $text = strip_tags($text);
-        // Convert special characters to HTML entities (XSS prevention)
-        $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
-        // Trim whitespace
-        return trim($text);
-    }
-}
-
-
-### SQL INJECTION PREVENTION
-
-ALWAYS use PDO prepared statements:
-
-// CORRECT ✅
-$stmt = $pdo->prepare("SELECT * FROM items WHERE id = ? AND status = ?");
-$stmt->execute([$item_id, 'active']);
-
-// WRONG ❌ - Never do this!
-$query = "SELECT * FROM items WHERE id = $item_id";
-
-
-### FILE UPLOAD SECURITY
-
-Image Upload Helper Example:
-
-class ImageHelper {
-    public static function uploadItemImage($file) {
-        // 1. Validate file type
-        $allowed_types = ['image/jpeg', 'image/png', 'image/webp'];
-        if (!in_array($file['type'], $allowed_types)) {
-            throw new Exception("Invalid file type");
-        }
-        
-        // 2. Validate file size (max 2MB)
-        if ($file['size'] > 2 * 1024 * 1024) {
-            throw new Exception("File too large");
-        }
-        
-        // 3. Generate unique filename
-        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-        $filename = bin2hex(random_bytes(16)) . '.' . $extension;
-        
-        // 4. Convert to WebP and resize
-        $image = imagecreatefromstring(file_get_contents($file['tmp_name']));
-        $resized = imagescale($image, 800, 800);
-        
-        // 5. Save to upload directory
-        $path = __DIR__ . '/../../public/assets/uploads/items/' . $filename;
-        imagewebp($resized, $path, 85);
-        
-        return '/assets/uploads/items/' . $filename;
-    }
-}
-
-
-### CSRF PROTECTION
-
-Generate and validate CSRF tokens:
-
-// Generate token on form load
-$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-
-// Validate on form submission
-if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-    die("CSRF token validation failed");
-}
-
-
-### RATE LIMITING
-
-Prevent brute force attacks:
-
-class RateLimitMiddleware {
-    public static function checkLoginAttempts($ip_address) {
-        $key = "login_attempts:" . $ip_address;
-        $attempts = Redis::get($key) ?? 0;
-        
-        if ($attempts >= 5) {
-            throw new Exception("Too many login attempts. Try again in 15 minutes.");
-        }
-        
-        Redis::incr($key);
-        Redis::expire($key, 900); // 15 minutes
-    }
-}
-
-
----
-
-## 📱 RESPONSIVE DESIGN BREAKPOINTS
-
-/* Mobile First Approach */
-
-/* Extra Small (Portrait Mobile) */
-@media (min-width: 0) {
-    .container { max-width: 100%; padding: 0 16px; }
-    .grid { grid-template-columns: 1fr; }
-}
-
-/* Small (Landscape Mobile) */
-@media (min-width: 640px) {
-    .container { max-width: 640px; }
-    .grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* Medium (Tablet) */
-@media (min-width: 768px) {
-    .container { max-width: 768px; }
-    .hero-title { font-size: 3rem; }
-}
-
-/* Large (Desktop) */
-@media (min-width: 1024px) {
-    .container { max-width: 1024px; }
-    .grid { grid-template-columns: repeat(3, 1fr); }
-    .sidebar { display: block; }
-}
-
-/* Extra Large (Wide Desktop) */
-@media (min-width: 1280px) {
-    .container { max-width: 1280px; }
-    .grid { grid-template-columns: repeat(4, 1fr); }
-}
-
-/* 2XL (Ultra Wide) */
-@media (min-width: 1536px) {
-    .container { max-width: 1536px; }
-}
-
-
-### MOBILE OPTIMIZATION CHECKLIST
-
-✅ Touch targets minimum 44x44px
-✅ Swipeable cards for categories
-✅ Bottom navigation on mobile
-✅ Hamburger menu with smooth slide-in
-✅ Sticky search bar on scroll
-✅ Collapsible filters on mobile
-✅ One-handed thumb-friendly layout
-
-
----
-
-## ⚡ PERFORMANCE OPTIMIZATION
-
-### CACHING STRATEGY (Redis)
-
-class CacheHelper {
-    // Homepage: Cache for 5 minutes
-    public static function getHomePage() {
-        return self::remember('homepage', 300, function() {
-            // Generate homepage data
-        });
-    }
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error approving validation';
+    END;
     
-    // Category pages: Cache for 10 minutes
-    public static function getCategoryItems($slug) {
-        return self::remember("category:{$slug}", 600, function() use ($slug) {
-            // Query items
-        });
-    }
+    START TRANSACTION;
     
-    // Item details: Cache for 1 minute (frequent updates)
-    public static function getItemDetail($id) {
-        return self::remember("item:{$id}", 60, function() use ($id) {
-            // Query item details
-        });
-    }
+    -- Get validation details
+    SELECT item_id, action_type, old_price, new_price
+    INTO v_item_id, v_action_type, v_old_price, v_new_price
+    FROM validation_queue
+    WHERE queue_id = p_queue_id AND status = 'pending';
     
-    // Search results: Cache for 30 seconds
-    public static function search($query) {
-        $key = "search:" . md5($query);
-        return self::remember($key, 30, function() use ($query) {
-            // Execute search
-        });
-    }
-    
-    private static function remember($key, $ttl, $callback) {
-        $value = Redis::get($key);
-        if ($value === null) {
-            $value = $callback();
-            Redis::setex($key, $ttl, serialize($value));
-        } else {
-            $value = unserialize($value);
-        }
-        return $value;
-    }
-}
-
-
-### DATABASE QUERY OPTIMIZATION
-
-1. Use Indexes Effectively:
-   - slug (for URL lookups)
-   - status (for filtering active items)
-   - category_id (for category filtering)
-   - Full-text index on name_en, name_ne, tags
-
-2. Avoid N+1 Queries:
-   Instead of:
-     foreach ($items as $item) {
-         $category = Category::find($item->category_id);
-     }
-   
-   Use eager loading:
-     $items = Item::with('category')->get();
-
-3. Use Query Result Caching:
-   Cache frequently accessed queries in Redis
-
-
-### IMAGE OPTIMIZATION
-
-1. Convert all uploads to WebP:
-   - Original: JPEG/PNG (2MB)
-   - WebP: 85% quality (~200KB)
-   - Savings: 90% reduction
-
-2. Generate Multiple Sizes:
-   - Thumbnail: 150x150px (for lists)
-   - Medium: 400x400px (for cards)
-   - Large: 800x800px (for detail page)
-
-3. Lazy Loading:
-   <img src="placeholder.jpg" 
-        data-src="actual-image.webp" 
-        loading="lazy" 
-        alt="Item name">
-
-4. Use <picture> for Responsive Images:
-   <picture>
-     <source media="(max-width: 640px)" srcset="item-400.webp">
-     <source media="(max-width: 1024px)" srcset="item-600.webp">
-     <img src="item-800.webp" alt="Item">
-   </picture>
-
-
-### FRONTEND OPTIMIZATION
-
-1. Critical CSS Inlining:
-   - Inline above-the-fold CSS in <head>
-   - Defer non-critical stylesheets
-
-2. JavaScript Optimization:
-   - Defer non-critical scripts
-   - Use async for independent scripts
-   - Minimize third-party scripts
-
-3. Service Worker (PWA):
-   // sw.js
-   self.addEventListener('install', (event) => {
-     event.waitUntil(
-       caches.open('mulyasuchi-v1').then((cache) => {
-         return cache.addAll([
-           '/',
-           '/assets/css/main.min.css',
-           '/assets/js/app.min.js',
-           '/assets/images/logo.svg'
-         ]);
-       })
-     );
-   });
-
-4. Compression:
-   - Enable Gzip/Brotli compression in NGINX
-   - Minify CSS/JS in production
-
-
----
-
-## 🔍 SEO OPTIMIZATION STRATEGY
-
-### ON-PAGE SEO IMPLEMENTATION
-
-PHP SEO Helper Class:
-
-class SEOHelper {
-    public static function generateMeta($page, $data = []) {
-        $defaults = [
-            'site_name' => 'मूल्यसूची (MulyaSuchi)',
-            'site_url' => 'https://mulyasuchi.com.np',
-            'og_image' => 'https://mulyasuchi.com.np/assets/images/og-image.jpg'
-        ];
+    IF v_action_type = 'new_item' THEN
+        -- Create new item from queue data
+        INSERT INTO items (
+            item_name, category_id, base_price, current_price, unit,
+            market_location, description, image_path, status,
+            created_by, validated_by, validated_at
+        )
+        SELECT 
+            item_name, category_id, new_price, new_price, unit,
+            market_location, description, image_path, 'active',
+            submitted_by, p_admin_id, NOW()
+        FROM validation_queue
+        WHERE queue_id = p_queue_id;
         
-        switch($page) {
-            case 'home':
-                return [
-                    'title' => 'मूल्यसूची | Nepal\'s Official Price Index',
-                    'description' => 'Real-time market prices for vegetables, fruits, tech, and daily essentials in Nepal. Updated daily by verified contributors. नेपालको आधिकारिक मूल्यसूची।',
-                    'keywords' => 'nepal market price, मूल्यसूची, तरकारी मूल्य, daily price nepal, kalimati price, nepal price index',
-                    'canonical' => $defaults['site_url'],
-                    'og:type' => 'website',
-                    'og:title' => 'मूल्यसूची - Nepal\'s Official Price Index',
-                    'og:description' => 'Check real-time market prices across Nepal',
-                    'og:image' => $defaults['og_image']
-                ];
-                
-            case 'item':
-                return [
-                    'title' => $data['name_en'] . ' Price in Nepal | मूल्यसूची',
-                    'description' => "Current market price of {$data['name_en']} ({$data['name_ne']}) is NPR {$data['price']} per {$data['unit']}. Updated: " . date('d M Y'),
-                    'keywords' => "{$data['name_en']}, {$data['name_ne']}, price, nepal",
-                    'canonical' => $defaults['site_url'] . '/item/' . $data['slug'],
-                    'og:type' => 'product',
-                    'og:image' => $defaults['site_url'] . $data['image_url']
-                ];
-                
-            case 'category':
-                return [
-                    'title' => $data['name_en'] . ' Prices in Nepal | मूल्यसूची',
-                    'description' => "Browse current market prices for all {$data['name_en']} items in Nepal. Daily updated prices from verified sources.",
-                    'keywords' => "{$data['name_en']}, {$data['name_ne']}, prices, nepal",
-                    'canonical' => $defaults['site_url'] . '/category/' . $data['slug']
-                ];
-        }
-    }
-}
+        SET v_item_id = LAST_INSERT_ID();
+        
+    ELSEIF v_action_type = 'price_update' THEN
+        -- Update existing item price
+        UPDATE items
+        SET current_price = v_new_price,
+            validated_by = p_admin_id,
+            validated_at = NOW()
+        WHERE item_id = v_item_id;
+        
+        -- Record price history
+        INSERT INTO price_history (item_id, old_price, new_price, updated_by)
+        VALUES (v_item_id, v_old_price, v_new_price, p_admin_id);
+    END IF;
+    
+    -- Update validation queue
+    UPDATE validation_queue
+    SET status = 'approved',
+        validated_by = p_admin_id,
+        validated_at = NOW()
+    WHERE queue_id = p_queue_id;
+    
+    COMMIT;
+END$$
 
+DELIMITER ;
 
-### STRUCTURED DATA (JSON-LD)
+-- Procedure: Reject Validation
+DELIMITER $$
 
-Product Schema for Item Pages:
+CREATE PROCEDURE sp_reject_validation(
+    IN p_queue_id INT UNSIGNED,
+    IN p_admin_id INT UNSIGNED,
+    IN p_reason TEXT
+)
+BEGIN
+    UPDATE validation_queue
+    SET status = 'rejected',
+        validated_by = p_admin_id,
+        validated_at = NOW(),
+        rejection_reason = p_reason
+    WHERE queue_id = p_queue_id AND status = 'pending';
+END$$
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Red Onion (रातो प्याज)",
-  "image": "https://mulyasuchi.com.np/assets/uploads/items/red-onion.webp",
-  "description": "Current market price of Red Onion in Nepal",
-  "offers": {
-    "@type": "Offer",
-    "price": "120.00",
-    "priceCurrency": "NPR",
-    "availability": "https://schema.org/InStock",
-    "priceValidUntil": "2025-11-22"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.5",
-    "reviewCount": "89"
-  }
-}
-</script>
+DELIMITER ;
 
+-- ===========================================================================
+-- TRIGGERS
+-- ===========================================================================
 
-Organization Schema for Homepage:
+-- Trigger: Update tag usage count when item_tags is inserted
+DELIMITER $$
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "मूल्यसूची (MulyaSuchi)",
-  "url": "https://mulyasuchi.com.np",
-  "logo": "https://mulyasuchi.com.np/assets/images/logo.svg",
-  "description": "Nepal's official market price intelligence platform",
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "NP"
-  },
-  "sameAs": [
-    "https://facebook.com/mulyasuchi",
-    "https://twitter.com/mulyasuchi"
-  ]
-}
-</script>
+CREATE TRIGGER trg_after_insert_item_tags
+AFTER INSERT ON item_tags
+FOR EACH ROW
+BEGIN
+    UPDATE tags
+    SET usage_count = usage_count + 1
+    WHERE tag_id = NEW.tag_id;
+END$$
 
+DELIMITER ;
 
-### URL STRUCTURE (SEO-Friendly)
+-- Trigger: Update tag usage count when item_tags is deleted
+DELIMITER $$
 
-Homepage:
-https://mulyasuchi.com.np/
+CREATE TRIGGER trg_after_delete_item_tags
+AFTER DELETE ON item_tags
+FOR EACH ROW
+BEGIN
+    UPDATE tags
+    SET usage_count = usage_count - 1
+    WHERE tag_id = OLD.tag_id;
+END$$
 
-Category Pages:
-https://mulyasuchi.com.np/category/vegetables
-https://mulyasuchi.com.np/category/fruits
+DELIMITER ;
 
-Item Detail Pages:
-https://mulyasuchi.com.np/item/red-onion-rato-pyaj
-https://mulyasuchi.com.np/item/iphone-15-pro
+================================================================================
+4. FILE STRUCTURE - DETAILED SPECIFICATIONS
+================================================================================
 
-Search Results:
-https://mulyasuchi.com.np/search?q=tomato
+In the following sections, you will find the complete, production-ready code 
+for each file in the system. Each file includes:
+- Complete PHP/HTML/CSS/JS code
+- Inline comments explaining logic
+- Security measures (SQL injection, XSS, CSRF protection)
+- Error handling
+- Responsive design considerations
 
-About Pages:
-https://mulyasuchi.com.np/about
-https://mulyasuchi.com.np/how-it-works
+================================================================================
+5. DETAILED FILE SPECIFICATIONS
+================================================================================
 
-
-### SITEMAP GENERATION
-
-PHP Sitemap Generator Script:
+/===================================================================\
+| FILE: config/database.php                                         |
+| PURPOSE: Database connection using PDO                            |
+\===================================================================/
 
 <?php
-// scripts/sitemap-generator.php
+/**
+ * Database Configuration and Connection
+ * 
+ * This file establishes a secure database connection using PDO
+ * with prepared statements to prevent SQL injection.
+ */
 
-$base_url = 'https://mulyasuchi.com.np';
-$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
+// Database configuration constants
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'mulyasuchi_db');
+define('DB_USER', 'your_db_username');
+define('DB_PASS', 'your_db_password');
+define('DB_CHARSET', 'utf8mb4');
 
-// Homepage
-$url = $xml->addChild('url');
-$url->addChild('loc', $base_url . '/');
-$url->addChild('changefreq', 'daily');
-$url->addChild('priority', '1.0');
+// PDO options for security and error handling
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . DB_CHARSET
+];
 
-// Category pages
-$categories = Category::all();
-foreach ($categories as $category) {
-    $url = $xml->addChild('url');
-    $url->addChild('loc', $base_url . '/category/' . $category->slug);
-    $url->addChild('changefreq', 'daily');
-    $url->addChild('priority', '0.8');
+try {
+    $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+    $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+} catch (PDOException $e) {
+    // Log error securely (don't expose database details to users)
+    error_log("Database Connection Error: " . $e->getMessage());
+    die("Connection failed. Please try again later.");
 }
 
-// Item pages
-$items = Item::where('status', 'active')->get();
-foreach ($items as $item) {
-    $url = $xml->addChild('url');
-    $url->addChild('loc', $base_url . '/item/' . $item->slug);
-    $url->addChild('lastmod', $item->last_updated_at);
-    $url->addChild('changefreq', 'weekly');
-    $url->addChild('priority', '0.6');
+?>
+
+/===================================================================\
+| FILE: config/config.php                                           |
+| PURPOSE: Site-wide configuration settings                         |
+\===================================================================/
+
+<?php
+/**
+ * Site Configuration
+ * 
+ * Global configuration settings for the Mulyasuchi platform
+ */
+
+// Prevent direct access
+if (!defined('MULYASUCHI_APP')) {
+    die('Direct access not permitted');
 }
 
-// Save sitemap
-file_put_contents(__DIR__ . '/../public/sitemap.xml', $xml->asXML());
-echo "Sitemap generated successfully!\n";
+// Site Information
+define('SITE_NAME', 'Mulyasuchi');
+define('SITE_TAGLINE', 'Your Trusted Market Intelligence Platform');
+define('SITE_URL', 'http://localhost/mulyasuchi'); // Change for production
+define('SITE_EMAIL', 'contact@mulyasuchi.com');
 
+// File Upload Configuration
+define('UPLOAD_DIR', __DIR__ . '/../assets/uploads/items/');
+define('UPLOAD_URL', SITE_URL . '/assets/uploads/items/');
+define('MAX_FILE_SIZE', 5242880); // 5MB in bytes
+define('ALLOWED_IMAGE_TYPES', ['image/jpeg', 'image/png', 'image/jpg', 'image/webp']);
 
-### ROBOTS.TXT
+// Pagination
+define('ITEMS_PER_PAGE', 20);
 
-User-agent: *
-Allow: /
-Disallow: /admin/
-Disallow: /contributor/
-Disallow: /api/
-Disallow: /assets/uploads/temp/
+// Session Configuration
+define('SESSION_LIFETIME', 3600); // 1 hour in seconds
+define('SESSION_NAME', 'MULYASUCHI_SESSION');
 
-Sitemap: https://mulyasuchi.com.np/sitemap.xml
+// Security
+define('CSRF_TOKEN_NAME', 'csrf_token');
+define('PASSWORD_MIN_LENGTH', 8);
 
+// Timezone
+date_default_timezone_set('Asia/Kathmandu');
 
----
+// Error Reporting (disable in production)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-## 🌐 NEPALI LOCALIZATION
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_name(SESSION_NAME);
+    session_start([
+        'cookie_lifetime' => SESSION_LIFETIME,
+        'cookie_httponly' => true,
+        'cookie_secure' => false, // Set to true in production with HTTPS
+        'use_strict_mode' => true
+    ]);
+}
 
-### BILINGUAL SUPPORT IMPLEMENTATION
+?>
 
-class NepaliHelper {
-    // Convert English numbers to Nepali (Devanagari)
-    public static function toNepaliNumber($number) {
-        $english = ['0','1','2','3','4','5','6','7','8','9'];
-        $nepali = ['०','१','२','३','४','५','६','७','८','९'];
-        return str_replace($english, $nepali, $number);
+/===================================================================\
+| FILE: config/constants.php                                        |
+| PURPOSE: System-wide constants                                    |
+\===================================================================/
+
+<?php
+/**
+ * System Constants
+ */
+
+define('MULYASUCHI_APP', true);
+
+// User Roles
+define('ROLE_ADMIN', 'admin');
+define('ROLE_CONTRIBUTOR', 'contributor');
+
+// User Status
+define('STATUS_ACTIVE', 'active');
+define('STATUS_SUSPENDED', 'suspended');
+define('STATUS_INACTIVE', 'inactive');
+
+// Item Status
+define('ITEM_STATUS_ACTIVE', 'active');
+define('ITEM_STATUS_PENDING', 'pending');
+define('ITEM_STATUS_INACTIVE', 'inactive');
+
+// Validation Queue Status
+define('VALIDATION_PENDING', 'pending');
+define('VALIDATION_APPROVED', 'approved');
+define('VALIDATION_REJECTED', 'rejected');
+
+// Action Types
+define('ACTION_NEW_ITEM', 'new_item');
+define('ACTION_PRICE_UPDATE', 'price_update');
+
+// Log Action Types
+define('LOG_LOGIN', 'login');
+define('LOG_LOGOUT', 'logout');
+define('LOG_CREATE', 'create');
+define('LOG_UPDATE', 'update');
+define('LOG_DELETE', 'delete');
+define('LOG_VALIDATE', 'validate');
+define('LOG_REJECT', 'reject');
+
+// Price Change Alert Threshold
+define('PRICE_CHANGE_THRESHOLD', 20); // Percentage
+
+// Maximum Tags Per Item
+define('MAX_TAGS_PER_ITEM', 10);
+
+?>
+
+/===================================================================\
+| FILE: classes/Database.php                                        |
+| PURPOSE: Database connection class with singleton pattern         |
+\===================================================================/
+
+<?php
+/**
+ * Database Connection Class
+ * 
+ * Singleton pattern for database connections
+ */
+
+class Database {
+    private static $instance = null;
+    private $pdo;
+    
+    private function __construct() {
+        require_once __DIR__ . '/../config/database.php';
+        $this->pdo = $pdo;
     }
     
-    // Convert Nepali numbers back to English
-    public static function toEnglishNumber($number) {
-        $nepali = ['०','१','२','३','४','५','६','७','८','९'];
-        $english = ['0','1','2','3','4','5','6','7','8','9'];
-        return str_replace($nepali, $english, $number);
-    }
-    
-    // Convert Gregorian date to Bikram Sambat (BS)
-    public static function toBikramSambat($gregorian_date) {
-        // Use: https://github.com/j4m35f15h/nepali-date-converter-php
-        // Example implementation:
-        require_once 'vendor/nepali-date-converter/NepaliDateConverter.php';
-        $converter = new NepaliDateConverter();
-        return $converter->engToNep($gregorian_date);
-    }
-    
-    // Format currency in Nepali style
-    public static function formatCurrency($amount, $lang = 'en') {
-        $formatted = 'NPR ' . number_format($amount, 2);
-        if ($lang === 'ne') {
-            $formatted = 'रु ' . self::toNepaliNumber(number_format($amount, 2));
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
         }
-        return $formatted;
+        return self::$instance;
+    }
+    
+    public function getConnection() {
+        return $this->pdo;
+    }
+    
+    // Prevent cloning
+    private function __clone() {}
+    
+    // Prevent unserialization
+    public function __wakeup() {
+        throw new Exception("Cannot unserialize singleton");
     }
 }
 
+?>
 
-### LANGUAGE TOGGLE
+/===================================================================\
+| FILE: classes/Auth.php                                            |
+| PURPOSE: Authentication and authorization class                   |
+\===================================================================/
 
-HTML Implementation:
+<?php
+/**
+ * Authentication Class
+ * 
+ * Handles user authentication, session management, and authorization
+ */
 
-<div class="language-toggle">
-    <button onclick="switchLanguage('en')" class="lang-btn" data-lang="en">
-        English
-    </button>
-    <button onclick="switchLanguage('ne')" class="lang-btn active" data-lang="ne">
-        नेपाली
-    </button>
-</div>
-
-<script>
-function switchLanguage(lang) {
-    // Store preference
-    localStorage.setItem('preferred_language', lang);
+class Auth {
+    private $pdo;
     
-    // Toggle active class
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
-    });
-    
-    // Update content
-    document.querySelectorAll('[data-lang-en]').forEach(el => {
-        el.textContent = lang === 'en' ? el.dataset.langEn : el.dataset.langNe;
-    });
-    
-    // Reload page with language parameter
-    window.location.href = '?lang=' + lang;
-}
-</script>
-
-
-### DATABASE STRUCTURE FOR BILINGUAL CONTENT
-
-All text fields have both English and Nepali columns:
-- name_en / name_ne
-- description_en / description_ne
-
-Display logic:
-
-$lang = $_GET['lang'] ?? $_SESSION['lang'] ?? 'ne'; // Default to Nepali
-$item_name = $lang === 'en' ? $item->name_en : $item->name_ne;
-
-
----
-
-## 📊 ADMIN DASHBOARD WIDGETS
-
-### STATISTICS OVERVIEW
-
-Dashboard Metrics to Display:
-
-1. Total Active Items: 285
-2. Pending Validations: 12 (Red badge if > 10)
-3. Today's Price Updates: 47
-4. Active Contributors: 8
-5. Monthly Page Views: 45,230
-6. Average Validation Time: 2.3 hours
-
-
-### PRICE FLUCTUATION ALERTS
-
-SQL Query for Significant Changes:
-
-SELECT 
-    i.name_en,
-    i.name_ne,
-    p.old_price,
-    p.new_price,
-    p.price_change_percent,
-    p.submitted_at,
-    u.username as contributor
-FROM price_updates p
-JOIN items i ON p.item_id = i.id
-JOIN users u ON p.submitted_by = u.id
-WHERE p.price_change_percent > 20
-  AND p.submitted_at > DATE_SUB(NOW(), INTERVAL 7 DAY)
-  AND p.status = 'pending'
-ORDER BY ABS(p.price_change_percent) DESC
-LIMIT 10;
-
-
-### VALIDATION QUEUE TABLE
-
-Admin Dashboard Table Layout:
-
-| Item Name              | Old Price | New Price | Change  | Contributor | Source        | Actions      |
-|------------------------|-----------|-----------|---------|-------------|---------------|--------------|
-| Red Onion (रातो प्याज)  | NPR 110   | NPR 125   | +13.6%  | ram_sharma  | Kalimati      | ✅ Approve ❌ Reject |
-| Tomato (गोलभेंडा)       | NPR 80    | NPR 65    | -18.8%  | sita_KC     | New Road      | ✅ Approve ❌ Reject |
-| iPhone 15 Pro          | NPR 185k  | NPR 175k  | -5.4%   | tech_guru   | Durbar Marg   | ✅ Approve ❌ Reject |
-
-
-HTML Implementation:
-
-<div class="validation-queue">
-    <h2>Pending Validations <span class="badge">12</span></h2>
-    
-    <table class="queue-table">
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Old Price</th>
-                <th>New Price</th>
-                <th>Change</th>
-                <th>Contributor</th>
-                <th>Source</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($pending_updates as $update): ?>
-            <tr>
-                <td>
-                    <strong><?= $update->item_name_en ?></strong><br>
-                    <small><?= $update->item_name_ne ?></small>
-                </td>
-                <td>NPR <?= number_format($update->old_price, 2) ?></td>
-                <td>NPR <?= number_format($update->new_price, 2) ?></td>
-                <td class="<?= $update->price_change_percent > 0 ? 'text-danger' : 'text-success' ?>">
-                    <?= $update->price_change_percent > 0 ? '↑' : '↓' ?>
-                    <?= abs($update->price_change_percent) ?>%
-                </td>
-                <td>@<?= $update->contributor_username ?></td>
-                <td><?= $update->source_info ?></td>
-                <td>
-                    <button onclick="validateUpdate(<?= $update->id ?>, 'approve')" 
-                            class="btn btn-success btn-sm">
-                        ✅ Approve
-                    </button>
-                    <button onclick="validateUpdate(<?= $update->id ?>, 'reject')" 
-                            class="btn btn-danger btn-sm">
-                        ❌ Reject
-                    </button>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
-
-<script>
-function validateUpdate(updateId, action) {
-    if (!confirm(`Are you sure you want to ${action} this update?`)) {
-        return;
+    public function __construct() {
+        $db = Database::getInstance();
+        $this->pdo = $db->getConnection();
     }
     
-    fetch(`/api/v1/admin/validate/${updateId}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + getAuthToken()
-        },
-        body: JSON.stringify({ action: action })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Update ' + action + 'd successfully!');
-            location.reload();
-        } else {
-            alert('Error: ' + data.error.message);
+    /**
+     * Authenticate user with username and password
+     */
+    public function login($username, $password) {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT user_id, username, email, password_hash, full_name, role, status
+                FROM users
+                WHERE username = :username AND status = :status
+            ");
+            
+            $stmt->execute([
+                'username' => $username,
+                'status' => STATUS_ACTIVE
+            ]);
+            
+            $user = $stmt->fetch();
+            
+            if ($user && password_verify($password, $user['password_hash'])) {
+                // Set session variables
+                $_SESSION['user_id'] = $user['user_id'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['full_name'] = $user['full_name'];
+                $_SESSION['role'] = $user['role'];
+                $_SESSION['logged_in'] = true;
+                
+                // Update last login
+                $this->updateLastLogin($user['user_id']);
+                
+                // Log the login
+                Logger::log(LOG_LOGIN, 'user', $user['user_id'], "User {$username} logged in");
+                
+                return true;
+            }
+            
+            return false;
+            
+        } catch (PDOException $e) {
+            error_log("Login error: " . $e->getMessage());
+            return false;
         }
-    });
-}
-</script>
-
-
-### CONTRIBUTOR PERFORMANCE METRICS
-
-Display for each contributor:
-
-- Total Submissions: 145
-- Approved: 141 (97.2%)
-- Rejected: 4 (2.8%)
-- Pending: 5
-- Reputation Level: Gold ⭐⭐⭐
-- Last Active: 2 hours ago
-
-
----
-
-## 🛠️ DEVELOPMENT WORKFLOW
-
-### ENVIRONMENT SETUP
-
-Step 1: System Requirements
-- PHP 8.2 or higher
-- MySQL 8.0 or higher
-- Composer (PHP dependency manager)
-- Node.js 18+ and npm
-- Redis 6.0+
-- Git
-
-Step 2: Clone Repository
-git clone https://github.com/jasminesharmakuok/mulyasuchi.git
-cd mulyasuchi
-
-Step 3: Install PHP Dependencies
-composer install
-
-Step 4: Install Node.js Dependencies
-npm install
-
-Step 5: Environment Configuration
-cp .env.example .env
-
-Edit .env file:
-APP_NAME=MulyaSuchi
-APP_URL=http://localhost:8000
-APP_ENV=development
-
-DB_HOST=localhost
-DB_PORT=3306
-DB_DATABASE=mulyasuchi
-DB_USERNAME=root
-DB_PASSWORD=your_password
-
-REDIS_HOST=127.0.0.1
-REDIS_PORT=6379
-
-MAIL_HOST=smtp.gmail.com
-MAIL_PORT=587
-MAIL_USERNAME=your_email@gmail.com
-MAIL_PASSWORD=your_app_password
-
-Step 6: Database Setup
-mysql -u root -p
-
-In MySQL console:
-CREATE DATABASE mulyasuchi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-EXIT;
-
-Run migrations:
-php artisan migrate
-
-Seed initial data:
-php artisan db:seed
-
-Step 7: Build Frontend Assets
-npm run dev       # For development
-npm run build     # For production
-
-Step 8: Start Development Server
-php -S localhost:8000 -t public/
-
-Or using PHP built-in server:
-php artisan serve
-
-Visit: http://localhost:8000
-
-
-### GIT WORKFLOW
-
-Branch Structure:
-
-main (production)
-  ├── develop (staging)
-  │   ├── feature/add-export-csv
-  │   ├── feature/push-notifications
-  │   ├── feature/price-alerts
-  │   └── bugfix/search-pagination
-
-
-Git Commands:
-
-# Create feature branch
-git checkout develop
-git pull origin develop
-git checkout -b feature/add-export-csv
-
-# Make changes and commit
-git add .
-git commit -m "Add CSV export functionality for price history"
-
-# Push to remote
-git push origin feature/add-export-csv
-
-# Create Pull Request on GitHub
-# After review and approval, merge to develop
-
-# Deploy to staging
-git checkout develop
-git merge feature/add-export-csv
-git push origin develop
-
-# After testing on staging, merge to production
-git checkout main
-git merge develop
-git push origin main
-
-
-### CODE QUALITY STANDARDS
-
-1. PHP Coding Standards (PSR-12)
-   - Use 4 spaces for indentation
-   - Maximum line length: 120 characters
-   - Class names: PascalCase
-   - Method names: camelCase
-   - Constants: UPPER_CASE
-
-2. JavaScript Standards (ES6+)
-   - Use const/let (never var)
-   - Arrow functions for callbacks
-   - Template literals for strings
-   - Async/await for asynchronous code
-
-3. SQL Standards
-   - Use uppercase for SQL keywords
-   - Always use prepared statements
-   - Add indexes for frequently queried columns
-   - Use transactions for multi-step operations
-
-
----
-
-## 🚢 DEPLOYMENT GUIDE
-
-### PRE-DEPLOYMENT CHECKLIST
-
-□ Run all tests: vendor/bin/phpunit
-□ Check PHP syntax errors: find . -name "*.php" -exec php -l {} \;
-□ Optimize Composer autoloader: composer dump-autoload -o
-□ Minify CSS/JS: npm run production
-□ Generate sitemap: php scripts/sitemap-generator.php
-□ Database backup: php scripts/backup.sh
-□ Update .env with production values
-□ Enable maintenance mode: php artisan down
-
-
-### SERVER REQUIREMENTS
-
-Operating System: Ubuntu 22.04 LTS
-
-Software Stack:
-- NGINX 1.22+
-- PHP 8.2+ with extensions:
-  * php-fpm
-  * php-mysql
-  * php-redis
-  * php-mbstring
-  * php-xml
-  * php-curl
-  * php-gd
-  * php-zip
-  * php-intl
-- MySQL 8.0+
-- Redis 6.0+
-- Certbot (Let's Encrypt SSL)
-
-
-### NGINX CONFIGURATION
-
-File: /etc/nginx/sites-available/mulyasuchi
-
-server {
-    listen 80;
-    server_name mulyasuchi.com.np www.mulyasuchi.com.np;
-    return 301 https://$server_name$request_uri;
-}
-
-server {
-    listen 443 ssl http2;
-    server_name mulyasuchi.com.np www.mulyasuchi.com.np;
-    
-    root /var/www/mulyasuchi/public;
-    index index.php index.html;
-    
-    # SSL Certificates (Let's Encrypt)
-    ssl_certificate /etc/letsencrypt/live/mulyasuchi.com.np/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/mulyasuchi.com.np/privkey.pem;
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers HIGH:!aNULL:!MD5;
-    
-    # Security Headers
-    add_header X-Frame-Options "SAMEORIGIN" always;
-    add_header X-Content-Type-Options "nosniff" always;
-    add_header X-XSS-Protection "1; mode=block" always;
-    add_header Referrer-Policy "no-referrer-when-downgrade" always;
-    add_header Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';" always;
-    
-    # Gzip Compression
-    gzip on;
-    gzip_vary on;
-    gzip_min_length 1024;
-    gzip_types text/plain text/css text/xml text/javascript application/json application/javascript application/xml+rss application/rss+xml font/truetype font/opentype application/vnd.ms-fontobject image/svg+xml;
-    
-    # Client body size (for image uploads)
-    client_max_body_size 5M;
-    
-    # Main location block
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
     }
     
-    # PHP-FPM configuration
-    location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;
-        fastcgi_hide_header X-Powered-By;
+    /**
+     * Update last login timestamp
+     */
+    private function updateLastLogin($userId) {
+        try {
+            $stmt = $this->pdo->prepare("UPDATE users SET last_login = NOW() WHERE user_id = :user_id");
+            $stmt->execute(['user_id' => $userId]);
+        } catch (PDOException $e) {
+            error_log("Update last login error: " . $e->getMessage());
+        }
     }
     
-    # Cache static assets
-    location ~* \.(jpg|jpeg|png|gif|webp|ico|svg|css|js|woff|woff2|ttf|eot)$ {
-        expires 1y;
-        add_header Cache-Control "public, immutable";
+    /**
+     * Logout user
+     */
+    public function logout() {
+        if (isset($_SESSION['user_id'])) {
+            Logger::log(LOG_LOGOUT, 'user', $_SESSION['user_id'], "User logged out");
+        }
+        
+        session_unset();
+        session_destroy();
+        
+        // Start a new session for flash messages
+        session_start();
     }
     
-    # Deny access to hidden files
-    location ~ /\. {
-        deny all;
+    /**
+     * Check if user is logged in
+     */
+    public static function isLoggedIn() {
+        return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
     }
     
-    # Deny access to sensitive files
-    location ~ /\.(env|git|htaccess) {
-        deny all;
+    /**
+     * Check if user has specific role
+     */
+    public static function hasRole($role) {
+        return self::isLoggedIn() && isset($_SESSION['role']) && $_SESSION['role'] === $role;
+    }
+    
+    /**
+     * Require login (redirect if not logged in)
+     */
+    public static function requireLogin($redirectTo = '/public/index.php') {
+        if (!self::isLoggedIn()) {
+            $_SESSION['error'] = "Please login to continue";
+            header("Location: " . SITE_URL . $redirectTo);
+            exit;
+        }
+    }
+    
+    /**
+     * Require specific role
+     */
+    public static function requireRole($role, $redirectTo = '/public/index.php') {
+        self::requireLogin();
+        
+        if (!self::hasRole($role)) {
+            $_SESSION['error'] = "Access denied";
+            header("Location: " . SITE_URL . $redirectTo);
+            exit;
+        }
+    }
+    
+    /**
+     * Generate CSRF token
+     */
+    public static function generateCSRFToken() {
+        if (!isset($_SESSION[CSRF_TOKEN_NAME])) {
+            $_SESSION[CSRF_TOKEN_NAME] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION[CSRF_TOKEN_NAME];
+    }
+    
+    /**
+     * Verify CSRF token
+     */
+    public static function verifyCSRFToken($token) {
+        return isset($_SESSION[CSRF_TOKEN_NAME]) && hash_equals($_SESSION[CSRF_TOKEN_NAME], $token);
+    }
+    
+    /**
+     * Get current user ID
+     */
+    public static function getUserId() {
+        return $_SESSION['user_id'] ?? null;
+    }
+    
+    /**
+     * Get current user role
+     */
+    public static function getUserRole() {
+        return $_SESSION['role'] ?? null;
     }
 }
 
-Enable site:
-ln -s /etc/nginx/sites-available/mulyasuchi /etc/nginx/sites-enabled/
-nginx -t
-systemctl reload nginx
+?>
 
+/===================================================================\
+| FILE: classes/Logger.php                                          |
+| PURPOSE: System logging class                                     |
+\===================================================================/
 
-### SSL CERTIFICATE SETUP (Let's Encrypt)
+<?php
+/**
+ * Logger Class
+ * 
+ * Handles system-wide logging for audit trails
+ */
 
-# Install Certbot
-sudo apt update
-sudo apt install certbot python3-certbot-nginx
+class Logger {
+    
+    /**
+     * Log system activity
+     */
+    public static function log($actionType, $entityType = null, $entityId = null, $description = '') {
+        try {
+            $db = Database::getInstance();
+            $pdo = $db->getConnection();
+            
+            $userId = Auth::getUserId();
+            $ipAddress = $_SERVER['REMOTE_ADDR'] ?? null;
+            $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? null;
+            
+            $stmt = $pdo->prepare("
+                INSERT INTO system_logs (user_id, action_type, entity_type, entity_id, description, ip_address, user_agent)
+                VALUES (:user_id, :action_type, :entity_type, :entity_id, :description, :ip_address, :user_agent)
+            ");
+            
+            $stmt->execute([
+                'user_id' => $userId,
+                'action_type' => $actionType,
+                'entity_type' => $entityType,
+                'entity_id' => $entityId,
+                'description' => $description,
+                'ip_address' => $ipAddress,
+                'user_agent' => $userAgent
+            ]);
+            
+        } catch (PDOException $e) {
+            // Fail silently but log to error log
+            error_log("Logger error: " . $e->getMessage());
+        }
+    }
+    
+    /**
+     * Get recent logs
+     */
+    public static function getRecentLogs($limit = 100, $userId = null) {
+        try {
+            $db = Database::getInstance();
+            $pdo = $db->getConnection();
+            
+            $sql = "
+                SELECT l.*, u.username, u.full_name
+                FROM system_logs l
+                LEFT JOIN users u ON l.user_id = u.user_id
+            ";
+            
+            if ($userId) {
+                $sql .= " WHERE l.user_id = :user_id";
+            }
+            
+            $sql .= " ORDER BY l.created_at DESC LIMIT :limit";
+            
+            $stmt = $pdo->prepare($sql);
+            
+            if ($userId) {
+                $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+            }
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            
+            $stmt->execute();
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Get logs error: " . $e->getMessage());
+            return [];
+        }
+    }
+}
 
-# Obtain SSL certificate
-sudo certbot --nginx -d mulyasuchi.com.np -d www.mulyasuchi.com.np
+?>
 
-# Auto-renewal (runs twice daily
+/===================================================================\
+| FILE: classes/Item.php                                            |
+| PURPOSE: Item management class                                    |
+\===================================================================/
+
+<?php
+/**
+ * Item Class
+ * 
+ * Handles all item-related operations
+ */
+
+class Item {
+    private $pdo;
+    
+    public function __construct() {
+        $db = Database::getInstance();
+        $this->pdo = $db->getConnection();
+    }
+    
+    /**
+     * Get all active items
+     */
+    public function getActiveItems($limit = null, $offset = 0, $categoryId = null) {
+        try {
+            $sql = "
+                SELECT i.*, c.category_name, c.slug as category_slug
+                FROM items i
+                JOIN categories c ON i.category_id = c.category_id
+                WHERE i.status = :status
+            ";
+            
+            if ($categoryId) {
+                $sql .= " AND i.category_id = :category_id";
+            }
+            
+            $sql .= " ORDER BY i.updated_at DESC";
+            
+            if ($limit) {
+                $sql .= " LIMIT :limit OFFSET :offset";
+            }
+            
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':status', ITEM_STATUS_ACTIVE, PDO::PARAM_STR);
+            
+            if ($categoryId) {
+                $stmt->bindValue(':category_id', $categoryId, PDO::PARAM_INT);
+            }
+            
+            if ($limit) {
+                $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+                $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+            }
+            
+            $stmt->execute();
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Get active items error: " . $e->getMessage());
+            return [];
+        }
+    }
+    
+    /**
+     * Get item by ID
+     */
+    public function getItemById($itemId) {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT i.*, c.category_name, c.slug as category_slug,
+                       u.full_name as created_by_name
+                FROM items i
+                JOIN categories c ON i.category_id = c.category_id
+                JOIN users u ON i.created_by = u.user_id
+                WHERE i.item_id = :item_id
+            ");
+            
+            $stmt->execute(['item_id' => $itemId]);
+            return $stmt->fetch();
+            
+        } catch (PDOException $e) {
+            error_log("Get item by ID error: " . $e->getMessage());
+            return null;
+        }
+    }
+    
+    /**
+     * Get item by slug
+     */
+    public function getItemBySlug($slug) {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT i.*, c.category_name, c.slug as category_slug,
+                       u.full_name as created_by_name
+                FROM items i
+                JOIN categories c ON i.category_id = c.category_id
+                JOIN users u ON i.created_by = u.user_id
+                WHERE i.slug = :slug AND i.status = :status
+            ");
+            
+            $stmt->execute([
+                'slug' => $slug,
+                'status' => ITEM_STATUS_ACTIVE
+            ]);
+            
+            return $stmt->fetch();
+            
+        } catch (PDOException $e) {
+            error_log("Get item by slug error: " . $e->getMessage());
+            return null;
+        }
+    }
+    
+    /**
+     * Search items
+     */
+    public function searchItems($query, $limit = 20, $offset = 0) {
+        try {
+            $searchTerm = "%{$query}%";
+            
+            $stmt = $this->pdo->prepare("
+                SELECT i.*, c.category_name, c.slug as category_slug
+                FROM items i
+                JOIN categories c ON i.category_id = c.category_id
+                WHERE i.status = :status
+                AND (i.item_name LIKE :search OR i.description LIKE :search)
+                ORDER BY i.item_name ASC
+                LIMIT :limit OFFSET :offset
+            ");
+            
+            $stmt->bindValue(':status', ITEM_STATUS_ACTIVE, PDO::PARAM_STR);
+            $stmt->bindValue(':search', $searchTerm, PDO::PARAM_STR);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+            
+            $stmt->execute();
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Search items error: " . $e->getMessage());
+            return [];
+        }
+    }
+    
+    /**
+     * Get item price history
+     */
+    public function getPriceHistory($itemId, $limit = 30) {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT ph.*, u.full_name as updated_by_name
+                FROM price_history ph
+                JOIN users u ON ph.updated_by = u.user_id
+                WHERE ph.item_id = :item_id
+                ORDER BY ph.updated_at DESC
+                LIMIT :limit
+            ");
+            
+            $stmt->bindValue(':item_id', $itemId, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            
+            $stmt->execute();
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Get price history error: " . $e->getMessage());
+            return [];
+        }
+    }
+    
+    /**
+     * Get items with significant price changes
+     */
+    public function getSignificantPriceChanges($threshold = PRICE_CHANGE_THRESHOLD, $limit = 10) {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT i.item_id, i.item_name, i.current_price, i.image_path,
+                       ph.old_price, ph.new_price, ph.price_change_percent, ph.updated_at
+                FROM items i
+                JOIN price_history ph ON i.item_id = ph.item_id
+                WHERE ABS(ph.price_change_percent) >= :threshold
+                AND ph.updated_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+                ORDER BY ABS(ph.price_change_percent) DESC
+                LIMIT :limit
+            ");
+            
+            $stmt->bindValue(':threshold', $threshold, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            
+            $stmt->execute();
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Get significant price changes error: " . $e->getMessage());
+            return [];
+        }
+    }
+    
+    /**
+     * Get item tags
+     */
+    public function getItemTags($itemId) {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT t.*
+                FROM tags t
+                JOIN item_tags it ON t.tag_id = it.tag_id
+                WHERE it.item_id = :item_id
+            ");
+            
+            $stmt->execute(['item_id' => $itemId]);
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Get item tags error: " . $e->getMessage());
+            return [];
+        }
+    }
+    
+    /**
+     * Generate unique slug from item name
+     */
+    public function generateSlug($name) {
+        // Convert to lowercase and replace spaces with hyphens
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name)));
+        
+        // Check if slug exists
+        $originalSlug = $slug;
+        $counter = 1;
+        
+        while ($this->slugExists($slug)) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
+        
+        return $slug;
+    }
+    
+    /**
+     * Check if slug exists
+     */
+    private function slugExists($slug) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM items WHERE slug = :slug");
+            $stmt->execute(['slug' => $slug]);
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Slug exists check error: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Count total items
+     */
+    public function countItems($categoryId = null, $status = ITEM_STATUS_ACTIVE) {
+        try {
+            $sql = "SELECT COUNT(*) FROM items WHERE status = :status";
+            
+            if ($categoryId) {
+                $sql .= " AND category_id = :category_id";
+            }
+            
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':status', $status, PDO::PARAM_STR);
+            
+            if ($categoryId) {
+                $stmt->bindValue(':category_id', $categoryId, PDO::PARAM_INT);
+            }
+            
+            $stmt->execute();
+            return $stmt->fetchColumn();
+            
+        } catch (PDOException $e) {
+            error_log("Count items error: " . $e->getMessage());
+            return 0;
+        }
+    }
+}
+
+?>
+
+/===================================================================\
+| FILE: classes/Category.php                                        |
+| PURPOSE: Category management class                                |
+\===================================================================/
+
+<?php
+/**
+ * Category Class
+ * 
+ * Handles all category-related operations
+ */
+
+class Category {
+    private $pdo;
+    
+    public function __construct() {
+        $db = Database::getInstance();
+        $this->pdo = $db->getConnection();
+    }
+    
+    /**
+     * Get all active categories
+     */
+    public function getActiveCategories() {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT * FROM categories
+                WHERE is_active = 1
+                ORDER BY display_order ASC, category_name ASC
+            ");
+            
+            $stmt->execute();
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Get active categories error: " . $e->getMessage());
+            return [];
+        }
+    }
+    
+    /**
+     * Get category by ID
+     */
+    public function getCategoryById($categoryId) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM categories WHERE category_id = :category_id");
+            $stmt->execute(['category_id' => $categoryId]);
+            return $stmt->fetch();
+            
+        } catch (PDOException $e) {
+            error_log("Get category by ID error: " . $e->getMessage());
+            return null;
+        }
+    }
+    
+    /**
+     * Get category by slug
+     */
+    public function getCategoryBySlug($slug) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM categories WHERE slug = :slug AND is_active = 1");
+            $stmt->execute(['slug' => $slug]);
+            return $stmt->fetch();
+            
+        } catch (PDOException $e) {
+            error_log("Get category by slug error: " . $e->getMessage());
+            return null;
+        }
+    }
+    
+    /**
+     * Get categories with item counts
+     */
+    public function getCategoriesWithItemCounts() {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT c.*, COUNT(i.item_id) as item_count
+                FROM categories c
+                LEFT JOIN items i ON c.category_id = i.category_id AND i.status = :status
+                WHERE c.is_active = 1
+                GROUP BY c.category_id
+                ORDER BY c.display_order ASC, c.category_name ASC
+            ");
+            
+            $stmt->execute(['status' => ITEM_STATUS_ACTIVE]);
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Get categories with item counts error: " . $e->getMessage());
+            return [];
+        }
+    }
+}
+
+?>
+
+/===================================================================\
+| FILE: classes/Validation.php                                      |
+| PURPOSE: Validation queue management class                        |
+\===================================================================/
+
+<?php
+/**
+ * Validation Class
+ * 
+ * Handles validation queue operations
+ */
+
+class Validation {
+    private $pdo;
+    
+    public function __construct() {
+        $db = Database::getInstance();
+        $this->pdo = $db->getConnection();
+    }
+    
+    /**
+     * Submit new item for validation
+     */
+    public function submitNewItem($data) {
+        try {
+            $stmt = $this->pdo->prepare("
+                INSERT INTO validation_queue (
+                    action_type, item_name, category_id, new_price, unit,
+                    market_location, description, image_path, source,
+                    submitted_by
+                ) VALUES (
+                    :action_type, :item_name, :category_id, :new_price, :unit,
+                    :market_location, :description, :image_path, :source,
+                    :submitted_by
+                )
+            ");
+            
+            $result = $stmt->execute([
+                'action_type' => ACTION_NEW_ITEM,
+                'item_name' => $data['item_name'],
+                'category_id' => $data['category_id'],
+                'new_price' => $data['price'],
+                'unit' => $data['unit'],
+                'market_location' => $data['market_location'] ?? null,
+                'description' => $data['description'] ?? null,
+                'image_path' => $data['image_path'] ?? null,
+                'source' => $data['source'] ?? null,
+                'submitted_by' => Auth::getUserId()
+            ]);
+            
+            if ($result) {
+                $queueId = $this->pdo->lastInsertId();
+                Logger::log(LOG_CREATE, 'validation_queue', $queueId, "New item submitted for validation: {$data['item_name']}");
+                return $queueId;
+            }
+            
+            return false;
+            
+        } catch (PDOException $e) {
+            error_log("Submit new item error: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Submit price update for validation
+     */
+    public function submitPriceUpdate($itemId, $newPrice, $source = null) {
+        try {
+            // Get current price
+            $itemStmt = $this->pdo->prepare("SELECT current_price FROM items WHERE item_id = :item_id");
+            $itemStmt->execute(['item_id' => $itemId]);
+            $currentPrice = $itemStmt->fetchColumn();
+            
+            if (!$currentPrice) {
+                return false;
+            }
+            
+            $stmt = $this->pdo->prepare("
+                INSERT INTO validation_queue (
+                    action_type, item_id, old_price, new_price, source, submitted_by
+                ) VALUES (
+                    :action_type, :item_id, :old_price, :new_price, :source, :submitted_by
+                )
+            ");
+            
+            $result = $stmt->execute([
+                'action_type' => ACTION_PRICE_UPDATE,
+                'item_id' => $itemId,
+                'old_price' => $currentPrice,
+                'new_price' => $newPrice,
+                'source' => $source,
+                'submitted_by' => Auth::getUserId()
+            ]);
+            
+            if ($result) {
+                $queueId = $this->pdo->lastInsertId();
+                Logger::log(LOG_CREATE, 'validation_queue', $queueId, "Price update submitted for item ID: {$itemId}");
+                return $queueId;
+            }
+            
+            return false;
+            
+        } catch (PDOException $e) {
+            error_log("Submit price update error: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Get pending validations
+     */
+    public function getPendingValidations() {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT vq.*, u.username, u.full_name,
+                       c.category_name, i.item_name as existing_item_name
+                FROM validation_queue vq
+                JOIN users u ON vq.submitted_by = u.user_id
+                LEFT JOIN categories c ON vq.category_id = c.category_id
+                LEFT JOIN items i ON vq.item_id = i.item_id
+                WHERE vq.status = :status
+                ORDER BY vq.submitted_at ASC
+            ");
+            
+            $stmt->execute(['status' => VALIDATION_PENDING]);
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Get pending validations error: " . $e->getMessage());
+            return [];
+        }
+    }
+    
+    /**
+     * Get validation by ID
+     */
+    public function getValidationById($queueId) {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT vq.*, u.username, u.full_name,
+                       c.category_name, i.item_name as existing_item_name
+                FROM validation_queue vq
+                JOIN users u ON vq.submitted_by = u.user_id
+                LEFT JOIN categories c ON vq.category_id = c.category_id
+                LEFT JOIN items i ON vq.item_id = i.item_id
+                WHERE vq.queue_id = :queue_id
+            ");
+            
+            $stmt->execute(['queue_id' => $queueId]);
+            return $stmt->fetch();
+            
+        } catch (PDOException $e) {
+            error_log("Get validation by ID error: " . $e->getMessage());
+            return null;
+        }
+    }
+    
+    /**
+     * Approve validation (uses stored procedure)
+     */
+    public function approveValidation($queueId) {
+        try {
+            $stmt = $this->pdo->prepare("CALL sp_approve_validation(:queue_id, :admin_id)");
+            $result = $stmt->execute([
+                'queue_id' => $queueId,
+                'admin_id' => Auth::getUserId()
+            ]);
+            
+            if ($result) {
+                Logger::log(LOG_VALIDATE, 'validation_queue', $queueId, "Validation approved");
+            }
+            
+            return $result;
+            
+        } catch (PDOException $e) {
+            error_log("Approve validation error: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Reject validation (uses stored procedure)
+     */
+    public function rejectValidation($queueId, $reason) {
+        try {
+            $stmt = $this->pdo->prepare("CALL sp_reject_validation(:queue_id, :admin_id, :reason)");
+            $result = $stmt->execute([
+                'queue_id' => $queueId,
+                'admin_id' => Auth::getUserId(),
+                'reason' => $reason
+            ]);
+            
+            if ($result) {
+                Logger::log(LOG_REJECT, 'validation_queue', $queueId, "Validation rejected: {$reason}");
+            }
+            
+            return $result;
+            
+        } catch (PDOException $e) {
+            error_log("Reject validation error: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Get contributor's submission history
+     */
+    public function getContributorHistory($userId, $limit = 50) {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT vq.*, c.category_name, i.item_name as existing_item_name,
+                       u_validator.full_name as validated_by_name
+                FROM validation_queue vq
+                LEFT JOIN categories c ON vq.category_id = c.category_id
+                LEFT JOIN items i ON vq.item_id = i.item_id
+                LEFT JOIN users u_validator ON vq.validated_by = u_validator.user_id
+                WHERE vq.submitted_by = :user_id
+                ORDER BY vq.submitted_at DESC
+                LIMIT :limit
+            ");
+            
+            $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            
+            $stmt->execute();
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Get contributor history error: " . $e->getMessage());
+            return [];
+        }
+    }
+    
+    /**
+     * Count pending validations
+     */
+    public function countPendingValidations() {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT COUNT(*) FROM validation_queue WHERE status = :status
+            ");
+            $stmt
