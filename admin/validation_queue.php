@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $action = $_POST['action'] ?? '';
         
         if ($action === 'approve') {
-            $result = $validationObj->approveSubmission($queueId);
+            $result = $validationObj->approveValidation($queueId);
             if ($result) {
                 setFlashMessage('Submission approved successfully!', 'success');
             } else {
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($reason)) {
                 setFlashMessage('Please provide a rejection reason', 'error');
             } else {
-                $result = $validationObj->rejectSubmission($queueId, $reason);
+                $result = $validationObj->rejectValidation($queueId, $reason);
                 if ($result) {
                     setFlashMessage('Submission rejected', 'success');
                 } else {
@@ -248,7 +248,7 @@ include __DIR__ . '/../includes/header.php';
                             <?php echo htmlspecialchars($submission['item_name'] ?? $submission['existing_item_name'] ?? 'Item'); ?>
                         </h3>
                         <p style="font-size: 0.875rem; color: var(--text-secondary);">
-                            Submitted by: <strong><?php echo htmlspecialchars($submission['contributor_name']); ?></strong> | 
+                            Submitted by: <strong><?php echo htmlspecialchars($submission['full_name']); ?></strong> | 
                             <?php echo date('M j, Y g:i A', strtotime($submission['submitted_at'])); ?>
                         </p>
                     </div>
@@ -262,7 +262,7 @@ include __DIR__ . '/../includes/header.php';
                         </div>
                         <div class="detail-item">
                             <strong>INITIAL PRICE</strong>
-                            NPR <?php echo number_format($submission['base_price'], 2); ?> / <?php echo htmlspecialchars($submission['unit']); ?>
+                            NPR <?php echo number_format($submission['new_price'], 2); ?> / <?php echo htmlspecialchars($submission['unit']); ?>
                         </div>
                         <div class="detail-item">
                             <strong>MARKET LOCATION</strong>
@@ -277,7 +277,7 @@ include __DIR__ . '/../includes/header.php';
                     <?php else: ?>
                         <div class="detail-item">
                             <strong>CURRENT PRICE</strong>
-                            NPR <?php echo number_format($submission['current_price'], 2); ?>
+                            NPR <?php echo number_format($submission['old_price'], 2); ?>
                         </div>
                         <div class="detail-item">
                             <strong>NEW PRICE</strong>
@@ -286,7 +286,7 @@ include __DIR__ . '/../includes/header.php';
                         <div class="detail-item">
                             <strong>CHANGE</strong>
                             <?php
-                            $change = (($submission['new_price'] - $submission['current_price']) / $submission['current_price']) * 100;
+                            $change = (($submission['new_price'] - $submission['old_price']) / $submission['old_price']) * 100;
                             $color = $change > 0 ? 'var(--danger)' : 'var(--success)';
                             echo "<span style='color: $color; font-weight: 700;'>";
                             echo ($change > 0 ? '+' : '') . number_format($change, 1) . '%';
