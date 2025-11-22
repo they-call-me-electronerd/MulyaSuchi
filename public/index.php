@@ -254,7 +254,7 @@ $recentItems = $itemObj->getActiveItems(8);
        
         <!-- Nepal Skyline Image -->
         <div style="position: absolute; bottom: 0; left: 0; width: 100%; z-index: 1; pointer-events: none;">
-            <img src="<?php echo SITE_URL; ?>/assets/images/nepal-skyline.png" 
+            <img src="<?php echo SITE_URL; ?>/assets/images/nepal-skyline.png"
                  alt="Nepal Skyline" 
                  style="width: 100%; height: auto; opacity: 0.25; display: block;">
         </div>
