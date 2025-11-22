@@ -45,6 +45,11 @@
 
         if (counters.length === 0) return;
 
+        // Initially set counters to 0 to prevent flash
+        counters.forEach(counter => {
+            counter.textContent = '0';
+        });
+
         // Check if IntersectionObserver is supported
         if (!('IntersectionObserver' in window)) {
             // Fallback: show final values immediately
@@ -56,7 +61,7 @@
             return;
         }
 
-        // Create observer
+        // Create observer with better settings
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !entry.target.dataset.animated) {
@@ -77,7 +82,8 @@
                 }
             });
         }, {
-            threshold: 0.5
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
         });
 
         // Observe all counters

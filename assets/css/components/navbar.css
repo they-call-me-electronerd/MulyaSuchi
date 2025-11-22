@@ -332,7 +332,8 @@
 }
 
 .mobile-menu-toggle.active i::before {
-    content: "\F62A"; /* X icon */
+    content: "\F62A";
+    /* X icon */
 }
 
 /* ============================================================================
@@ -345,6 +346,7 @@
         transform: translateY(-100%);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;
@@ -353,10 +355,13 @@
 
 /* Logo Glow Pulse */
 @keyframes logo-glow-pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0.8;
         filter: blur(8px);
     }
+
     50% {
         opacity: 1;
         filter: blur(12px);
@@ -369,6 +374,7 @@
         width: 0;
         opacity: 0;
     }
+
     to {
         width: 80%;
         opacity: 1;
@@ -382,6 +388,7 @@
         height: 0;
         opacity: 1;
     }
+
     to {
         width: 300px;
         height: 300px;
@@ -395,6 +402,7 @@
         opacity: 0;
         transform: translateX(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -450,11 +458,25 @@
         animation: menu-item-fade-in 0.4s ease forwards;
     }
 
-    .navbar-menu.active li:nth-child(1) { animation-delay: 0.05s; }
-    .navbar-menu.active li:nth-child(2) { animation-delay: 0.1s; }
-    .navbar-menu.active li:nth-child(3) { animation-delay: 0.15s; }
-    .navbar-menu.active li:nth-child(4) { animation-delay: 0.2s; }
-    .navbar-menu.active li:nth-child(5) { animation-delay: 0.25s; }
+    .navbar-menu.active li:nth-child(1) {
+        animation-delay: 0.05s;
+    }
+
+    .navbar-menu.active li:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+    .navbar-menu.active li:nth-child(3) {
+        animation-delay: 0.15s;
+    }
+
+    .navbar-menu.active li:nth-child(4) {
+        animation-delay: 0.2s;
+    }
+
+    .navbar-menu.active li:nth-child(5) {
+        animation-delay: 0.25s;
+    }
 
     .navbar-menu a {
         width: 100%;
@@ -492,6 +514,7 @@
 
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {

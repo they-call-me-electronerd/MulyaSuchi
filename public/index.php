@@ -32,6 +32,24 @@ $recentItems = $itemObj->getActiveItems(8);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MulyaSuchi is Nepal's premier price tracking platform. Track daily market prices of vegetables, fruits, and essential commodities across 50+ markets in Nepal.">
+    <meta name="keywords" content="price tracking nepal, vegetable prices nepal, kalimati market price, daily rates, mulyasuchi, commodity prices">
+    <meta name="author" content="MulyaSuchi Team">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo SITE_URL; ?>">
+    <meta property="og:title" content="MulyaSuchi - Track Daily Market Prices in Nepal">
+    <meta property="og:description" content="Track daily market prices of vegetables, fruits, and essential commodities across 50+ markets in Nepal.">
+    <meta property="og:image" content="<?php echo SITE_URL; ?>/assets/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="<?php echo SITE_URL; ?>">
+    <meta property="twitter:title" content="MulyaSuchi - Track Daily Market Prices in Nepal">
+    <meta property="twitter:description" content="Track daily market prices of vegetables, fruits, and essential commodities across 50+ markets in Nepal.">
+    <meta property="twitter:image" content="<?php echo SITE_URL; ?>/assets/images/og-image.jpg">
+    
     <title><?php echo $pageTitle . ' - ' . SITE_NAME; ?></title>
     
     <!-- Bootstrap CSS -->
@@ -60,6 +78,7 @@ $recentItems = $itemObj->getActiveItems(8);
     <!-- Animation Styles -->
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/animations/enhanced-animations.css">
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/animations/hero-enhancements.css">
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/pages/enhanced-ui.css">
     
     <!-- Theme -->
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/themes/dark-mode.css">
@@ -256,15 +275,16 @@ $recentItems = $itemObj->getActiveItems(8);
             </div>
         </div>
        
+       
         <!-- Nepal Skyline Image -->
         <div style="position: absolute; bottom: 0; left: 0; width: 100%; z-index: 1; pointer-events: none;">
-            <img src="<?php echo SITE_URL; ?>/assets/images/nepal-skyline.png"
+            <img src="<?php echo SITE_URL; ?>/assets/images/skyline.png"
                  alt="Nepal Skyline" 
                  style="width: 100%; height: auto; opacity: 0.25; display: block;">
         </div>
         
         <!-- Bottom Wave Divider -->
-        <div class="section-divider">
+        <div class="section-divider" style="transform: rotate(180deg);">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
             </svg>
@@ -273,7 +293,8 @@ $recentItems = $itemObj->getActiveItems(8);
     </section>
 
     <!-- What is Mulyasuchi Section -->
-    <section class="section-colored scroll-reveal" style="padding: 6rem 0; position: relative;">
+    <!-- What is Mulyasuchi Section -->
+    <section class="section-colored scroll-reveal section-padding" aria-label="About Mulyasuchi" style="position: relative;">
        
         </div>
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
@@ -319,7 +340,7 @@ $recentItems = $itemObj->getActiveItems(8);
     </section>
 
     <!-- Why Choose Us Section -->
-    <section class="scroll-reveal" style="padding: 6rem 0; background: #f9fafb; position: relative;">
+    <section class="scroll-reveal section-padding" aria-label="Why Choose Us" style="background: #f9fafb; position: relative;">
         
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
@@ -340,11 +361,11 @@ $recentItems = $itemObj->getActiveItems(8);
     </section>
 
     <!-- How It Works Section -->
-    <section class="scroll-reveal" style="padding: 6rem 0; background: white; position: relative;">
+    <section class="scroll-reveal section-padding" aria-label="How It Works" style="background: white; position: relative;">
 
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
-                <div style="display: inline-block; background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;"><span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">PROCESS</span></div>
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;"><span class="text-gradient-blue" style="font-weight: 700; font-size: 0.875rem;">PROCESS</span></div>
                 <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">How It Works</h2>
                 <p style="font-size: 1.125rem; color: #6b7280; max-width: 600px; margin: 0 auto;">Simple, transparent, and effective - here's how we bring you accurate prices</p>
             </div>
@@ -352,14 +373,14 @@ $recentItems = $itemObj->getActiveItems(8);
                 <div class="col-lg-6">
                     <div style="position: relative;">
                         <div style="position: absolute; left: 32px; top: 80px; bottom: 80px; width: 2px; background: linear-gradient(180deg, #f97316, #3b82f6, #10b981); opacity: 0.3;"></div>
-                        <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem; position: relative;"><div style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #f97316, #ea580c); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">1</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">Data Collection</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Our network of contributors visits local markets and collects price information for various products daily</p></div></div>
-                        <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem; position: relative;"><div style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">2</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">Verification</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Each price entry is verified through multiple sources to ensure accuracy and reliability</p></div></div>
-                        <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem; position: relative;"><div style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">3</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">Publishing</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Verified prices are published on our platform, making them accessible to everyone for free</p></div></div>
-                        <div style="display: flex; gap: 1.5rem; position: relative;"><div style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #8b5cf6, #7c3aed); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">4</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">You Benefit</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Make informed decisions, compare prices, and shop smarter with real-time market data</p></div></div>
+                        <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem; position: relative;"><div class="floating-card" style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #f97316, #ea580c); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">1</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">Data Collection</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Our network of contributors visits local markets and collects price information for various products daily</p></div></div>
+                        <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem; position: relative;"><div class="floating-card" style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">2</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">Verification</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Each price entry is verified through multiple sources to ensure accuracy and reliability</p></div></div>
+                        <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem; position: relative;"><div class="floating-card" style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">3</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">Publishing</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Verified prices are published on our platform, making them accessible to everyone for free</p></div></div>
+                        <div style="display: flex; gap: 1.5rem; position: relative;"><div class="floating-card" style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #8b5cf6, #7c3aed); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">4</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">You Benefit</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Make informed decisions, compare prices, and shop smarter with real-time market data</p></div></div>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div style="background: white; border-radius: 24px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
+                    <div class="floating-card" style="background: white; border-radius: 24px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
                         <svg viewBox="0 0 400 400" style="width: 100%; height: auto;"><rect x="50" y="200" width="120" height="150" fill="#f97316" rx="8"/><rect x="70" y="220" width="30" height="40" fill="#fff" opacity="0.8"/><rect x="120" y="220" width="30" height="40" fill="#fff" opacity="0.8"/><rect x="70" y="280" width="30" height="40" fill="#fff" opacity="0.8"/><rect x="120" y="280" width="30" height="40" fill="#fff" opacity="0.8"/><polygon points="50,200 110,160 170,200" fill="#ea580c"/><path d="M 180 275 L 220 275" stroke="#3b82f6" stroke-width="4" fill="none" stroke-dasharray="5,5"><animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/></path><polygon points="220,275 210,270 210,280" fill="#3b82f6"/><ellipse cx="280" cy="260" rx="50" ry="20" fill="#3b82f6"/><rect x="230" y="260" width="100" height="60" fill="#3b82f6"/><ellipse cx="280" cy="320" rx="50" ry="20" fill="#2563eb"/><rect x="245" y="275" width="70" height="5" fill="#fff" opacity="0.3"/><rect x="245" y="285" width="70" height="5" fill="#fff" opacity="0.3"/><rect x="245" y="295" width="70" height="5" fill="#fff" opacity="0.3"/><circle cx="110" cy="100" r="25" fill="#10b981"/><path d="M 110 125 L 110 160 M 95 140 L 125 140 M 110 160 L 95 190 M 110 160 L 125 190" stroke="#10b981" stroke-width="8" stroke-linecap="round"/><circle cx="280" cy="100" r="25" fill="#8b5cf6"/><path d="M 280 125 L 280 160 M 265 140 L 295 140 M 280 160 L 265 190 M 280 160 L 295 190" stroke="#8b5cf6" stroke-width="8" stroke-linecap="round"/><path d="M 110 190 L 110 200" stroke="#10b981" stroke-width="3" stroke-dasharray="5,5"><animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/></path><path d="M 280 190 Q 280 230 280 260" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="5,5"><animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/></path><circle cx="200" cy="150" r="30" fill="#10b981" opacity="0.2"><animate attributeName="r" values="30;35;30" dur="2s" repeatCount="indefinite"/></circle><path d="M 185 150 L 195 160 L 215 140" stroke="#10b981" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </div>
                 </div>
@@ -369,7 +390,7 @@ $recentItems = $itemObj->getActiveItems(8);
 
 
     <!-- Categories Section -->
-    <section class="scroll-reveal" style="padding: 6rem 0; background: #f9fafb; position: relative;">
+    <section class="scroll-reveal section-padding" aria-label="Product Categories" style="background: #f9fafb; position: relative;">
 
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
@@ -424,7 +445,7 @@ $recentItems = $itemObj->getActiveItems(8);
 
     <?php if (!empty($recentItems)): ?>
     <!-- Recent Updates Section -->
-    <section class="scroll-reveal" style="padding: 6rem 0; background: white; position: relative;">
+    <section class="scroll-reveal section-padding" aria-label="Recent Price Updates" style="background: white; position: relative;">
 
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">

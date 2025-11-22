@@ -1,0 +1,207 @@
+/**
+ * Enhanced UI/UX Styles
+ * Modern gradients, glassmorphism, spacing, and interactive elements
+ */
+
+/* ============================================================================
+   GLOBAL VARIABLES & UTILITIES
+   ============================================================================ */
+
+:root {
+    --gradient-primary: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    --gradient-surface: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    --gradient-glow: radial-gradient(circle at center, rgba(249, 115, 22, 0.15) 0%, transparent 70%);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    --section-spacing: 8rem;
+}
+
+/* Consistent Section Spacing */
+.section-padding {
+    padding-top: var(--section-spacing);
+    padding-bottom: var(--section-spacing);
+}
+
+/* ============================================================================
+   MODERN GRADIENTS & BACKGROUNDS
+   ============================================================================ */
+
+.bg-gradient-surface {
+    background: var(--gradient-surface);
+}
+
+.bg-gradient-subtle {
+    background: linear-gradient(135deg, #fdfbf7 0%, #fff 100%);
+}
+
+.text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-gradient-blue {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Vibrant Gradients */
+.bg-gradient-vibrant {
+    background: linear-gradient(135deg, #fff7ed 0%, #fff 100%);
+}
+
+.bg-gradient-mesh {
+    background-color: #ffffff;
+    background-image: radial-gradient(at 0% 0%, hsla(28, 100%, 74%, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(214, 100%, 74%, 0.1) 0px, transparent 50%);
+}
+
+/* ============================================================================
+   GLASSMORPHISM CARDS
+   ============================================================================ */
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: rgba(249, 115, 22, 0.3);
+}
+
+/* ============================================================================
+   INTERACTIVE INFOGRAPHICS (How It Works)
+   ============================================================================ */
+
+/* Floating Card Effect */
+.floating-card {
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-card:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.floating-card:nth-child(3) {
+    animation-delay: 2s;
+}
+
+.floating-card:hover {
+    animation-play-state: paused;
+}
+
+.step-card {
+    position: relative;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    z-index: 1;
+}
+
+.step-card::before {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.step-card:hover::before {
+    opacity: 1;
+}
+
+.step-icon-wrapper {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    background: rgba(249, 115, 22, 0.1);
+    color: #f97316;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.step-card:hover .step-icon-wrapper {
+    background: var(--gradient-primary);
+    color: white;
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Connecting lines for steps (desktop only) */
+@media (min-width: 992px) {
+    .step-connector {
+        position: absolute;
+        top: 3rem;
+        right: -50%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(249, 115, 22, 0.2) 0%, transparent 100%);
+        z-index: 0;
+    }
+
+    .step-item:last-child .step-connector {
+        display: none;
+    }
+}
+
+/* ============================================================================
+   CATEGORY CARDS ENHANCEMENT
+   ============================================================================ */
+
+.category-card-enhanced {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: white;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.category-card-enhanced::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(249, 115, 22, 0.1), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.category-card-enhanced:hover::after {
+    opacity: 1;
+}
+
+.category-card-enhanced:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: rgba(249, 115, 22, 0.2);
+}
+
+/* ============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    :root {
+        --section-spacing: 4rem;
+    }
+
+    .section-padding {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
