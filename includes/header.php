@@ -13,6 +13,7 @@
     
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/style.css">
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/nav-modern.css">
     <?php if (isset($additionalCSS)): ?>
         <link rel="stylesheet" href="<?php echo SITE_URL . '/assets/css/' . $additionalCSS; ?>">
     <?php endif; ?>

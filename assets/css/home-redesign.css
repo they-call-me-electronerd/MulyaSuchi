@@ -49,143 +49,23 @@ body {
 }
 
 /* ===================================
-   NAVIGATION BAR
+   NAVIGATION BAR - MODERN LIQUID GLASS
    =================================== */
-
-.main-navbar {
-    background: var(--white);
-    border-bottom: 1px solid var(--gray-200);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: var(--shadow-sm);
-}
-
-.navbar-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-}
-
-.navbar-logo {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: var(--gray-900);
-    text-decoration: none;
-    letter-spacing: -0.02em;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.navbar-logo .logo-text {
-    background: linear-gradient(135deg, var(--primary-orange), var(--primary-orange-dark));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.navbar-menu {
-    display: flex;
-    align-items: center;
-    gap: 2.5rem;
-    list-style: none;
-    flex: 1;
-    justify-content: center;
-}
-
-.navbar-menu a {
-    color: var(--gray-700);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9375rem;
-    transition: color 0.2s ease;
-    position: relative;
-}
-
-.navbar-menu a:hover {
-    color: var(--primary-orange);
-}
-
-.navbar-menu a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary-orange);
-    transition: width 0.3s ease;
-}
-
-.navbar-menu a:hover::after {
-    width: 100%;
-}
-
-.navbar-actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.nav-search-icon {
-    background: none;
-    border: none;
-    font-size: 1.25rem;
-    color: var(--gray-600);
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s ease;
-}
-
-.nav-search-icon:hover {
-    background: var(--gray-100);
-    color: var(--primary-orange);
-}
-
-.nav-btn {
-    padding: 0.625rem 1.25rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    font-size: 0.875rem;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    border: none;
-    cursor: pointer;
-}
-
-.nav-btn-login {
-    background: var(--white);
-    color: var(--gray-700);
-    border: 1px solid var(--gray-300);
-}
-
-.nav-btn-login:hover {
-    background: var(--gray-50);
-    border-color: var(--gray-400);
-}
-
-.nav-btn-admin {
-    background: linear-gradient(135deg, var(--primary-orange), var(--primary-orange-dark));
-    color: var(--white);
-    box-shadow: var(--shadow-sm);
-}
-
-/* Mobile Menu Toggle */
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--gray-700);
-    cursor: pointer;
-}
+/* 
+   Navigation styles have been moved to nav-modern.css
+   for better modularity and maintainability.
+   
+   Features:
+   - Modern glassmorphism design
+   - Smooth animations and transitions
+   - Premium liquid glass effects
+   - Mobile-responsive navigation
+   - Accessibility support
+   
+   Include nav-modern.css in your HTML:
+   <link rel="stylesheet" href="assets/css/nav-modern.css">
+   <script src="assets/js/nav-modern.js"></script>
+*/
 
 /* ===================================
    HERO SECTION WITH NEPAL SKYLINE

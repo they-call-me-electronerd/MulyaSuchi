@@ -39,6 +39,7 @@
     </footer>
     
     <script src="<?php echo SITE_URL; ?>/assets/js/main.js"></script>
+    <script src="<?php echo SITE_URL; ?>/assets/js/nav-modern.js"></script>
     <?php if (isset($additionalJS)): ?>
         <script src="<?php echo SITE_URL . '/assets/js/' . $additionalJS; ?>"></script>
     <?php endif; ?>

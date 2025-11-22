@@ -1,42 +1,125 @@
 <?php
 /**
- * Navigation Bar
+ * Enhanced Modern Liquid Glass Navigation Bar
+ * With Glassmorphism, Smooth Animations, and Premium Design
  */
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
-<nav class="main-nav">
+<nav class="modern-nav">
+    <!-- Animated background elements -->
+    <div class="nav-backdrop"></div>
+    <div class="nav-blur-container">
+        <div class="nav-glass-effect"></div>
+    </div>
+    
     <div class="nav-container">
-        <div class="nav-brand">
-            <a href="<?php echo SITE_URL; ?>/public/index.php">
-                <h1><?php echo SITE_NAME; ?></h1>
-                <span class="tagline"><?php echo SITE_TAGLINE; ?></span>
+        <!-- Brand Section with Logo Animation -->
+        <div class="nav-brand-wrapper">
+            <a href="<?php echo SITE_URL; ?>/public/index.php" class="nav-brand">
+                <div class="brand-icon-wrapper">
+                    <span class="brand-icon">💎</span>
+                    <div class="brand-glow"></div>
+                </div>
+                <div class="brand-text-wrapper">
+                    <h1 class="brand-name"><?php echo SITE_NAME; ?></h1>
+                    <span class="brand-tagline"><?php echo SITE_TAGLINE; ?></span>
+                </div>
             </a>
         </div>
         
-        <button class="nav-toggle" id="navToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        
-        <ul class="nav-menu" id="navMenu">
-            <li><a href="<?php echo SITE_URL; ?>/public/index.php" class="<?php echo $currentPage == 'index.php' ? 'active' : ''; ?>">Home</a></li>
-            <li><a href="<?php echo SITE_URL; ?>/public/browse.php" class="<?php echo $currentPage == 'browse.php' ? 'active' : ''; ?>">Browse</a></li>
-            <li><a href="<?php echo SITE_URL; ?>/public/search.php" class="<?php echo $currentPage == 'search.php' ? 'active' : ''; ?>">Search</a></li>
-            <li><a href="<?php echo SITE_URL; ?>/public/about.php" class="<?php echo $currentPage == 'about.php' ? 'active' : ''; ?>">About</a></li>
-            <li><a href="<?php echo SITE_URL; ?>/public/how-it-works.php" class="<?php echo $currentPage == 'how-it-works.php' ? 'active' : ''; ?>">How It Works</a></li>
+        <!-- Main Navigation Menu with Smooth Transitions -->
+        <div class="nav-menu-wrapper">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line line-1"></span>
+                <span class="hamburger-line line-2"></span>
+                <span class="hamburger-line line-3"></span>
+                <span class="hamburger-bg"></span>
+            </button>
             
-            <?php if (Auth::isLoggedIn()): ?>
-                <?php if (Auth::hasRole(ROLE_ADMIN)): ?>
-                    <li><a href="<?php echo SITE_URL; ?>/admin/dashboard.php" class="btn-admin">Admin Panel</a></li>
-                <?php elseif (Auth::hasRole(ROLE_CONTRIBUTOR)): ?>
-                    <li><a href="<?php echo SITE_URL; ?>/contributor/dashboard.php" class="btn-contributor">Dashboard</a></li>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="<?php echo SITE_URL; ?>/public/index.php" class="nav-link <?php echo $currentPage == 'index.php' ? 'active' : ''; ?>">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo SITE_URL; ?>/public/browse.php" class="nav-link <?php echo $currentPage == 'browse.php' ? 'active' : ''; ?>">
+                        <span class="nav-icon">📦</span>
+                        <span class="nav-text">Browse</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo SITE_URL; ?>/public/search.php" class="nav-link <?php echo $currentPage == 'search.php' ? 'active' : ''; ?>">
+                        <span class="nav-icon">🔍</span>
+                        <span class="nav-text">Search</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo SITE_URL; ?>/public/about.php" class="nav-link <?php echo $currentPage == 'about.php' ? 'active' : ''; ?>">
+                        <span class="nav-icon">ℹ️</span>
+                        <span class="nav-text">About</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo SITE_URL; ?>/public/how-it-works.php" class="nav-link <?php echo $currentPage == 'how-it-works.php' ? 'active' : ''; ?>">
+                        <span class="nav-icon">⚙️</span>
+                        <span class="nav-text">How It Works</span>
+                    </a>
+                </li>
+                
+                <!-- Authentication Links with Premium Styling -->
+                <li class="nav-divider"></li>
+                
+                <?php if (Auth::isLoggedIn()): ?>
+                    <?php if (Auth::hasRole(ROLE_ADMIN)): ?>
+                        <li class="nav-item">
+                            <a href="<?php echo SITE_URL; ?>/admin/dashboard.php" class="nav-link nav-link-admin">
+                                <span class="nav-icon">👑</span>
+                                <span class="nav-text">Admin Panel</span>
+                                <span class="nav-badge">Admin</span>
+                            </a>
+                        </li>
+                    <?php elseif (Auth::hasRole(ROLE_CONTRIBUTOR)): ?>
+                        <li class="nav-item">
+                            <a href="<?php echo SITE_URL; ?>/contributor/dashboard.php" class="nav-link nav-link-contributor">
+                                <span class="nav-icon">📊</span>
+                                <span class="nav-text">Dashboard</span>
+                                <span class="nav-badge">Contributor</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <li class="nav-item">
+                        <a href="<?php echo SITE_URL; ?>/<?php echo strtolower(Auth::getUserRole()); ?>/logout.php" class="nav-link nav-link-logout">
+                            <span class="nav-icon">🚪</span>
+                            <span class="nav-text">Logout</span>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a href="<?php echo SITE_URL; ?>/contributor/login.php" class="nav-link nav-link-auth nav-link-contributor">
+                            <span class="nav-icon">🔐</span>
+                            <span class="nav-text">Contributor</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo SITE_URL; ?>/admin/login.php" class="nav-link nav-link-auth nav-link-admin">
+                            <span class="nav-icon">👑</span>
+                            <span class="nav-text">Admin</span>
+                        </a>
+                    </li>
                 <?php endif; ?>
-                <li><a href="<?php echo SITE_URL; ?>/<?php echo strtolower(Auth::getUserRole()); ?>/logout.php" class="btn-logout">Logout</a></li>
-            <?php else: ?>
-                <li><a href="<?php echo SITE_URL; ?>/contributor/login.php" class="btn-login">Contributor Login</a></li>
-                <li><a href="<?php echo SITE_URL; ?>/admin/login.php" class="btn-login">Admin Login</a></li>
-            <?php endif; ?>
-        </ul>
+            </ul>
+        </div>
+        
+        <!-- Additional Actions (Search, Notifications, etc.) -->
+        <div class="nav-actions">
+            <button class="nav-action-btn" aria-label="Search" title="Search">
+                <span class="action-icon">🔍</span>
+            </button>
+            <button class="nav-action-btn theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+                <span class="action-icon">🌙</span>
+            </button>
+        </div>
     </div>
 </nav>
