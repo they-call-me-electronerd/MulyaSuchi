@@ -88,9 +88,9 @@
     --bg-secondary: #1f2937;
     --bg-tertiary: #374151;
 
-    --text-primary: #f9fafb;
-    --text-secondary: #d1d5db;
-    --text-tertiary: #9ca3af;
+    --text-primary: #f1f5f9;
+    --text-secondary: #e2e8f0;
+    --text-tertiary: #cbd5e1;
 
     --border-color: rgba(255, 255, 255, 0.1);
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
@@ -165,12 +165,73 @@ p {
     color: var(--text-secondary);
 }
 
+/* Dark mode - ensure all text is visible */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] li,
+[data-theme="dark"] td,
+[data-theme="dark"] .stat-label,
+[data-theme="dark"] .stat-number {
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .hero-subtitle,
+[data-theme="dark"] .section-description,
+[data-theme="dark"] .card-text {
+    color: #cbd5e1;
+}
+
 /* Footer - Always Dark */
 footer,
 .professional-footer {
     /* Footer stays dark in both themes for consistency */
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #111827 100%);
     color: #9ca3af;
+}
+
+/* Dark mode sections - improve visibility */
+[data-theme="dark"] section {
+    background: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] .hero-section {
+    background: linear-gradient(135deg, #111827 0%, #1e293b 100%) !important;
+}
+
+[data-theme="dark"] .section-colored {
+    background: linear-gradient(180deg, #1f2937 0%, #111827 100%) !important;
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .category-card-inner {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+    color: #f1f5f9;
+}
+
+/* Badge styles for dark mode */
+[data-theme="dark"] .hero-badge {
+    background: rgba(226, 232, 240, 0.1);
+    color: #cbd5e1;
+}
+
+/* Form elements in dark mode */
+[data-theme="dark"] .hero-search-input {
+    background: #1e293b;
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .hero-search-input::placeholder {
+    color: #64748b;
 }
 
 /* Inputs and Forms */
@@ -296,6 +357,46 @@ select:focus {
 [data-theme="dark"] .dropdown-item:hover {
     background: var(--bg-tertiary);
     color: var(--text-primary);
+}
+
+/* ============================================================================
+   DARK MODE - INLINE STYLE OVERRIDES FOR TEXT
+   ============================================================================ */
+
+/* Override inline color styles for dark mode text visibility */
+[data-theme="dark"] *[style*="color: #6b7280"],
+[data-theme="dark"] *[style*="color: #4b5563"],
+[data-theme="dark"] *[style*="color: #111827"],
+[data-theme="dark"] *[style*="color: #374151"] {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] div[style*="color: #6b7280"] {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] p[style*="color: #6b7280"],
+[data-theme="dark"] span[style*="color: #6b7280"],
+[data-theme="dark"] h3[style*="color: #111827"],
+[data-theme="dark"] h4[style*="color: #111827"] {
+    color: #e2e8f0 !important;
+}
+
+/* Ensure badge and label colors are visible */
+[data-theme="dark"] [style*="background: #f9fafb"],
+[data-theme="dark"] [style*="background-color: #f9fafb"] {
+    background-color: #1e293b !important;
+    color: #e2e8f0 !important;
+}
+
+/* Sections with inline background styles */
+[data-theme="dark"] section[style*="background: #f9fafb"],
+[data-theme="dark"] section[style*="background: white"] {
+    background: #1f2937 !important;
+}
+
+[data-theme="dark"] section[style*="background: white"] {
+    background: #111827 !important;
 }
 
 /* ============================================================================

@@ -55,6 +55,7 @@ $recentItems = $itemObj->getActiveItems(8);
     
     <!-- Page Specific Styles -->
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/pages/landing.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/wave-dark-mode.css">
     
     <!-- Theme -->
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/themes/dark-mode.css">

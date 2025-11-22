@@ -1,0 +1,131 @@
+/* ===================================
+   WAVE DIVIDER DARK MODE SUPPORT
+   =================================== */
+
+/* Enhanced wave fills for better visibility */
+.section-divider .shape-fill {
+    fill: #e5e7eb;
+    /* Light gray for light mode - more visible */
+    transition: fill 0.3s ease;
+}
+
+.section-divider-top .shape-fill {
+    fill: #e5e7eb;
+    /* Light gray for light mode - more visible */
+    transition: fill 0.3s ease;
+}
+
+/* Dark mode wave colors - enhanced for visibility */
+[data-theme="dark"] .section-divider .shape-fill,
+[data-theme="dark"] .section-divider-top .shape-fill {
+    fill: #1f2937;
+    /* Dark gray for dark mode */
+}
+
+/* Hide any duplicate/intercepting waves */
+.section-divider-top {
+    display: none !important;
+}
+
+/* Flip wave dividers for enhanced look */
+.section-divider svg {
+    transform: scaleY(-1);
+}
+
+/* ===================================
+   DARK MODE TEXT COLORS - ENHANCED CONTRAST
+   =================================== */
+
+/* Hero Section Text */
+[data-theme="dark"] .hero-title {
+    color: #ffffff !important;
+    /* Pure white for maximum contrast */
+}
+
+[data-theme="dark"] .hero-subtitle {
+    color: #e5e7eb !important;
+    /* Light gray for readability */
+}
+
+[data-theme="dark"] .stat-number {
+    color: #ffffff !important;
+    /* Pure white for stats */
+}
+
+[data-theme="dark"] .stat-label {
+    color: #d1d5db !important;
+    /* Medium gray for labels */
+}
+
+/* All Headings in Dark Mode */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+    color: #ffffff !important;
+}
+
+/* All Paragraphs in Dark Mode */
+[data-theme="dark"] p {
+    color: #e5e7eb !important;
+}
+
+/* Card Text */
+[data-theme="dark"] .card-title {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .card-text {
+    color: #d1d5db !important;
+}
+
+/* Category Cards */
+[data-theme="dark"] .card h5 {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .card p {
+    color: #d1d5db !important;
+}
+
+/* Badge Text */
+[data-theme="dark"] .badge {
+    color: #ffffff !important;
+}
+
+/* Small Text Elements */
+[data-theme="dark"] small {
+    color: #d1d5db !important;
+}
+
+/* Search Box */
+[data-theme="dark"] .hero-search-box {
+    background: #374151;
+    border-color: #4b5563;
+}
+
+[data-theme="dark"] .hero-search-input {
+    background: #374151;
+    color: #f9fafb;
+}
+
+[data-theme="dark"] .hero-search-input::placeholder {
+    color: #9ca3af;
+}
+
+/* Price Text - Make it stand out */
+[data-theme="dark"] .price,
+[data-theme="dark"] [style*="font-size: 2rem"] {
+    color: #ffffff !important;
+}
+
+/* Category Section Titles */
+[data-theme="dark"] section h2 {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] section p {
+    color: #e5e7eb !important;
+}
