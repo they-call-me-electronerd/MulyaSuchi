@@ -57,8 +57,11 @@ $recentItems = $itemObj->getActiveItems(8);
                     },
                     colors: {
                         brand: {
-                            crimson: '#DC143C',
-                            blue: '#003893',
+                            maroon: '#8B1538',
+                            'maroon-dark': '#6B0F2A',
+                            blue: '#1E3A8A',
+                            'blue-dark': '#1E40AF',
+                            gold: '#D4AF37',
                         }
                     }
                 }
@@ -76,14 +79,23 @@ $recentItems = $itemObj->getActiveItems(8);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .hero-gradient {
-            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #3b82f6 100%);
+            background: linear-gradient(135deg, #8B1538 0%, #5a1232 25%, #1E3A8A 75%, #152d6e 100%);
         }
         .nav-link { position: relative; }
         .nav-link::after {
             content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
-            background-color: #4f46e5; transition: width 0.3s;
+            background-color: #8B1538; transition: width 0.3s;
         }
         .nav-link:hover::after { width: 100%; }
+        @keyframes animate-blob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -20px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(-20px, -20px) scale(1.05); }
+        }
+        .animate-blob { animation: animate-blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -92,7 +104,7 @@ $recentItems = $itemObj->getActiveItems(8);
     <nav class="navbar navbar-expand-lg sticky-top bg-white/90 backdrop-blur-md shadow-sm py-3">
         <div class="container">
             <a class="navbar-brand font-heading font-extrabold text-2xl tracking-tight text-gray-900" href="<?php echo SITE_URL; ?>">
-                <span class="text-indigo-600">Mulya</span>Suchi
+                <span class="text-transparent bg-clip-text" style="background: linear-gradient(135deg, #8B1538 0%, #1E3A8A 100%);">Mulya</span><span class="text-gray-900">Suchi</span>
             </a>
             <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -100,11 +112,11 @@ $recentItems = $itemObj->getActiveItems(8);
             
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto gap-lg-4 font-medium text-gray-600">
-                    <li class="nav-item"><a class="nav-link hover:text-indigo-600 transition-colors" href="<?php echo SITE_URL; ?>">Home</a></li>
-                    <li class="nav-item"><a class="nav-link hover:text-indigo-600 transition-colors" href="browse.php">Browse</a></li>
-                    <li class="nav-item"><a class="nav-link hover:text-indigo-600 transition-colors" href="#search">Search</a></li>
-                    <li class="nav-item"><a class="nav-link hover:text-indigo-600 transition-colors" href="about.php">About</a></li>
-                    <li class="nav-item"><a class="nav-link hover:text-indigo-600 transition-colors" href="how-it-works.php">How It Works</a></li>
+                    <li class="nav-item"><a class="nav-link transition-colors" style="color: #374151;" onmouseover="this.style.color='#8B1538'" onmouseout="this.style.color='#374151'" href="<?php echo SITE_URL; ?>">Home</a></li>
+                    <li class="nav-item"><a class="nav-link transition-colors" style="color: #374151;" onmouseover="this.style.color='#8B1538'" onmouseout="this.style.color='#374151'" href="browse.php">Browse</a></li>
+                    <li class="nav-item"><a class="nav-link transition-colors" style="color: #374151;" onmouseover="this.style.color='#8B1538'" onmouseout="this.style.color='#374151'" href="#search">Search</a></li>
+                    <li class="nav-item"><a class="nav-link transition-colors" style="color: #374151;" onmouseover="this.style.color='#8B1538'" onmouseout="this.style.color='#374151'" href="about.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link transition-colors" style="color: #374151;" onmouseover="this.style.color='#8B1538'" onmouseout="this.style.color='#374151'" href="how-it-works.php">How It Works</a></li>
                 </ul>
                 
                 <div class="d-flex gap-3 mt-3 mt-lg-0 align-items-center">
@@ -125,10 +137,10 @@ $recentItems = $itemObj->getActiveItems(8);
                             </ul>
                         </div>
                     <?php else: ?>
-                        <a href="<?php echo SITE_URL; ?>/contributor/login.php" class="btn btn-outline-primary rounded-full px-4 font-semibold hover:shadow-lg transition-all">
+                        <a href="<?php echo SITE_URL; ?>/contributor/login.php" class="btn btn-outline-primary rounded-full px-4 font-semibold hover:shadow-lg transition-all" style="border-color: #1E3A8A; color: #1E3A8A;" onmouseover="this.style.backgroundColor='#1E3A8A'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#1E3A8A';">
                             Contributor
                         </a>
-                        <a href="<?php echo SITE_URL; ?>/admin/login.php" class="btn bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-full px-4 font-semibold hover:shadow-lg hover:scale-105 transition-all border-0">
+                        <a href="<?php echo SITE_URL; ?>/admin/login.php" class="btn text-white rounded-full px-4 font-semibold hover:shadow-lg hover:scale-105 transition-all border-0" style="background: linear-gradient(135deg, #8B1538 0%, #1E3A8A 100%);">
                             Login
                         </a>
                     <?php endif; ?>
@@ -141,9 +153,9 @@ $recentItems = $itemObj->getActiveItems(8);
     <section class="hero-gradient relative overflow-hidden min-vh-80 d-flex align-items-center py-5">
         <!-- Abstract Background Shapes -->
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-            <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-            <div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-            <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+            <div class="absolute top-[-10%] left-[-10%] w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" style="background-color: rgba(139, 21, 56, 0.5);"></div>
+            <div class="absolute top-[-10%] right-[-10%] w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" style="background-color: rgba(30, 58, 138, 0.5);"></div>
+            <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob animation-delay-4000" style="background-color: rgba(212, 175, 55, 0.3);"></div>
         </div>
 
         <div class="container position-relative z-10">
@@ -156,7 +168,7 @@ $recentItems = $itemObj->getActiveItems(8);
                     </div>
                     
                     <h1 class="display-3 fw-bold mb-3 tracking-tight leading-tight">
-                        Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-indigo-200">Mulyasuchi</span>
+                        Welcome to <span class="text-white">Mulyasuchi</span>
                     </h1>
                     <p class="lead mb-2 font-nepali text-2xl opacity-90">
                         तपाईंको विश्वसनीय बजार मूल्य सूची प्लेटफर्म
@@ -172,14 +184,14 @@ $recentItems = $itemObj->getActiveItems(8);
                                 <i class="bi bi-search text-xl"></i>
                             </span>
                             <input type="text" name="q" class="form-control border-0 shadow-none py-3 text-gray-700 font-medium focus:ring-0" placeholder="Search items... तरकारी, फलफूल, इलेक्ट्रोनिक्स">
-                            <button class="btn bg-indigo-600 text-white rounded-lg px-4 py-2 font-semibold hover:bg-indigo-700 transition-colors" type="submit">
+                            <button class="btn text-white rounded-lg px-4 py-2 font-semibold transition-colors" style="background-color: #8B1538;" onmouseover="this.style.backgroundColor='#6B0F2A'" onmouseout="this.style.backgroundColor='#8B1538'" type="submit">
                                 Search
                             </button>
                         </form>
                     </div>
                     
                     <div class="mt-4 text-sm text-indigo-200 font-medium">
-                        Trending: <span class="text-white underline decoration-indigo-400 underline-offset-4">Tomato</span>, <span class="text-white underline decoration-indigo-400 underline-offset-4">Gold</span>, <span class="text-white underline decoration-indigo-400 underline-offset-4">Rice</span>
+                        Trending: <span class="text-white" style="text-decoration: underline; text-decoration-color: #8B1538; text-underline-offset: 4px;">Tomato</span>, <span class="text-white" style="text-decoration: underline; text-decoration-color: #8B1538; text-underline-offset: 4px;">Gold</span>, <span class="text-white" style="text-decoration: underline; text-decoration-color: #8B1538; text-underline-offset: 4px;">Rice</span>
                     </div>
                 </div>
 
@@ -259,7 +271,7 @@ $recentItems = $itemObj->getActiveItems(8);
             <div class="row g-4">
                 <?php foreach ($categories as $category): ?>
                 <div class="col-6 col-md-4 col-lg-3">
-                    <a href="browse.php?category=<?php echo $category['slug']; ?>" class="group block bg-gray-50 rounded-2xl p-6 text-center hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100">
+                    <a href="browse.php?category=<?php echo $category['slug']; ?>" class="group block bg-gray-50 rounded-2xl p-6 text-center transition-all duration-300 border border-gray-100" style="text-decoration: none;" onmouseover="this.style.backgroundColor='white'; this.style.boxShadow='0 20px 25px -5px rgba(0,0,0,0.1)'; this.style.transform='translateY(-4px)'; this.style.borderColor='#8B1538';" onmouseout="this.style.backgroundColor='rgb(249,250,251)'; this.style.boxShadow=''; this.style.transform=''; this.style.borderColor='rgb(243,244,246)';">
                         <div class="w-16 h-16 mx-auto bg-white rounded-full shadow-sm flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
                             <?php 
                             $icons = ['vegetables'=>'🥦','fruits'=>'🍎','kitchen-appliances'=>'🍳','study-material'=>'📚','clothing'=>'👕','tools'=>'🔧','electrical-appliances'=>'💡','tech-gadgets'=>'📱','miscellaneous'=>'📦'];
@@ -268,7 +280,7 @@ $recentItems = $itemObj->getActiveItems(8);
                         </div>
                         <h3 class="font-bold text-gray-900 mb-1"><?php echo htmlspecialchars($category['category_name']); ?></h3>
                         <p class="text-sm text-gray-500 font-nepali mb-2"><?php echo htmlspecialchars($category['category_name_nepali']); ?></p>
-                        <span class="inline-block px-3 py-1 bg-indigo-50 text-indigo-600 text-xs font-bold rounded-full">
+                        <span class="inline-block px-3 py-1 text-white text-xs font-bold rounded-full" style="background-color: #8B1538;">
                             <?php echo $category['item_count']; ?> Items
                         </span>
                     </a>
@@ -310,7 +322,7 @@ $recentItems = $itemObj->getActiveItems(8);
                         </div>
                         <div class="p-5">
                             <div class="flex justify-between items-start mb-2">
-                                <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded uppercase tracking-wider">
+                                <span class="text-xs font-bold px-2 py-1 rounded uppercase tracking-wider" style="color: #1E3A8A; background-color: rgba(30,58,138,0.1);">
                                     <?php echo htmlspecialchars($item['category_name']); ?>
                                 </span>
                                 <?php if ($item['market_location']): ?>
@@ -326,7 +338,7 @@ $recentItems = $itemObj->getActiveItems(8);
                             </h3>
                             <div class="flex items-baseline gap-1">
                                 <span class="text-sm text-gray-500 font-medium">NPR</span>
-                                <span class="text-2xl font-extrabold text-gray-900"><?php echo formatPrice($item['current_price']); ?></span>
+                                <span class="text-2xl font-extrabold" style="color: #8B1538;"><?php echo formatPrice($item['current_price']); ?></span>
                                 <span class="text-sm text-gray-400">/ <?php echo $item['unit']; ?></span>
                             </div>
                         </div>
@@ -346,9 +358,9 @@ $recentItems = $itemObj->getActiveItems(8);
                     <h4 class="font-bold text-2xl mb-4">Mulyasuchi</h4>
                     <p class="text-gray-400 mb-4">Empowering Nepal with transparent, real-time market intelligence. Making informed decisions easier for everyone.</p>
                     <div class="flex gap-3">
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-indigo-600 transition-colors"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-indigo-600 transition-colors"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-indigo-600 transition-colors"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center transition-colors" style="text-decoration:none;" onmouseover="this.style.backgroundColor='#8B1538'" onmouseout="this.style.backgroundColor='rgb(31,41,55)'"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center transition-colors" style="text-decoration:none;" onmouseover="this.style.backgroundColor='#8B1538'" onmouseout="this.style.backgroundColor='rgb(31,41,55)'"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center transition-colors" style="text-decoration:none;" onmouseover="this.style.backgroundColor='#8B1538'" onmouseout="this.style.backgroundColor='rgb(31,41,55)'"><i class="bi bi-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-6">
@@ -371,7 +383,7 @@ $recentItems = $itemObj->getActiveItems(8);
                     <h5 class="font-bold mb-4">Stay Updated</h5>
                     <form class="input-group">
                         <input type="email" class="form-control bg-gray-800 border-0 text-white focus:ring-0" placeholder="Enter your email">
-                        <button class="btn bg-indigo-600 text-white hover:bg-indigo-700" type="button">Subscribe</button>
+                        <button class="btn text-white border-0" style="background-color: #8B1538;" onmouseover="this.style.backgroundColor='#6B0F2A'" onmouseout="this.style.backgroundColor='#8B1538'" type="button">Subscribe</button>
                     </form>
                 </div>
             </div>
