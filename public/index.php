@@ -259,7 +259,7 @@ $recentItems = $itemObj->getActiveItems(8);
     </section>
 
     <!-- What is Mulyasuchi Section -->
-    <section style="padding: 6rem 0; background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%); position: relative;">
+    <section class="section-colored" style="padding: 6rem 0; position: relative;">
         <!-- Top Wave Divider -->
         <div class="section-divider-top">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -310,12 +310,6 @@ $recentItems = $itemObj->getActiveItems(8);
 
     <!-- Why Choose Us Section -->
     <section style="padding: 6rem 0; background: #f9fafb; position: relative;">
-        <!-- Top Wave Divider -->
-        <div class="section-divider-top">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
-        </div>
         
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
@@ -332,11 +326,7 @@ $recentItems = $itemObj->getActiveItems(8);
         </div>
         
         <!-- Bottom Wave Divider -->
-        <div class="section-divider">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
-        </div>
+    </section>
     </section>
 
     <!-- How It Works Section -->
@@ -370,12 +360,6 @@ $recentItems = $itemObj->getActiveItems(8);
 
     <!-- Categories Section -->
     <section style="padding: 6rem 0; background: #f9fafb; position: relative;">
-        <!-- Top Wave Divider -->
-        <div class="section-divider-top">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
-        </div>
 
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
@@ -431,12 +415,6 @@ $recentItems = $itemObj->getActiveItems(8);
     <?php if (!empty($recentItems)): ?>
     <!-- Recent Updates Section -->
     <section style="padding: 6rem 0; background: white; position: relative;">
-        <!-- Top Wave Divider -->
-        <div class="section-divider-top">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
-        </div>
 
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">

@@ -216,11 +216,14 @@ body {
     width: 100%;
     max-width: 550px;
     position: relative;
+    margin: 0 auto;
 }
 
 .illustration-circle {
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1/1;
+    height: auto;
     border-radius: 50%;
     background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1));
     position: absolute;
@@ -274,6 +277,75 @@ body {
 }
 
 /* ===================================
+   WAVE DIVIDERS & SEPARATORS
+   =================================== */
+
+.section-divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 2;
+}
+
+.section-divider svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+}
+
+.section-divider .shape-fill {
+    fill: #FFFFFF;
+}
+
+/* Top Wave (for sections starting with wave) */
+.section-divider-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+    z-index: 2;
+}
+
+.section-divider-top svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+}
+
+.section-divider-top .shape-fill {
+    fill: #FFFFFF;
+}
+
+/* Nepali Skyline Integration in Divider */
+.nepali-divider {
+    background-image: url('../images/nepal-skyline.png');
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100% auto;
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0.1;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Specific Section Adjustments for Waves */
+section {
+    position: relative;
+}
+
+/* ===================================
    RESPONSIVE DESIGN
    =================================== */
 
@@ -281,7 +353,7 @@ body {
     .hero-container {
         grid-template-columns: 1fr;
         gap: 3rem;
-        text-align: center;
+        text-align: left;
     }
 
     .hero-content {
@@ -293,7 +365,7 @@ body {
     }
 
     .hero-stats {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .hero-illustration {
@@ -301,8 +373,10 @@ body {
     }
 
     .illustration-circle {
-        width: 350px;
-        height: 350px;
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+        aspect-ratio: 1/1;
     }
 }
 
