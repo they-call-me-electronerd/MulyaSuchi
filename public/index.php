@@ -57,6 +57,10 @@ $recentItems = $itemObj->getActiveItems(8);
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/pages/landing.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/wave-dark-mode.css">
     
+    <!-- Animation Styles -->
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/animations/enhanced-animations.css">
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/animations/hero-enhancements.css">
+    
     <!-- Theme -->
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/themes/dark-mode.css">
 
@@ -197,15 +201,15 @@ $recentItems = $itemObj->getActiveItems(8);
                 <!-- Stats -->
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <span class="stat-number">1,245+</span>
+                        <span class="stat-number" data-counter="1245" data-suffix="+">0</span>
                         <span class="stat-label">Products Tracked</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">50+</span>
+                        <span class="stat-number" data-counter="50" data-suffix="+">0</span>
                         <span class="stat-label">Markets Covered</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">Daily</span>
+                        <span class="stat-number animate-pulse">Daily</span>
                         <span class="stat-label">Price Updates</span>
                     </div>
                 </div>
@@ -269,7 +273,7 @@ $recentItems = $itemObj->getActiveItems(8);
     </section>
 
     <!-- What is Mulyasuchi Section -->
-    <section class="section-colored" style="padding: 6rem 0; position: relative;">
+    <section class="section-colored scroll-reveal" style="padding: 6rem 0; position: relative;">
        
         </div>
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
@@ -315,7 +319,7 @@ $recentItems = $itemObj->getActiveItems(8);
     </section>
 
     <!-- Why Choose Us Section -->
-    <section style="padding: 6rem 0; background: #f9fafb; position: relative;">
+    <section class="scroll-reveal" style="padding: 6rem 0; background: #f9fafb; position: relative;">
         
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
@@ -336,7 +340,7 @@ $recentItems = $itemObj->getActiveItems(8);
     </section>
 
     <!-- How It Works Section -->
-    <section style="padding: 6rem 0; background: white; position: relative;">
+    <section class="scroll-reveal" style="padding: 6rem 0; background: white; position: relative;">
 
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
@@ -365,7 +369,7 @@ $recentItems = $itemObj->getActiveItems(8);
 
 
     <!-- Categories Section -->
-    <section style="padding: 6rem 0; background: #f9fafb; position: relative;">
+    <section class="scroll-reveal" style="padding: 6rem 0; background: #f9fafb; position: relative;">
 
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
@@ -420,7 +424,7 @@ $recentItems = $itemObj->getActiveItems(8);
 
     <?php if (!empty($recentItems)): ?>
     <!-- Recent Updates Section -->
-    <section style="padding: 6rem 0; background: white; position: relative;">
+    <section class="scroll-reveal" style="padding: 6rem 0; background: white; position: relative;">
 
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
@@ -617,8 +621,13 @@ $recentItems = $itemObj->getActiveItems(8);
     <script src="<?php echo SITE_URL; ?>/assets/js/components/navbar.js"></script>
     <script src="<?php echo SITE_URL; ?>/assets/js/components/footer.js"></script>
     
+    <!-- Animation Scripts -->
+    <script src="<?php echo SITE_URL; ?>/assets/js/animations/scroll-animations.js"></script>
+    <script src="<?php echo SITE_URL; ?>/assets/js/animations/counter-animation.js"></script>
+    <script src="<?php echo SITE_URL; ?>/assets/js/animations/hero-interactions.js"></script>
+    
     <script>
-        console.log('✨ Mulyasuchi - Organized & Enhanced UI Loaded!');
+        console.log('✨ Mulyasuchi - Enhanced UI with Smooth Animations Loaded!');
     </script>
 </body>
 </html>

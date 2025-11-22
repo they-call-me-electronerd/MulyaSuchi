@@ -142,6 +142,7 @@ body {
 .hero-search-box:focus-within {
     border-color: var(--primary-orange);
     box-shadow: 0 20px 25px -5px rgba(249, 115, 22, 0.2);
+    will-change: transform, box-shadow;
 }
 
 .search-icon-left {
@@ -179,6 +180,7 @@ body {
 .hero-search-btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+    will-change: transform;
 }
 
 .hero-stats {
@@ -239,6 +241,9 @@ body {
     position: relative;
     z-index: 1;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 @keyframes float {
@@ -299,6 +304,7 @@ body {
 
 .section-divider .shape-fill {
     fill: #FFFFFF;
+    transition: fill 0.3s ease;
 }
 
 /* Top Wave (for sections starting with wave) */
