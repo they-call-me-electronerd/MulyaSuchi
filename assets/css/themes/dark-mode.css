@@ -653,6 +653,188 @@ select:focus {
     color: #cbd5e1 !important;
 }
 
+[data-theme="dark"] .product-card {
+    background: #1e293b !important;
+    border-color: #374151 !important;
+}
+
+[data-theme="dark"] .product-details {
+    background: #1e293b !important;
+}
+
+[data-theme="dark"] .product-name,
+[data-theme="dark"] .product-price {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .results-header {
+    border-color: #374151 !important;
+}
+
+[data-theme="dark"] .empty-state {
+    background: #1e293b !important;
+}
+
+/* Item Detail Page Dark Mode */
+[data-theme="dark"] .item-detail-layout {
+    background: #111827 !important;
+}
+
+[data-theme="dark"] .price-box {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af) !important;
+    border-color: #3b82f6 !important;
+}
+
+[data-theme="dark"] .price-history-section {
+    background: #1e293b !important;
+}
+
+[data-theme="dark"] .price-chart-container {
+    background: #111827 !important;
+}
+
+[data-theme="dark"] .price-history-table table {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .price-history-table th {
+    background: #374151 !important;
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .price-history-table td {
+    border-color: #374151 !important;
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .price-history-table tr:hover {
+    background: #374151 !important;
+}
+
+/* About Page Dark Mode - Blueish Gradient */
+[data-theme="dark"] .about-hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3730a3 100%) !important;
+}
+
+[data-theme="dark"] .mission-card,
+[data-theme="dark"] .step-card,
+[data-theme="dark"] .value-card {
+    background: #1e293b !important;
+    border-color: #374151 !important;
+}
+
+[data-theme="dark"] .floating-card {
+    background: #1e293b !important;
+}
+
+/* Override inline color styles for dark mode text visibility */
+[data-theme="dark"] *[style*="color: #6b7280"],
+[data-theme="dark"] *[style*="color: #4b5563"],
+[data-theme="dark"] *[style*="color: #111827"],
+[data-theme="dark"] *[style*="color: #374151"],
+[data-theme="dark"] *[style*="color:#6b7280"],
+[data-theme="dark"] *[style*="color:#4b5563"],
+[data-theme="dark"] *[style*="color:#111827"],
+[data-theme="dark"] *[style*="color:#374151"] {
+    color: #e2e8f0 !important;
+}
+
+/* Headings with inline styles */
+[data-theme="dark"] h1[style*="color"],
+[data-theme="dark"] h2[style*="color"],
+[data-theme="dark"] h3[style*="color"],
+[data-theme="dark"] h4[style*="color"],
+[data-theme="dark"] h5[style*="color"],
+[data-theme="dark"] h6[style*="color"] {
+    color: #f1f5f9 !important;
+}
+
+/* Paragraphs and spans */
+[data-theme="dark"] p[style*="color"],
+[data-theme="dark"] span[style*="color"],
+[data-theme="dark"] div[style*="color"] {
+    color: #e2e8f0 !important;
+}
+
+/* Maintain orange/accent colors */
+[data-theme="dark"] *[style*="color: #f97316"],
+[data-theme="dark"] *[style*="color:#f97316"],
+[data-theme="dark"] .stat-number,
+[data-theme="dark"] .product-price,
+[data-theme="dark"] .product-category {
+    color: #fb923c !important;
+}
+
+/* Background overrides */
+[data-theme="dark"] [style*="background: #f9fafb"],
+[data-theme="dark"] [style*="background-color: #f9fafb"],
+[data-theme="dark"] [style*="background:#f9fafb"],
+[data-theme="dark"] [style*="background-color:#f9fafb"] {
+    background-color: #1e293b !important;
+}
+
+[data-theme="dark"] [style*="background: white"],
+[data-theme="dark"] [style*="background-color: white"],
+[data-theme="dark"] [style*="background:#fff"],
+[data-theme="dark"] [style*="background-color:#fff"] {
+    background-color: #1e293b !important;
+}
+
+[data-theme="dark"] [style*="background: #f3f4f6"],
+[data-theme="dark"] [style*="background-color: #f3f4f6"] {
+    background-color: #334155 !important;
+}
+
+/* Sections with inline background styles */
+[data-theme="dark"] section[style*="background: #f9fafb"],
+[data-theme="dark"] section[style*="background: white"],
+[data-theme="dark"] section[style*="background:#f9fafb"],
+[data-theme="dark"] section[style*="background-color: white"] {
+    background: #1e293b !important;
+}
+
+/* Body background with subtle gradient */
+[data-theme="dark"] body {
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%) !important;
+}
+
+/* Cards and containers */
+[data-theme="dark"] .container>div[style*="background: white"],
+[data-theme="dark"] .row>div[style*="background: white"] {
+    background: #1e293b !important;
+}
+
+/* Ensure gradients with white stay visible */
+[data-theme="dark"] [style*="background: linear-gradient"][style*="#fff"],
+[data-theme="dark"] [style*="background: linear-gradient"][style*="white"] {
+    background: linear-gradient(135deg, #1e293b, #374151) !important;
+}
+
+/* Navbar with blueish tint */
+[data-theme="dark"] .main-navbar[style] {
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(30, 64, 175, 0.95)) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Dropdowns */
+[data-theme="dark"] .dropdown-menu[style*="background"] {
+    background: #1e293b !important;
+    border-color: #374151 !important;
+}
+
+[data-theme="dark"] .category-dropdown-menu {
+    background: #1e293b !important;
+    border-color: #374151 !important;
+}
+
+/* Meta items and secondary text */
+[data-theme="dark"] .meta-item,
+[data-theme="dark"] .stat-label,
+[data-theme="dark"] .filter-label,
+[data-theme="dark"] .breadcrumb-nav {
+    color: #cbd5e1 !important;
+}
+
 /* ============================================================================
    ACCESSIBILITY
    ============================================================================ */
@@ -674,4 +856,26 @@ select:focus {
         --text-secondary: #e5e7eb;
         --border-color: rgba(255, 255, 255, 0.3);
     }
+}
+
+/* ============================================================================
+   SPECIFIC COMPONENT FIXES
+   ============================================================================ */
+
+/* Fix for "Why Choose Us" cards in dark mode 
+   Overrides inline gradients that might not be caught by generic selectors
+*/
+[data-theme="dark"] section[aria-label="Why Choose Us"] .row>div>div {
+    background: linear-gradient(135deg, #1e293b, #374151) !important;
+    box-shadow: var(--shadow-md) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Ensure text inside these cards is visible */
+[data-theme="dark"] section[aria-label="Why Choose Us"] h3 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] section[aria-label="Why Choose Us"] p {
+    color: #cbd5e1 !important;
 }

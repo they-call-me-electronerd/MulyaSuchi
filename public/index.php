@@ -351,54 +351,54 @@ include __DIR__ . '/../includes/header_professional.php';
             </div>
             <div class="row g-4">
                 <?php foreach ($recentItems as $item): ?>
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-4">
                     <a href="item.php?id=<?php echo $item['item_id']; ?>" class="text-decoration-none">
-                        <div class="card border-0 shadow-sm h-100" style="transition: all 0.3s ease; overflow: hidden;"
-                             onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';"
+                        <div class="card border-0 shadow-sm h-100" style="transition: all 0.2s ease; border-radius: 16px;"
+                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 20px -5px rgba(0, 0, 0, 0.1)';"
                              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 2px 0 rgba(0, 0, 0, 0.05)';">
-                            
-                            <div style="height: 200px; background: #f3f4f6; position: relative; overflow: hidden;">
-                                <?php if ($item['image_path']): ?>
-                                    <img src="<?php echo UPLOAD_URL . $item['image_path']; ?>" 
-                                         alt="<?php echo htmlspecialchars($item['item_name']); ?>" 
-                                         style="width: 100%; height: 100%; object-fit: cover;">
-                                <?php else: ?>
-                                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: #d1d5db; font-weight: 700;">
-                                        <?php echo mb_substr($item['item_name'], 0, 1); ?>
-                                    </div>
-                                <?php endif; ?>
-                                
-                                <div style="position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(249, 115, 22, 0.95); color: white; padding: 0.375rem 0.75rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600;">
-                                    <i class="bi bi-patch-check-fill me-1"></i>Verified
-                                </div>
-                            </div>
-
-                            <div class="card-body p-4">
-                                <span class="badge mb-2" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-weight: 600; font-size: 0.75rem; padding: 0.375rem 0.75rem;">
-                                    <?php echo htmlspecialchars($item['category_name']); ?>
-                                </span>
-
-                                <h5 class="card-title mb-3" style="color: #111827; font-weight: 600; line-height: 1.4;">
-                                    <?php echo htmlspecialchars($item['item_name']); ?>
-                                </h5>
-
-                                <div class="d-flex align-items-baseline gap-2 mb-3">
-                                    <span style="font-size: 0.875rem; color: #6b7280; font-weight: 500;">NPR</span>
-                                    <span style="font-size: 2rem; font-weight: 800; color: #111827;">
-                                        <?php echo formatPrice($item['current_price']); ?>
-                                    </span>
-                                    <span style="font-size: 0.875rem; color: #9ca3af;">/ <?php echo $item['unit']; ?></span>
-                                </div>
-
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <small style="color: #6b7280; font-size: 0.8125rem;">
-                                        <i class="bi bi-clock me-1"></i> <?php echo timeAgo($item['updated_at']); ?>
-                                    </small>
-                                    <?php if ($item['market_location']): ?>
-                                        <small style="color: #6b7280; font-size: 0.8125rem;">
-                                            <i class="bi bi-geo-alt me-1"></i><?php echo htmlspecialchars($item['market_location']); ?>
-                                        </small>
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <!-- Image/Icon -->
+                                <div style="width: 64px; height: 64px; flex-shrink: 0; border-radius: 12px; overflow: hidden; background: #f3f4f6; position: relative;">
+                                    <?php if ($item['image_path']): ?>
+                                        <img src="<?php echo UPLOAD_URL . $item['image_path']; ?>" 
+                                             alt="<?php echo htmlspecialchars($item['item_name']); ?>" 
+                                             style="width: 100%; height: 100%; object-fit: cover;">
+                                    <?php else: ?>
+                                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #9ca3af; font-weight: 700; background: #f9fafb;">
+                                            <?php echo mb_substr($item['item_name'], 0, 1); ?>
+                                        </div>
                                     <?php endif; ?>
+                                </div>
+
+                                <!-- Content -->
+                                <div style="flex: 1; min-width: 0;">
+                                    <div class="d-flex justify-content-between align-items-start mb-1">
+                                        <h5 class="mb-0 text-truncate" style="font-size: 1rem; font-weight: 600; color: #111827; max-width: 100%;">
+                                            <?php echo htmlspecialchars($item['item_name']); ?>
+                                        </h5>
+                                        <?php if ($item['market_location']): ?>
+                                            <small style="color: #9ca3af; font-size: 0.75rem; white-space: nowrap; margin-left: 0.5rem;">
+                                                <i class="bi bi-geo-alt"></i> <?php echo htmlspecialchars($item['market_location']); ?>
+                                            </small>
+                                        <?php endif; ?>
+                                    </div>
+                                    
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                        <span class="badge" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-weight: 500; font-size: 0.7rem; padding: 0.25rem 0.5rem; border-radius: 6px;">
+                                            <?php echo htmlspecialchars($item['category_name']); ?>
+                                        </span>
+                                        <small style="color: #6b7280; font-size: 0.75rem;">
+                                            <i class="bi bi-clock"></i> <?php echo timeAgo($item['updated_at']); ?>
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <!-- Price -->
+                                <div class="text-end ps-2" style="min-width: 80px;">
+                                    <div style="font-weight: 700; color: #f97316; font-size: 1.125rem;">
+                                        <?php echo formatPrice($item['current_price']); ?>
+                                    </div>
+                                    <small style="color: #9ca3af; font-size: 0.75rem;">/ <?php echo $item['unit']; ?></small>
                                 </div>
                             </div>
                         </div>

@@ -11,7 +11,7 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'mulyasuchi_db');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_CHARSET', 'utf8mb4');
+define('DB_CHARSET', 'latin1');
 
 // PDO options for security and error handling
 $options = [
