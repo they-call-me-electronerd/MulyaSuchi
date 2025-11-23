@@ -168,67 +168,6 @@ body {
 
 [data-theme="dark"] body {
     background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%) !important;
-}
-
-/* All sections */
-[data-theme="dark"] section {
-    background-color: transparent !important;
-}
-
-[data-theme="dark"] .container {
-    color: var(--text-primary);
-}
-
-/* Headings */
-[data-theme="dark"] h1,
-[data-theme="dark"] h2,
-[data-theme="dark"] h3,
-[data-theme="dark"] h4,
-[data-theme="dark"] h5,
-[data-theme="dark"] h6 {
-    color: var(--text-primary) !important;
-}
-
-/* Paragraphs */
-[data-theme="dark"] p {
-    color: var(--text-secondary) !important;
-}
-
-/* Navbar */
-.main-navbar {
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(10px);
-    border-bottom-color: var(--border-color);
-    transition: all var(--theme-transition);
-}
-
-[data-theme="dark"] .main-navbar {
-    background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(30, 64, 175, 0.95)) !important;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3) !important;
-}
-
-/* Navigation Links */
-.navbar-menu a {
-    color: var(--text-secondary) !important;
-}
-
-[data-theme="dark"] .navbar-menu a {
-    color: #e2e8f0 !important;
-}
-
-.navbar-menu a:hover,
-.navbar-menu a.active {
-    color: #f97316 !important;
-}
-
-[data-theme="dark"] .navbar-menu a:hover,
-[data-theme="dark"] .navbar-menu a.active {
-    color: #60a5fa !important;
-}
-
-/* Logo */
-[data-theme="dark"] .navbar-logo {
     color: #60a5fa !important;
 }
 

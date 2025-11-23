@@ -1,6 +1,6 @@
 /**
- * Enhanced Header Animations & Effects
- * Professional glassmorphism, smooth scroll animations, and interactive elements
+ * Enhanced Header Animations & Effects - Professional Liquid Glass Theme
+ * Premium glassmorphism, smooth scroll animations, and interactive elements
  * Optimized for performance with GPU-accelerated transforms
  */
 
@@ -11,7 +11,7 @@
 }
 
 /* ============================================================================
-   MAIN NAVBAR - BASE STYLES WITH ENHANCEMENTS
+   MAIN NAVBAR - PROFESSIONAL LIQUID GLASS THEME
    ============================================================================ */
 
 .main-navbar {
@@ -20,25 +20,60 @@
     left: 0;
     right: 0;
     height: var(--header-full-height);
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(10px) saturate(180%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    /* Enhanced Liquid Glass Background */
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.88) 0%,
+            rgba(249, 250, 251, 0.92) 50%,
+            rgba(255, 255, 255, 0.88) 100%);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    /* Vibrant Border with Multi-Color Gradient */
+    border-bottom: 1.5px solid rgba(249, 115, 22, 0.15);
+    box-shadow:
+        0 4px 24px rgba(249, 115, 22, 0.1),
+        0 8px 40px rgba(59, 130, 246, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.6);
     z-index: 1000;
     transition: all var(--header-transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
     animation: navbar-slide-down 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     will-change: transform, background, box-shadow;
+    position: relative;
 }
 
-/* Scrolled State - Enhanced Glassmorphism */
+/* Subtle Shimmer Effect Overlay */
+.main-navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(249, 115, 22, 0.08),
+            rgba(59, 130, 246, 0.08),
+            rgba(16, 185, 129, 0.08),
+            transparent);
+    animation: navbar-shimmer 10s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Scrolled State - Enhanced Liquid Glass */
 .main-navbar.scrolled {
     height: var(--header-shrink-height);
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px) saturate(200%);
-    -webkit-backdrop-filter: blur(20px) saturate(200%);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
-    border-bottom-color: rgba(0, 0, 0, 0.12);
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.96) 0%,
+            rgba(249, 250, 251, 0.98) 50%,
+            rgba(255, 255, 255, 0.96) 100%);
+    backdrop-filter: blur(32px) saturate(220%);
+    -webkit-backdrop-filter: blur(32px) saturate(220%);
+    box-shadow:
+        0 6px 32px rgba(249, 115, 22, 0.14),
+        0 12px 56px rgba(59, 130, 246, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.8);
+    border-bottom: 1.5px solid rgba(249, 115, 22, 0.2);
 }
 
 /* Navbar Container */
@@ -67,39 +102,44 @@
     gap: 0.75rem;
     text-decoration: none;
     padding: 0.5rem 1rem;
-    border-radius: 12px;
+    border-radius: 14px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
 }
 
-/* Glow Effect Background */
+/* Enhanced Glow Effect Background */
 .navbar-logo::before {
     content: '';
     position: absolute;
-    inset: -2px;
-    background: linear-gradient(135deg, rgba(249, 115, 22, 0.3), rgba(59, 130, 246, 0.3));
-    border-radius: 12px;
+    inset: -3px;
+    background: linear-gradient(135deg,
+            rgba(249, 115, 22, 0.35),
+            rgba(59, 130, 246, 0.35),
+            rgba(16, 185, 129, 0.25));
+    border-radius: 14px;
     opacity: 0;
-    filter: blur(8px);
+    filter: blur(12px);
     transition: opacity 0.4s ease;
     z-index: -1;
 }
 
 .navbar-logo:hover::before {
     opacity: 1;
-    animation: logo-glow-pulse 2s ease-in-out infinite;
+    animation: logo-glow-pulse 2.5s ease-in-out infinite;
 }
 
 .navbar-logo:hover {
-    background: rgba(249, 115, 22, 0.08);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg,
+            rgba(249, 115, 22, 0.12),
+            rgba(59, 130, 246, 0.08));
+    transform: translateY(-2px) scale(1.02);
 }
 
 /* Logo Icon */
 .navbar-logo i {
     font-size: 2rem;
-    background: linear-gradient(135deg, #f97316, #ea580c);
+    background: linear-gradient(135deg, #f97316, #ea580c, #dc2626);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -109,8 +149,8 @@
 }
 
 .navbar-logo:hover i {
-    transform: rotate(10deg) scale(1.1);
-    filter: drop-shadow(0 4px 8px rgba(249, 115, 22, 0.4));
+    transform: rotate(10deg) scale(1.12);
+    filter: drop-shadow(0 4px 12px rgba(249, 115, 22, 0.5));
 }
 
 .main-navbar.scrolled .navbar-logo i {
@@ -121,7 +161,7 @@
 .logo-text {
     font-size: 1.5rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #f97316, #ea580c);
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #dc2626 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -160,26 +200,32 @@
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
 }
 
-/* Animated Underline Effect */
+/* Animated Underline Effect with Gradient */
 .navbar-menu a::after {
     content: '';
     position: absolute;
     bottom: 8px;
     left: 50%;
     width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #f97316, transparent);
+    height: 2.5px;
+    background: linear-gradient(90deg,
+            transparent,
+            #f97316 20%,
+            #3b82f6 50%,
+            #10b981 80%,
+            transparent);
     transform: translateX(-50%);
     transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 2px;
 }
 
 .navbar-menu a:hover::after {
-    width: 80%;
+    width: 85%;
     animation: link-underline-expand 0.4s ease;
 }
 
@@ -188,9 +234,12 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1));
+    background: linear-gradient(135deg,
+            rgba(249, 115, 22, 0.12),
+            rgba(59, 130, 246, 0.1),
+            rgba(16, 185, 129, 0.08));
     opacity: 0;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: opacity 0.3s ease;
     z-index: -1;
 }
@@ -202,13 +251,18 @@
 
 .navbar-menu a:hover::before {
     opacity: 1;
+    box-shadow: inset 0 0 20px rgba(249, 115, 22, 0.1);
 }
 
 /* Active Link State */
 .navbar-menu a.active {
     color: #f97316;
-    background: rgba(249, 115, 22, 0.15);
-    box-shadow: inset 0 0 20px rgba(249, 115, 22, 0.1);
+    background: linear-gradient(135deg,
+            rgba(249, 115, 22, 0.18),
+            rgba(59, 130, 246, 0.12));
+    box-shadow:
+        inset 0 0 24px rgba(249, 115, 22, 0.15),
+        0 2px 8px rgba(249, 115, 22, 0.2);
 }
 
 /* ============================================================================
@@ -227,9 +281,11 @@
     justify-content: center;
     width: 42px;
     height: 42px;
-    background: rgba(249, 115, 22, 0.1);
-    border: 1px solid rgba(249, 115, 22, 0.2);
-    border-radius: 10px;
+    background: linear-gradient(135deg,
+            rgba(249, 115, 22, 0.12),
+            rgba(59, 130, 246, 0.08));
+    border: 1.5px solid rgba(249, 115, 22, 0.25);
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -237,9 +293,12 @@
 }
 
 .nav-search-icon:hover {
-    background: rgba(249, 115, 22, 0.2);
+    background: linear-gradient(135deg,
+            rgba(249, 115, 22, 0.25),
+            rgba(59, 130, 246, 0.15));
     border-color: #f97316;
     transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
 }
 
 .nav-btn {
@@ -247,7 +306,7 @@
     padding: 0.65rem 1.5rem;
     font-weight: 600;
     font-size: 0.95rem;
-    border-radius: 10px;
+    border-radius: 12px;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
@@ -276,30 +335,38 @@
 
 /* Login Button */
 .nav-btn-login {
-    background: linear-gradient(135deg, #f97316, #ea580c);
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #dc2626 100%);
     color: white;
-    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+    box-shadow:
+        0 4px 18px rgba(249, 115, 22, 0.35),
+        0 2px 8px rgba(234, 88, 12, 0.25);
 }
 
 .nav-btn-login:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.5);
-    background: linear-gradient(135deg, #ea580c, #f97316);
+    box-shadow:
+        0 8px 28px rgba(249, 115, 22, 0.5),
+        0 4px 14px rgba(234, 88, 12, 0.35);
+    background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%);
 }
 
 /* Admin Button */
 .nav-btn-admin {
-    background: rgba(59, 130, 246, 0.1);
+    background: linear-gradient(135deg,
+            rgba(59, 130, 246, 0.12),
+            rgba(99, 102, 241, 0.1));
     color: #3b82f6;
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    border: 1.5px solid rgba(59, 130, 246, 0.3);
 }
 
 .nav-btn-admin:hover {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
     color: white;
     border-color: #3b82f6;
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    box-shadow:
+        0 8px 28px rgba(59, 130, 246, 0.45),
+        0 4px 14px rgba(37, 99, 235, 0.35);
 }
 
 /* ============================================================================
@@ -316,13 +383,15 @@
     padding: 0.5rem;
     width: 45px;
     height: 45px;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: all 0.3s ease;
     position: relative;
 }
 
 .mobile-menu-toggle:hover {
-    background: rgba(249, 115, 22, 0.1);
+    background: linear-gradient(135deg,
+            rgba(249, 115, 22, 0.12),
+            rgba(59, 130, 246, 0.08));
 }
 
 .mobile-menu-toggle i {
@@ -353,18 +422,33 @@
     }
 }
 
+/* Navbar Shimmer Effect */
+@keyframes navbar-shimmer {
+    0% {
+        left: -100%;
+    }
+
+    50% {
+        left: 100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
 /* Logo Glow Pulse */
 @keyframes logo-glow-pulse {
 
     0%,
     100% {
         opacity: 0.8;
-        filter: blur(8px);
+        filter: blur(12px);
     }
 
     50% {
         opacity: 1;
-        filter: blur(12px);
+        filter: blur(16px);
     }
 }
 
@@ -376,7 +460,7 @@
     }
 
     to {
-        width: 80%;
+        width: 85%;
         opacity: 1;
     }
 }
@@ -437,14 +521,16 @@
         right: 0;
         flex-direction: column;
         gap: 0;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.98),
+                rgba(249, 250, 251, 0.98));
+        backdrop-filter: blur(24px) saturate(200%);
+        -webkit-backdrop-filter: blur(24px) saturate(200%);
+        border-bottom: 1.5px solid rgba(249, 115, 22, 0.15);
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
     }
 
     .navbar-menu.active {
