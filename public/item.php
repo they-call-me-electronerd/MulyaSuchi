@@ -20,13 +20,14 @@ $itemId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $item = $itemObj->getItemById($itemId);
 
 if (!$item) {
-    header('Location: browse.php');
+    header('Location: products.php');
     exit;
 }
 
 $pageTitle = $item['item_name'];
-$additionalCSS = 'public.css';
-$additionalJS = 'chart.js';
+$metaDescription = "View details and price history for " . htmlspecialchars($item['item_name']) . " in Nepal. Current price: " . formatPrice($item['current_price']);
+$additionalCSS = ['pages/item.css'];
+$additionalJS = ['https://cdn.jsdelivr.net/npm/chart.js', 'components/chart.js'];
 
 // Get price history
 $priceHistory = $itemObj->getPriceHistory($itemId, 30);
@@ -34,19 +35,16 @@ $priceHistory = $itemObj->getPriceHistory($itemId, 30);
 // Get tags
 $tags = $itemObj->getItemTags($itemId);
 
-include __DIR__ . '/../includes/header.php';
-include __DIR__ . '/../includes/nav.php';
+include __DIR__ . '/../includes/header_professional.php';
 ?>
 
-<main class="item-detail-page">
-    <section class="breadcrumb">
-        <div class="container">
-            <a href="index.php">Home</a> / 
-            <a href="browse.php?category=<?php echo $item['category_slug']; ?>">
-                <?php echo htmlspecialchars($item['category_name']); ?>
-            </a> / 
-            <span><?php echo htmlspecialchars($item['item_name']); ?></span>
-        </div>
+<main class="container my-5">
+    <section class="breadcrumb-nav mb-4">
+        <a href="index.php">Home</a> / 
+        <a href="products.php?category=<?php echo $item['category_slug']; ?>">
+            <?php echo htmlspecialchars($item['category_name']); ?>
+        </a> / 
+        <span><?php echo htmlspecialchars($item['item_name']); ?></span>
     </section>
     
     <section class="item-detail-content">
@@ -162,4 +160,4 @@ include __DIR__ . '/../includes/nav.php';
 const priceData = <?php echo json_encode(array_reverse($priceHistory)); ?>;
 </script>
 
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer_professional.php'; ?>

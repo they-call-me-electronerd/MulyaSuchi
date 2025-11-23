@@ -10,8 +10,8 @@
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="<?php echo SITE_URL; ?>/public/index.php">Home</a></li>
-                    <li><a href="<?php echo SITE_URL; ?>/public/browse.php">Browse Categories</a></li>
-                    <li><a href="<?php echo SITE_URL; ?>/public/search.php">Search Items</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/public/products.php">Browse Products</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/public/products.php">Search Items</a></li>
                     <li><a href="<?php echo SITE_URL; ?>/public/about.php">About Us</a></li>
                 </ul>
             </div>
@@ -20,7 +20,7 @@
                 <h4>For Contributors</h4>
                 <ul>
                     <li><a href="<?php echo SITE_URL; ?>/contributor/login.php">Login</a></li>
-                    <li><a href="<?php echo SITE_URL; ?>/public/how-it-works.php">How It Works</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/public/about.php">How It Works</a></li>
                     <li><a href="<?php echo SITE_URL; ?>/public/about.php">Join Us</a></li>
                 </ul>
             </div>
@@ -41,7 +41,13 @@
     <script src="<?php echo SITE_URL; ?>/assets/js/main.js"></script>
     <script src="<?php echo SITE_URL; ?>/assets/js/nav-modern.js"></script>
     <?php if (isset($additionalJS)): ?>
-        <script src="<?php echo SITE_URL . '/assets/js/' . $additionalJS; ?>"></script>
+        <?php if (is_array($additionalJS)): ?>
+            <?php foreach ($additionalJS as $js): ?>
+                <script src="<?php echo SITE_URL . '/assets/js/' . $js; ?>"></script>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <script src="<?php echo SITE_URL . '/assets/js/' . $additionalJS; ?>"></script>
+        <?php endif; ?>
     <?php endif; ?>
 </body>
 </html>

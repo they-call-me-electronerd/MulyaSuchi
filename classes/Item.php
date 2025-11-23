@@ -271,6 +271,165 @@ class Item {
             return 0;
         }
     }
+    
+    /**
+     * Advanced product search with multiple filters
+     * @param array $filters Array containing search, category_id, min_price, max_price, sort_by, limit, offset
+     * @return array Array of products matching the filters
+     */
+    public function searchProductsAdvanced($filters = []) {
+        try {
+            $sql = "
+                SELECT i.*, c.category_name, c.slug as category_slug
+                FROM items i
+                JOIN categories c ON i.category_id = c.category_id
+                WHERE i.status = :status
+            ";
+            
+            $params = [':status' => ITEM_STATUS_ACTIVE];
+            
+            // Search by item name
+            if (!empty($filters['search'])) {
+                $sql .= " AND (i.item_name LIKE :search OR i.item_name_nepali LIKE :search OR i.description LIKE :search)";
+                $params[':search'] = '%' . $filters['search'] . '%';
+            }
+            
+            // Filter by category
+            if (!empty($filters['category_id'])) {
+                $sql .= " AND i.category_id = :category_id";
+                $params[':category_id'] = $filters['category_id'];
+            }
+            
+            // Filter by minimum price
+            if (isset($filters['min_price']) && $filters['min_price'] !== null && $filters['min_price'] !== '') {
+                $sql .= " AND i.current_price >= :min_price";
+                $params[':min_price'] = $filters['min_price'];
+            }
+            
+            // Filter by maximum price
+            if (isset($filters['max_price']) && $filters['max_price'] !== null && $filters['max_price'] !== '') {
+                $sql .= " AND i.current_price <= :max_price";
+                $params[':max_price'] = $filters['max_price'];
+            }
+            
+            // Sort by
+            $sortBy = $filters['sort_by'] ?? 'name_asc';
+            switch ($sortBy) {
+                case 'name_desc':
+                    $sql .= " ORDER BY i.item_name DESC";
+                    break;
+                case 'price_asc':
+                    $sql .= " ORDER BY i.current_price ASC";
+                    break;
+                case 'price_desc':
+                    $sql .= " ORDER BY i.current_price DESC";
+                    break;
+                case 'newest':
+                    $sql .= " ORDER BY i.created_at DESC";
+                    break;
+                case 'oldest':
+                    $sql .= " ORDER BY i.created_at ASC";
+                    break;
+                case 'name_asc':
+                default:
+                    $sql .= " ORDER BY i.item_name ASC";
+                    break;
+            }
+            
+            // Pagination
+            if (isset($filters['limit'])) {
+                $sql .= " LIMIT :limit";
+                if (isset($filters['offset'])) {
+                    $sql .= " OFFSET :offset";
+                }
+            }
+            
+            $stmt = $this->pdo->prepare($sql);
+            
+            // Bind all parameters
+            foreach ($params as $key => $value) {
+                if (is_int($value)) {
+                    $stmt->bindValue($key, $value, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue($key, $value, PDO::PARAM_STR);
+                }
+            }
+            
+            // Bind limit and offset separately
+            if (isset($filters['limit'])) {
+                $stmt->bindValue(':limit', (int)$filters['limit'], PDO::PARAM_INT);
+                if (isset($filters['offset'])) {
+                    $stmt->bindValue(':offset', (int)$filters['offset'], PDO::PARAM_INT);
+                }
+            }
+            
+            $stmt->execute();
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Advanced product search error: " . $e->getMessage());
+            return [];
+        }
+    }
+    
+    /**
+     * Count products with advanced filters
+     * @param array $filters Array containing search, category_id, min_price, max_price
+     * @return int Count of products matching the filters
+     */
+    public function countProductsAdvanced($filters = []) {
+        try {
+            $sql = "
+                SELECT COUNT(*) 
+                FROM items i
+                WHERE i.status = :status
+            ";
+            
+            $params = [':status' => ITEM_STATUS_ACTIVE];
+            
+            // Search by item name
+            if (!empty($filters['search'])) {
+                $sql .= " AND (i.item_name LIKE :search OR i.item_name_nepali LIKE :search OR i.description LIKE :search)";
+                $params[':search'] = '%' . $filters['search'] . '%';
+            }
+            
+            // Filter by category
+            if (!empty($filters['category_id'])) {
+                $sql .= " AND i.category_id = :category_id";
+                $params[':category_id'] = $filters['category_id'];
+            }
+            
+            // Filter by minimum price
+            if (isset($filters['min_price']) && $filters['min_price'] !== null && $filters['min_price'] !== '') {
+                $sql .= " AND i.current_price >= :min_price";
+                $params[':min_price'] = $filters['min_price'];
+            }
+            
+            // Filter by maximum price
+            if (isset($filters['max_price']) && $filters['max_price'] !== null && $filters['max_price'] !== '') {
+                $sql .= " AND i.current_price <= :max_price";
+                $params[':max_price'] = $filters['max_price'];
+            }
+            
+            $stmt = $this->pdo->prepare($sql);
+            
+            // Bind all parameters
+            foreach ($params as $key => $value) {
+                if (is_int($value)) {
+                    $stmt->bindValue($key, $value, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue($key, $value, PDO::PARAM_STR);
+                }
+            }
+            
+            $stmt->execute();
+            return $stmt->fetchColumn();
+            
+        } catch (PDOException $e) {
+            error_log("Count advanced products error: " . $e->getMessage());
+            return 0;
+        }
+    }
 }
 
 ?>

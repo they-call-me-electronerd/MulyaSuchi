@@ -1,0 +1,209 @@
+/**
+ * Legal Pages - Privacy Policy, Terms of Service
+ * Consistent styling for legal documentation pages
+ */
+
+.legal-hero {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 5rem 0 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.legal-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h60v60H0z" fill="none"/><path d="M30 0v60M0 30h60" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+    opacity: 0.5;
+}
+
+.legal-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.legal-hero .lead {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    position: relative;
+    z-index: 1;
+}
+
+.legal-content {
+    background: var(--bg-primary);
+    padding: 4rem 0;
+}
+
+.legal-section {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.legal-section:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.legal-section h2 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-orange);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.legal-section h2 i {
+    color: var(--primary-orange);
+    font-size: 1.75rem;
+}
+
+.legal-section h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.legal-section p {
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+}
+
+.legal-section ul,
+.legal-section ol {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.legal-section li {
+    margin-bottom: 0.75rem;
+    line-height: 1.7;
+}
+
+.legal-section strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.legal-section a {
+    color: var(--primary-orange);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.legal-section a:hover {
+    color: var(--primary-orange-dark);
+    text-decoration: underline;
+}
+
+.highlight-box {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--primary-orange);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+}
+
+.highlight-box p {
+    margin-bottom: 0;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.last-updated {
+    background: var(--bg-secondary);
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.contact-box {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.contact-box h3 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.contact-box p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+}
+
+.contact-box a {
+    color: white;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.contact-box a:hover {
+    opacity: 0.9;
+}
+
+/* Dark Mode Specific */
+[data-theme="dark"] .legal-hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3730a3 100%);
+}
+
+[data-theme="dark"] .legal-section {
+    background: var(--bg-secondary);
+    border-color: rgba(148, 163, 184, 0.2);
+}
+
+[data-theme="dark"] .highlight-box {
+    background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .last-updated {
+    background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .contact-box {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .legal-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .legal-hero .lead {
+        font-size: 1rem;
+    }
+    
+    .legal-section {
+        padding: 1.5rem;
+    }
+    
+    .legal-section h2 {
+        font-size: 1.5rem;
+    }
+}

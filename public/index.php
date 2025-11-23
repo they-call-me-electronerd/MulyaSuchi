@@ -16,8 +16,10 @@ require_once __DIR__ . '/../classes/Category.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $pageTitle = 'Home';
-$additionalCSS = 'public.css';
-$additionalJS = 'ticker.js';
+$metaDescription = "MulyaSuchi is Nepal's premier price tracking platform. Track daily market prices of vegetables, fruits, and essential commodities across 50+ markets in Nepal.";
+$metaKeywords = "price tracking nepal, vegetable prices nepal, kalimati market price, daily rates, mulyasuchi, commodity prices";
+$additionalCSS = ['pages/landing.css', 'animations/enhanced-animations.css', 'animations/hero-enhancements.css'];
+$additionalJS = ['animations/counter-animation.js', 'animations/scroll-animations.js', 'components/ticker.js'];
 
 // Get categories with item counts
 $categoryObj = new Category();
@@ -26,164 +28,18 @@ $categories = $categoryObj->getCategoriesWithItemCounts();
 // Get recent items
 $itemObj = new Item();
 $recentItems = $itemObj->getActiveItems(8);
+
+include __DIR__ . '/../includes/header_professional.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MulyaSuchi is Nepal's premier price tracking platform. Track daily market prices of vegetables, fruits, and essential commodities across 50+ markets in Nepal.">
-    <meta name="keywords" content="price tracking nepal, vegetable prices nepal, kalimati market price, daily rates, mulyasuchi, commodity prices">
-    <meta name="author" content="MulyaSuchi Team">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="<?php echo SITE_URL; ?>">
-    <meta property="og:title" content="MulyaSuchi - Track Daily Market Prices in Nepal">
-    <meta property="og:description" content="Track daily market prices of vegetables, fruits, and essential commodities across 50+ markets in Nepal.">
-    <meta property="og:image" content="<?php echo SITE_URL; ?>/assets/images/og-image.jpg">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="<?php echo SITE_URL; ?>">
-    <meta property="twitter:title" content="MulyaSuchi - Track Daily Market Prices in Nepal">
-    <meta property="twitter:description" content="Track daily market prices of vegetables, fruits, and essential commodities across 50+ markets in Nepal.">
-    <meta property="twitter:image" content="<?php echo SITE_URL; ?>/assets/images/og-image.jpg">
-    
-    <title><?php echo $pageTitle . ' - ' . SITE_NAME; ?></title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Price Ticker -->
+<div class="price-ticker-container">
+    <div class="price-ticker">
+        <!-- Ticker items will be loaded via AJAX -->
+    </div>
+</div>
 
-    <!-- Core Styles -->
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/core/variables.css">
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/core/reset.css">
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/core/utilities.css">
-    
-    <!-- Component Styles -->
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/components/navbar.css">
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/components/footer.css">
-    
-    <!-- Page Specific Styles -->
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/pages/landing.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/wave-dark-mode.css">
-    
-    <!-- Animation Styles -->
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/animations/enhanced-animations.css">
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/animations/hero-enhancements.css">
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/pages/enhanced-ui.css">
-    
-    <!-- Theme -->
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/themes/dark-mode.css">
-
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Manrope', sans-serif; }
-        
-        /* Hero Section Alignment & Spacing */
-        /* .hero-section { padding-top: 8rem !important; min-height: 90vh; display: flex; align-items: center; } */
-        /* .hero-container { display: flex; align-items: center; justify-content: space-between; } */
-        .hero-content { text-align: left; max-width: 600px; }
-        
-        /* Search Bar Sizing */
-        /* Search Bar Sizing & Alignment */
-        .hero-search-box { max-width: 480px !important; margin-left: 0 !important; margin-right: auto !important; }
-        
-        /* Stats Alignment */
-        .hero-stats { justify-content: flex-start !important; }
-        
-        /* Section Header Alignment */
-        /* section .text-center { text-align: left !important; } */
-        /* section .d-inline-block { display: inline-block; margin-left: 0; } */
-        /* section p { margin-left: 0; margin-right: auto; } */
-        
-        /* Font Size Fixes */
-        .hero-title { font-size: 3rem !important; }
-        .hero-subtitle { font-size: 1.125rem !important; }
-        .stat-number { font-size: 1.75rem !important; }
-        .stat-label { font-size: 0.875rem !important; }
-        
-        /* Dark Theme Support - Bluish Gradient */
-        [data-theme="dark"] body { background: #0f172a; color: #e2e8f0; }
-        [data-theme="dark"] section { background: #1e293b !important; }
-        [data-theme="dark"] .hero-section { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%) !important; }
-        [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, 
-        [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6 { color: #f1f5f9 !important; }
-        [data-theme="dark"] p { color: #cbd5e1 !important; }
-        [data-theme="dark"] .card, [data-theme="dark"] .category-card-inner { background: #1e293b !important; border: 1px solid #334155; }
-        [data-theme="dark"] .professional-footer { background: #0f172a !important; border-top-color: #1e3a8a !important; }
-        
-        /* Animation */
-        @keyframes growUp { from { height: 0; opacity: 0; } to { opacity: 1; } }
-    </style>
-</head>
-<body>
-
-    <!-- Professional Navigation Bar -->
-    <nav class="main-navbar">
-        <div class="navbar-container">
-            <!-- Logo -->
-            <a href="<?php echo SITE_URL; ?>" class="navbar-logo">
-                <i class="bi bi-graph-up-arrow"></i>
-                <span class="logo-text">Mulyasuchi</span>
-            </a>
-
-            <!-- Main Menu -->
-            <ul class="navbar-menu" id="navbarMenu">
-                <li><a href="<?php echo SITE_URL; ?>">Home</a></li>
-                <li><a href="browse.php">Products</a></li>
-                <li><a href="browse.php">Categories</a></li>
-                <li><a href="about.php">Insights</a></li>
-                <li><a href="about.php">About</a></li>
-            </ul>
-
-            <!-- Right Actions -->
-            <div class="navbar-actions">
-                <button class="nav-search-icon" id="searchToggle">
-                    <i class="bi bi-search"></i>
-                </button>
-                
-                <!-- Theme Toggle -->
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="bi bi-sun-fill theme-icon-light"></i>
-                    <i class="bi bi-moon-stars-fill theme-icon-dark"></i>
-                </button>
-                
-                <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
-                    <div class="dropdown">
-                        <button class="nav-btn nav-btn-login dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle me-1"></i>
-                            <?php echo htmlspecialchars($_SESSION['username'] ?? 'User'); ?>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-xl mt-2">
-                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                                <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/admin/dashboard.php"><i class="bi bi-speedometer2 me-2"></i>Admin Dashboard</a></li>
-                            <?php else: ?>
-                                <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/contributor/dashboard.php"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
-                            <?php endif; ?>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="<?php echo SITE_URL; ?>/admin/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
-                        </ul>
-                    </div>
-                <?php else: ?>
-                    <a href="<?php echo SITE_URL; ?>/contributor/login.php" class="nav-btn nav-btn-login">Login</a>
-                    <a href="<?php echo SITE_URL; ?>/admin/login.php" class="nav-btn nav-btn-admin">Admin</a>
-                <?php endif; ?>
-
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <i class="bi bi-list"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
-
+<main>
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-container">
@@ -203,14 +59,15 @@ $recentItems = $itemObj->getActiveItems(8);
                 </p>
 
                 <!-- Search Box -->
-                <form action="browse.php" method="GET" class="hero-search-box">
+                <form action="products.php" method="GET" class="hero-search-box">
                     <i class="bi bi-search search-icon-left"></i>
                     <input 
                         type="text" 
-                        name="q" 
+                        name="search" 
                         class="hero-search-input" 
                         placeholder="Search for rice, tomatoes, mobile phones..."
                         autocomplete="off"
+                        required
                     >
                     <button type="submit" class="hero-search-btn">
                         Search
@@ -418,27 +275,64 @@ $recentItems = $itemObj->getActiveItems(8);
                 foreach ($categories as $category): 
                     $slug = $category['slug'];
                     $colors = $categoryColors[$slug] ?? ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'];
+                    $categoryItems = $categoryObj->getItemsByCategory($category['category_id'], 5);
                 ?>
                 <div class="col-6 col-md-4 col-lg-3">
-                    <a href="browse.php?category=<?php echo $slug; ?>" class="text-decoration-none d-block h-100" style="position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-12px) scale(1.02)'; this.querySelector('.category-card-inner').style.boxShadow='0 25px 50px -12px rgba(0, 0, 0, 0.25)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.querySelector('.category-card-inner').style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)';">
-                        <div class="category-card-inner" style="background: <?php echo $colors['bg']; ?>; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transition: all 0.4s ease;">
-                            <div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); opacity: 0.05; border-radius: 50%;"></div>
-                            <div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;"><?php echo $icons[$slug] ?? '📦'; ?></span></div>
-                            <h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;"><?php echo htmlspecialchars($category['category_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                            <p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;"><?php echo $category['category_name_nepali']; ?></p>
-                            <div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><?php echo $category['item_count']; ?> items</span></div>
+                    <div class="category-dropdown-wrapper" style="position: relative;">
+                        <div class="category-card-trigger" onclick="toggleCategoryDropdown(this)" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
+                            <div class="category-card-inner" style="background: <?php echo $colors['bg']; ?>; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transition: all 0.4s ease;">
+                                <div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); opacity: 0.05; border-radius: 50%;"></div>
+                                <div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;"><?php echo $icons[$slug] ?? '📦'; ?></span></div>
+                                <h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;"><?php echo htmlspecialchars($category['category_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                <p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;"><?php echo $category['category_name_nepali']; ?></p>
+                                <div style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;">
+                                    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><?php echo $category['item_count']; ?> items</span></div>
+                                    <i class="bi bi-chevron-down" style="font-size: 1.25rem; color: <?php echo $colors['from']; ?>; transition: transform 0.3s;"></i>
+                                </div>
+                            </div>
                         </div>
-                    </a>
+                        
+                        <!-- Dropdown Menu -->
+                        <div class="category-dropdown-menu" style="display: none; position: absolute; top: calc(100% + 0.5rem); left: 0; right: 0; background: white; border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); z-index: 100; max-height: 400px; overflow-y: auto; animation: slideDown 0.3s ease;">
+                            <div style="padding: 1rem;">
+                                <div style="margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #f3f4f6;">
+                                    <h4 style="font-size: 0.875rem; font-weight: 700; color: #6b7280; text-transform: uppercase; margin: 0;">Quick View</h4>
+                                </div>
+                                <?php if (!empty($categoryItems)): ?>
+                                    <?php foreach ($categoryItems as $item): ?>
+                                        <a href="products.php?category=<?php echo $category['category_id']; ?>&search=<?php echo urlencode($item['item_name']); ?>" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-radius: 12px; text-decoration: none; transition: all 0.2s; margin-bottom: 0.5rem;" onmouseover="this.style.background='<?php echo $colors['bg']; ?>'" onmouseout="this.style.background='transparent'">
+                                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                                <span style="font-size: 1.25rem;"><?php echo $icons[$slug] ?? '📦'; ?></span>
+                                            </div>
+                                            <div style="flex: 1; min-width: 0;">
+                                                <div style="font-weight: 600; font-size: 0.875rem; color: #111827; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo htmlspecialchars($item['item_name']); ?></div>
+                                                <div style="font-size: 0.75rem; color: #6b7280;">NPR <?php echo number_format($item['current_price'], 2); ?>/<?php echo $item['unit']; ?></div>
+                                            </div>
+                                            <i class="bi bi-arrow-right" style="color: <?php echo $colors['from']; ?>; font-size: 1rem;"></i>
+                                        </a>
+                                    <?php endforeach; ?>
+                                    <a href="products.php?category=<?php echo $category['category_id']; ?>" style="display: block; text-align: center; padding: 0.75rem; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); color: white; border-radius: 12px; font-weight: 700; font-size: 0.875rem; text-decoration: none; margin-top: 0.75rem; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                                        View All <?php echo $category['item_count']; ?> Items →
+                                    </a>
+                                <?php else: ?>
+                                    <div style="text-align: center; padding: 2rem; color: #9ca3af;">
+                                        <i class="bi bi-inbox" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+                                        <p style="margin: 0; font-size: 0.875rem;">No items yet</p>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <?php endforeach; ?>
                 
-                <div class="col-6 col-md-4 col-lg-3"><a href="browse.php?category=groceries" class="text-decoration-none d-block h-100" style="position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-12px) scale(1.02)'; this.querySelector('.category-card-inner').style.boxShadow='0 25px 50px -12px rgba(0, 0, 0, 0.25)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.querySelector('.category-card-inner').style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)';"><div class="category-card-inner" style="background: #fefce8; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);"><div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, #eab308, #ca8a04); opacity: 0.05; border-radius: 50%;"></div><div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, #eab308, #ca8a04); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;">🛒</span></div><h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Groceries</h3><p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;">किराना सामान</p><div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, #eab308, #ca8a04); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, #eab308, #ca8a04); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Coming Soon</span></div></div></a></div>
-                <div class="col-6 col-md-4 col-lg-3"><a href="browse.php?category=furniture" class="text-decoration-none d-block h-100" style="position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-12px) scale(1.02)'; this.querySelector('.category-card-inner').style.boxShadow='0 25px 50px -12px rgba(0, 0, 0, 0.25)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.querySelector('.category-card-inner').style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)';"><div class="category-card-inner" style="background: #fef2f2; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);"><div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, #dc2626, #b91c1c); opacity: 0.05; border-radius: 50%;"></div><div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, #dc2626, #b91c1c); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;">🛋️</span></div><h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Furniture</h3><p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;">फर्निचर</p><div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, #dc2626, #b91c1c); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, #dc2626, #b91c1c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Coming Soon</span></div></div></a></div>
-                <div class="col-6 col-md-4 col-lg-3"><a href="browse.php?category=sports" class="text-decoration-none d-block h-100" style="position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-12px) scale(1.02)'; this.querySelector('.category-card-inner').style.boxShadow='0 25px 50px -12px rgba(0, 0, 0, 0.25)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.querySelector('.category-card-inner').style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)';"><div class="category-card-inner" style="background: #f0fdfa; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);"><div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, #14b8a6, #0d9488); opacity: 0.05; border-radius: 50%;"></div><div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, #14b8a6, #0d9488); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;">⚽</span></div><h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Sports & Fitness</h3><p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;">खेलकुद</p><div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, #14b8a6, #0d9488); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, #14b8a6, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Coming Soon</span></div></div></a></div>
+                <div class="col-6 col-md-4 col-lg-3"><a href="products.php?category=groceries" class="text-decoration-none d-block h-100" style="position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-12px) scale(1.02)'; this.querySelector('.category-card-inner').style.boxShadow='0 25px 50px -12px rgba(0, 0, 0, 0.25)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.querySelector('.category-card-inner').style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)';"><div class="category-card-inner" style="background: #fefce8; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);"><div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, #eab308, #ca8a04); opacity: 0.05; border-radius: 50%;"></div><div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, #eab308, #ca8a04); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;">🛒</span></div><h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Groceries</h3><p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;">किराना सामान</p><div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, #eab308, #ca8a04); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, #eab308, #ca8a04); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Coming Soon</span></div></div></a></div>
+                <div class="col-6 col-md-4 col-lg-3"><a href="products.php?category=furniture" class="text-decoration-none d-block h-100" style="position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-12px) scale(1.02)'; this.querySelector('.category-card-inner').style.boxShadow='0 25px 50px -12px rgba(0, 0, 0, 0.25)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.querySelector('.category-card-inner').style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)';"><div class="category-card-inner" style="background: #fef2f2; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);"><div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, #dc2626, #b91c1c); opacity: 0.05; border-radius: 50%;"></div><div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, #dc2626, #b91c1c); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;">🛋️</span></div><h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Furniture</h3><p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;">फर्निचर</p><div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, #dc2626, #b91c1c); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, #dc2626, #b91c1c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Coming Soon</span></div></div></a></div>
+                <div class="col-6 col-md-4 col-lg-3"><a href="products.php?category=sports" class="text-decoration-none d-block h-100" style="position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-12px) scale(1.02)'; this.querySelector('.category-card-inner').style.boxShadow='0 25px 50px -12px rgba(0, 0, 0, 0.25)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.querySelector('.category-card-inner').style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)';"><div class="category-card-inner" style="background: #f0fdfa; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);"><div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, #14b8a6, #0d9488); opacity: 0.05; border-radius: 50%;"></div><div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, #14b8a6, #0d9488); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;">⚽</span></div><h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Sports & Fitness</h3><p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;">खेलकुद</p><div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, #14b8a6, #0d9488); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, #14b8a6, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Coming Soon</span></div></div></a></div>
             </div>
             
             <div style="text-align: center; margin-top: 3rem;">
-                <a href="browse.php" style="display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, #f97316, #ea580c); color: white; padding: 1rem 2.5rem; border-radius: 3rem; font-weight: 700; font-size: 1.125rem; text-decoration: none; box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 15px 35px rgba(249, 115, 22, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(249, 115, 22, 0.3)';"><span>Explore All Categories</span><i class="bi bi-arrow-right" style="font-size: 1.25rem;"></i></a>
+                <a href="products.php" style="display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, #f97316, #ea580c); color: white; padding: 1rem 2.5rem; border-radius: 3rem; font-weight: 700; font-size: 1.125rem; text-decoration: none; box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 15px 35px rgba(249, 115, 22, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(249, 115, 22, 0.3)';"><span>Explore All Categories</span><i class="bi bi-arrow-right" style="font-size: 1.25rem;"></i></a>
             </div>
         </div>
     </section>
@@ -558,7 +452,7 @@ $recentItems = $itemObj->getActiveItems(8);
                     <h5 class="footer-heading">Quick Links</h5>
                     <ul class="footer-links">
                         <li><a href="<?php echo SITE_URL; ?>"><i class="bi bi-chevron-right"></i> Home</a></li>
-                        <li><a href="browse.php"><i class="bi bi-chevron-right"></i> Browse Products</a></li>
+                        <li><a href="products.php"><i class="bi bi-chevron-right"></i> Browse Products</a></li>
                         <li><a href="about.php"><i class="bi bi-chevron-right"></i> About Us</a></li>
                         <li><a href="#"><i class="bi bi-chevron-right"></i> How It Works</a></li>
                         <li><a href="#"><i class="bi bi-chevron-right"></i> Contact</a></li>
@@ -569,11 +463,11 @@ $recentItems = $itemObj->getActiveItems(8);
                 <div class="col-lg-2 col-md-3 col-6">
                     <h5 class="footer-heading">Categories</h5>
                     <ul class="footer-links">
-                        <li><a href="browse.php?category=vegetables"><i class="bi bi-chevron-right"></i> Vegetables</a></li>
-                        <li><a href="browse.php?category=fruits"><i class="bi bi-chevron-right"></i> Fruits</a></li>
-                        <li><a href="browse.php?category=kitchen-appliances"><i class="bi bi-chevron-right"></i> Kitchen</a></li>
-                        <li><a href="browse.php?category=tech-gadgets"><i class="bi bi-chevron-right"></i> Electronics</a></li>
-                        <li><a href="browse.php"><i class="bi bi-chevron-right"></i> View All</a></li>
+                        <li><a href="products.php?category=vegetables"><i class="bi bi-chevron-right"></i> Vegetables</a></li>
+                        <li><a href="products.php?category=fruits"><i class="bi bi-chevron-right"></i> Fruits</a></li>
+                        <li><a href="products.php?category=kitchen-appliances"><i class="bi bi-chevron-right"></i> Kitchen</a></li>
+                        <li><a href="products.php?category=tech-gadgets"><i class="bi bi-chevron-right"></i> Electronics</a></li>
+                        <li><a href="products.php"><i class="bi bi-chevron-right"></i> View All</a></li>
                     </ul>
                 </div>
 
@@ -647,8 +541,98 @@ $recentItems = $itemObj->getActiveItems(8);
     <script src="<?php echo SITE_URL; ?>/assets/js/animations/counter-animation.js"></script>
     <script src="<?php echo SITE_URL; ?>/assets/js/animations/hero-interactions.js"></script>
     
+    <!-- Category Dropdown Functionality -->
+    <style>
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .category-dropdown-menu {
+            scrollbar-width: thin;
+            scrollbar-color: #f97316 #f3f4f6;
+        }
+        
+        .category-dropdown-menu::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .category-dropdown-menu::-webkit-scrollbar-track {
+            background: #f3f4f6;
+            border-radius: 3px;
+        }
+        
+        .category-dropdown-menu::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 3px;
+        }
+        
+        .category-dropdown-menu::-webkit-scrollbar-thumb:hover {
+            background: #ea580c;
+        }
+    </style>
+    
     <script>
-        console.log('✨ Mulyasuchi - Enhanced UI with Smooth Animations Loaded!');
+        // Category dropdown toggle functionality
+        let activeDropdown = null;
+        
+        function toggleCategoryDropdown(trigger) {
+            const wrapper = trigger.closest('.category-dropdown-wrapper');
+            const dropdown = wrapper.querySelector('.category-dropdown-menu');
+            const chevron = trigger.querySelector('.bi-chevron-down');
+            const card = trigger.querySelector('.category-card-trigger');
+            
+            // Close other dropdowns
+            if (activeDropdown && activeDropdown !== dropdown) {
+                activeDropdown.style.display = 'none';
+                const activeChevron = activeDropdown.parentElement.querySelector('.bi-chevron-down');
+                if (activeChevron) {
+                    activeChevron.style.transform = 'rotate(0deg)';
+                }
+            }
+            
+            // Toggle current dropdown
+            if (dropdown.style.display === 'none' || !dropdown.style.display) {
+                dropdown.style.display = 'block';
+                chevron.style.transform = 'rotate(180deg)';
+                card.style.transform = 'translateY(-4px)';
+                activeDropdown = dropdown;
+            } else {
+                dropdown.style.display = 'none';
+                chevron.style.transform = 'rotate(0deg)';
+                card.style.transform = 'translateY(0)';
+                activeDropdown = null;
+            }
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.category-dropdown-wrapper')) {
+                if (activeDropdown) {
+                    activeDropdown.style.display = 'none';
+                    const activeChevron = activeDropdown.parentElement.querySelector('.bi-chevron-down');
+                    if (activeChevron) {
+                        activeChevron.style.transform = 'rotate(0deg)';
+                    }
+                    activeDropdown = null;
+                }
+            }
+        });
+        
+        // Prevent card click from bubbling to document
+        document.querySelectorAll('.category-card-trigger').forEach(trigger => {
+            trigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+        
+        console.log('✨ Mulyasuchi - Enhanced UI with Category Dropdowns Loaded!');
     </script>
 </body>
 </html>

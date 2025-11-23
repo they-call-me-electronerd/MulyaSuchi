@@ -85,6 +85,32 @@ class Category {
             return [];
         }
     }
+    
+    /**
+     * Get items by category with limit
+     */
+    public function getItemsByCategory($categoryId, $limit = 5) {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT i.*, c.category_name
+                FROM items i
+                JOIN categories c ON i.category_id = c.category_id
+                WHERE i.category_id = :category_id AND i.status = :status
+                ORDER BY i.updated_at DESC
+                LIMIT :limit
+            ");
+            
+            $stmt->bindValue(':category_id', $categoryId, PDO::PARAM_INT);
+            $stmt->bindValue(':status', ITEM_STATUS_ACTIVE, PDO::PARAM_STR);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll();
+            
+        } catch (PDOException $e) {
+            error_log("Get items by category error: " . $e->getMessage());
+            return [];
+        }
+    }
 }
 
 ?>

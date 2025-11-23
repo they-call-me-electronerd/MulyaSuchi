@@ -44,27 +44,15 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo SITE_URL; ?>/public/browse.php" class="nav-link <?php echo $currentPage == 'browse.php' ? 'active' : ''; ?>">
-                        <span class="nav-icon">📦</span>
-                        <span class="nav-text">Browse</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?php echo SITE_URL; ?>/public/search.php" class="nav-link <?php echo $currentPage == 'search.php' ? 'active' : ''; ?>">
-                        <span class="nav-icon">🔍</span>
-                        <span class="nav-text">Search</span>
+                    <a href="<?php echo SITE_URL; ?>/public/products.php" class="nav-link <?php echo $currentPage == 'products.php' ? 'active' : ''; ?>">
+                        <span class="nav-icon">🛍️</span>
+                        <span class="nav-text">Products</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="<?php echo SITE_URL; ?>/public/about.php" class="nav-link <?php echo $currentPage == 'about.php' ? 'active' : ''; ?>">
                         <span class="nav-icon">ℹ️</span>
                         <span class="nav-text">About</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?php echo SITE_URL; ?>/public/how-it-works.php" class="nav-link <?php echo $currentPage == 'how-it-works.php' ? 'active' : ''; ?>">
-                        <span class="nav-icon">⚙️</span>
-                        <span class="nav-text">How It Works</span>
                     </a>
                 </li>
                 
