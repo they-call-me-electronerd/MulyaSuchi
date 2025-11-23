@@ -112,9 +112,12 @@
             return;
         }
 
+        console.log('Theme toggle button found, attaching listener');
+
         // Add click event listener
         themeToggle.addEventListener('click', function (e) {
             e.preventDefault();
+            console.log('Theme toggle clicked');
             toggleTheme();
 
             // Add bounce animation

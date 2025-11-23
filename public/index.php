@@ -514,11 +514,11 @@ include __DIR__ . '/../includes/header_professional.php';
                         </p>
                     </div>
                     <div class="col-md-6 text-center text-md-end">
-                        <a href="#" class="footer-legal-link">Privacy Policy</a>
+                        <a href="privacy-policy.php" class="footer-legal-link">Privacy Policy</a>
                         <span class="mx-2">•</span>
-                        <a href="#" class="footer-legal-link">Terms of Service</a>
+                        <a href="terms-of-service.php" class="footer-legal-link">Terms of Service</a>
                         <span class="mx-2">•</span>
-                        <a href="#" class="footer-legal-link">Cookie Policy</a>
+                        <a href="cookie-policy.php" class="footer-legal-link">Cookie Policy</a>
                     </div>
                 </div>
             </div>
@@ -530,7 +530,6 @@ include __DIR__ . '/../includes/header_professional.php';
     
     <!-- Core Scripts -->
     <script src="<?php echo SITE_URL; ?>/assets/js/core/utils.js"></script>
-    <script src="<?php echo SITE_URL; ?>/assets/js/core/theme-manager.js"></script>
     
     <!-- Component Scripts -->
     <script src="<?php echo SITE_URL; ?>/assets/js/components/navbar.js"></script>

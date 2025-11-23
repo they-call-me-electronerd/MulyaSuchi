@@ -88,14 +88,14 @@
     --primary-orange-lighter: #fed7aa;
     --primary-gradient: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
     --primary-gradient-soft: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(234, 88, 12, 0.1) 100%);
-
+    
     /* Accent Colors */
     --accent-blue: #3b82f6;
     --accent-green: #10b981;
     --accent-red: #ef4444;
     --accent-yellow: #f59e0b;
     --accent-purple: #8b5cf6;
-
+    
     /* Success/Warning/Error */
     --success: #10b981;
     --success-light: #d1fae5;
@@ -105,60 +105,6 @@
     --error-light: #fee2e2;
     --info: #3b82f6;
     --info-light: #dbeafe;
-
-    /* Theme transition */
-    --theme-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --theme-transition-smooth: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Dark Theme Colors - Orange Accent with Dark Background */
-[data-theme="dark"] {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --bg-tertiary: #334155;
-    --bg-accent: #1f2937;
-    --bg-gradient: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3730a3 100%);
-
-    --text-primary: #f1f5f9;
-    --text-secondary: #e2e8f0;
-    --text-tertiary: #cbd5e1;
-
-    --border-color: rgba(249, 115, 22, 0.2);
-    --border-light: rgba(148, 163, 184, 0.15);
-    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 4px 12px -1px rgba(0, 0, 0, 0.6);
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.8);
-    --shadow-orange: 0 10px 30px rgba(249, 115, 22, 0.4);
-
-    /* Brand Colors - Keep Orange in Dark Mode */
-    --primary-orange: #fb923c;
-    --primary-orange-dark: #f97316;
-    --primary-orange-light: #fdba74;
-    --primary-orange-lighter: #fed7aa;
-    --primary-gradient: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-    --primary-gradient-soft: linear-gradient(135deg, rgba(251, 146, 60, 0.15) 0%, rgba(249, 115, 22, 0.15) 100%);
-
-    /* Accent Colors - Adjusted for dark mode */
-    --accent-blue: #60a5fa;
-    --accent-green: #34d399;
-    --accent-red: #f87171;
-    --accent-yellow: #fbbf24;
-    --accent-purple: #a78bfa;
-
-    /* Success/Warning/Error */
-    --success: #34d399;
-    --success-light: rgba(52, 211, 153, 0.2);
-    --warning: #fbbf24;
-    --warning-light: rgba(251, 191, 36, 0.2);
-    --error: #f87171;
-    --error-light: rgba(248, 113, 113, 0.2);
-    --info: #60a5fa;
-    --info-light: rgba(96, 165, 250, 0.2);
-}
-
-/* ============================================================================
-   APPLY THEME TO ELEMENTS
-   ============================================================================ */
 
 body {
     background-color: var(--bg-primary) !important;
@@ -205,7 +151,7 @@ body {
 [data-theme="dark"] .main-navbar {
     background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(30, 64, 175, 0.95)) !important;
     backdrop-filter: blur(10px);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3) !important;
 }
 
 /* Navigation Links */
@@ -678,8 +624,8 @@ select:focus {
 }
 
 /* Cards and containers */
-[data-theme="dark"] .container>div[style*="background: white"],
-[data-theme="dark"] .row>div[style*="background: white"] {
+[data-theme="dark"] .container > div[style*="background: white"],
+[data-theme="dark"] .row > div[style*="background: white"] {
     background: #1e293b !important;
 }
 
@@ -692,7 +638,7 @@ select:focus {
 /* Navbar with blueish tint */
 [data-theme="dark"] .main-navbar[style] {
     background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(30, 64, 175, 0.95)) !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
 }
 
 /* Dropdowns */

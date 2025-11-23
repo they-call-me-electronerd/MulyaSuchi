@@ -64,7 +64,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <script src="<?php echo SITE_URL; ?>/assets/js/core/theme-manager.js"></script>
     <script>
         // Apply saved theme immediately to prevent flash
-        document.documentElement.setAttribute('data-theme', ThemeManager.getCurrentTheme());
+        (function() {
+            const savedTheme = localStorage.getItem('mulyasuchi-theme');
+            const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (systemDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
     </script>
     
     <?php if (isset($additionalCSS) && is_array($additionalCSS)): ?>
@@ -122,7 +127,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <!-- Theme Toggle -->
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" style="background: none; border: none; font-size: 1.25rem; color: #6b7280; cursor: pointer; padding: 0.5rem; border-radius: 0.5rem; transition: all 0.3s;">
                     <i class="bi bi-sun-fill theme-icon-light"></i>
-                    <i class="bi bi-moon-stars-fill theme-icon-dark" style="display: none;"></i>
+                    <i class="bi bi-moon-stars-fill theme-icon-dark"></i>
                 </button>
                 
                 <?php if (Auth::isLoggedIn()): ?>
