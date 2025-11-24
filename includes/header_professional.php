@@ -106,7 +106,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <?php endif; ?>
 
     <!-- Professional Navigation Bar -->
-    <nav class="main-navbar" style="box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;">
+    <nav class="main-navbar" style="box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);">
         <div class="navbar-container" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem;">
             <!-- Logo -->
             <a href="<?php echo SITE_URL; ?>/public/index.php" class="navbar-logo" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; font-size: 1.5rem; font-weight: 800; color: #f97316;">
