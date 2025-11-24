@@ -67,7 +67,10 @@ include __DIR__ . '/../includes/header_professional.php';
                     'beverages' => 'bi-cup-straw',
                     'dairy' => 'bi-cup',
                     'meat' => 'bi-egg',
-                    'grains' => 'bi-flower1'
+                    'grains' => 'bi-flower1',
+                    'groceries' => 'bi-cart3',
+                    'furniture' => 'bi-lamp',
+                    'sports-fitness' => 'bi-bicycle'
                 ];
                 
                 $isAdmin = Auth::isLoggedIn() && Auth::hasRole(ROLE_ADMIN);

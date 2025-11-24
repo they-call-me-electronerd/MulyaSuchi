@@ -29,6 +29,10 @@ $categories = $categoryObj->getCategoriesWithItemCounts();
 $itemObj = new Item();
 $recentItems = $itemObj->getActiveItems(8);
 
+// Get stats
+$totalProducts = $itemObj->countItems();
+$totalMarkets = $itemObj->countMarkets();
+
 include __DIR__ . '/../includes/header_professional.php';
 ?>
 
@@ -87,11 +91,11 @@ include __DIR__ . '/../includes/header_professional.php';
                 <!-- Stats -->
                 <div class="hero-stats">
                     <div class="stat-item hover-lift">
-                        <span class="stat-number" data-counter="1245" data-suffix="+">0</span>
+                        <span class="stat-number" data-counter="<?php echo $totalProducts; ?>" data-suffix="+">0</span>
                         <span class="stat-label">Products Tracked</span>
                     </div>
                     <div class="stat-item hover-lift">
-                        <span class="stat-number" data-counter="50" data-suffix="+">0</span>
+                        <span class="stat-number" data-counter="<?php echo $totalMarkets; ?>" data-suffix="+">0</span>
                         <span class="stat-label">Markets Covered</span>
                     </div>
                     <div class="stat-item hover-lift">
@@ -270,66 +274,34 @@ include __DIR__ . '/../includes/header_professional.php';
                     'tools' => ['from' => '#6366f1', 'to' => '#4f46e5', 'bg' => '#eef2ff'],
                     'electrical-appliances' => ['from' => '#8b5cf6', 'to' => '#7c3aed', 'bg' => '#faf5ff'],
                     'tech-gadgets' => ['from' => '#06b6d4', 'to' => '#0891b2', 'bg' => '#ecfeff'],
-                    'miscellaneous' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed']
+                    'miscellaneous' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
+                    'groceries' => ['from' => '#eab308', 'to' => '#ca8a04', 'bg' => '#fefce8'],
+                    'furniture' => ['from' => '#dc2626', 'to' => '#b91c1c', 'bg' => '#fef2f2'],
+                    'sports-fitness' => ['from' => '#14b8a6', 'to' => '#0d9488', 'bg' => '#f0fdfa']
                 ];
-                $icons = ['vegetables'=>'🥦','fruits'=>'🍎','kitchen-appliances'=>'🍳','study-material'=>'📚','clothing'=>'👕','tools'=>'🔧','electrical-appliances'=>'💡','tech-gadgets'=>'📱','miscellaneous'=>'📦'];
+                $icons = ['vegetables'=>'🥦','fruits'=>'🍎','kitchen-appliances'=>'🍳','study-material'=>'📚','clothing'=>'👕','tools'=>'🔧','electrical-appliances'=>'💡','tech-gadgets'=>'📱','miscellaneous'=>'📦', 'groceries'=>'🛒', 'furniture'=>'🛋️', 'sports-fitness'=>'⚽'];
                 foreach ($categories as $category): 
                     $slug = $category['slug'];
                     $colors = $categoryColors[$slug] ?? ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'];
                     $categoryItems = $categoryObj->getItemsByCategory($category['category_id'], 5);
                 ?>
                 <div class="col-6 col-md-4 col-lg-2 category-card-animate">
-                    <div class="category-dropdown-wrapper" style="position: relative;">
-                        <div class="category-card-trigger" onclick="toggleCategoryDropdown(this)" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
-                            <div class="category-card-inner" style="background: <?php echo $colors['bg']; ?>; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transition: all 0.4s ease;">
-                                <div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); opacity: 0.05; border-radius: 50%;"></div>
-                                <div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;"><?php echo $icons[$slug] ?? '📦'; ?></span></div>
-                                <h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;"><?php echo htmlspecialchars($category['category_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                                <p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;"><?php echo $category['category_name_nepali']; ?></p>
-                                <div style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;">
-                                    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><?php echo $category['item_count']; ?> items</span></div>
-                                    <i class="bi bi-chevron-down" style="font-size: 1.25rem; color: <?php echo $colors['from']; ?>; transition: transform 0.3s;"></i>
-                                </div>
+                    <a href="products.php?category=<?php echo $category['category_id']; ?>" style="text-decoration: none; display: block;">
+                        <div class="category-card-inner" style="background: <?php echo $colors['bg']; ?>; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; cursor: pointer;">
+                            <div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); opacity: 0.05; border-radius: 50%;"></div>
+                            <div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;"><?php echo $icons[$slug] ?? '📦'; ?></span></div>
+                            <h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;"><?php echo htmlspecialchars($category['category_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                            <p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;"><?php echo $category['category_name_nepali']; ?></p>
+                            <div style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><?php echo $category['item_count'] > 0 ? $category['item_count'] . ' items' : 'Coming Soon'; ?></span></div>
+                                <i class="bi bi-arrow-right" style="font-size: 1.25rem; color: <?php echo $colors['from']; ?>; transition: transform 0.3s;"></i>
                             </div>
                         </div>
-                        
-                        <!-- Dropdown Menu -->
-                        <div class="category-dropdown-menu" style="display: none; position: absolute; top: calc(100% + 0.5rem); left: 0; right: 0; background: white; border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); z-index: 100; max-height: 400px; overflow-y: auto; animation: slideDown 0.3s ease;">
-                            <div style="padding: 1rem;">
-                                <div style="margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #f3f4f6;">
-                                    <h4 style="font-size: 0.875rem; font-weight: 700; color: #6b7280; text-transform: uppercase; margin: 0;">Quick View</h4>
-                                </div>
-                                <?php if (!empty($categoryItems)): ?>
-                                    <?php foreach ($categoryItems as $item): ?>
-                                        <a href="products.php?category=<?php echo $category['category_id']; ?>&search=<?php echo urlencode($item['item_name']); ?>" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-radius: 12px; text-decoration: none; transition: all 0.2s; margin-bottom: 0.5rem;" onmouseover="this.style.background='<?php echo $colors['bg']; ?>'" onmouseout="this.style.background='transparent'">
-                                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                                <span style="font-size: 1.25rem;"><?php echo $icons[$slug] ?? '📦'; ?></span>
-                                            </div>
-                                            <div style="flex: 1; min-width: 0;">
-                                                <div style="font-weight: 600; font-size: 0.875rem; color: #111827; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo htmlspecialchars($item['item_name']); ?></div>
-                                                <div style="font-size: 0.75rem; color: #6b7280;">NPR <?php echo number_format($item['current_price'], 2); ?>/<?php echo $item['unit']; ?></div>
-                                            </div>
-                                            <i class="bi bi-arrow-right" style="color: <?php echo $colors['from']; ?>; font-size: 1rem;"></i>
-                                        </a>
-                                    <?php endforeach; ?>
-                                    <a href="products.php?category=<?php echo $category['category_id']; ?>" style="display: block; text-align: center; padding: 0.75rem; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); color: white; border-radius: 12px; font-weight: 700; font-size: 0.875rem; text-decoration: none; margin-top: 0.75rem; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-                                        View All <?php echo $category['item_count']; ?> Items →
-                                    </a>
-                                <?php else: ?>
-                                    <div style="text-align: center; padding: 2rem; color: #9ca3af;">
-                                        <i class="bi bi-inbox" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
-                                        <p style="margin: 0; font-size: 0.875rem;">No items yet</p>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <?php endforeach; ?>
                 
-                <div class="col-6 col-md-4 col-lg-2 category-card-animate"><a href="products.php?category=groceries" class="text-decoration-none d-block h-100" style="position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-12px) scale(1.02)'; this.querySelector('.category-card-inner').style.boxShadow='0 25px 50px -12px rgba(0, 0, 0, 0.25)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.querySelector('.category-card-inner').style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)';"><div class="category-card-inner" style="background: #fefce8; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);"><div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, #eab308, #ca8a04); opacity: 0.05; border-radius: 50%;"></div><div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, #eab308, #ca8a04); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;">🛒</span></div><h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Groceries</h3><p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;">किराना सामान</p><div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, #eab308, #ca8a04); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, #eab308, #ca8a04); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Coming Soon</span></div></div></a></div>
-                <div class="col-6 col-md-4 col-lg-2 category-card-animate"><a href="products.php?category=furniture" class="text-decoration-none d-block h-100" style="position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-12px) scale(1.02)'; this.querySelector('.category-card-inner').style.boxShadow='0 25px 50px -12px rgba(0, 0, 0, 0.25)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.querySelector('.category-card-inner').style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)';"><div class="category-card-inner" style="background: #fef2f2; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);"><div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, #dc2626, #b91c1c); opacity: 0.05; border-radius: 50%;"></div><div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, #dc2626, #b91c1c); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;">🛋️</span></div><h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Furniture</h3><p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;">फर्निचर</p><div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, #dc2626, #b91c1c); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, #dc2626, #b91c1c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Coming Soon</span></div></div></a></div>
-                <div class="col-6 col-md-4 col-lg-2 category-card-animate"><a href="products.php?category=sports" class="text-decoration-none d-block h-100" style="position: relative; overflow: hidden; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-12px) scale(1.02)'; this.querySelector('.category-card-inner').style.boxShadow='0 25px 50px -12px rgba(0, 0, 0, 0.25)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.querySelector('.category-card-inner').style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)';"><div class="category-card-inner" style="background: #f0fdfa; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);"><div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, #14b8a6, #0d9488); opacity: 0.05; border-radius: 50%;"></div><div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, #14b8a6, #0d9488); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;">⚽</span></div><h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Sports & Fitness</h3><p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500;">खेलकुद</p><div style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, #14b8a6, #0d9488); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, #14b8a6, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Coming Soon</span></div></div></a></div>
+
             </div>
             
             <div style="text-align: center; margin-top: 3rem;">

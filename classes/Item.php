@@ -244,6 +244,19 @@ class Item {
             return false;
         }
     }
+
+    /**
+     * Count distinct markets
+     */
+    public function countMarkets() {
+        try {
+            $stmt = $this->pdo->query("SELECT COUNT(DISTINCT market_location) FROM items WHERE status = 'active' AND market_location IS NOT NULL AND market_location != ''");
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Count markets error: " . $e->getMessage());
+            return 0;
+        }
+    }
     
     /**
      * Count total items

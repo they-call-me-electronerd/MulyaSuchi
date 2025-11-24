@@ -9,7 +9,16 @@ require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../classes/Database.php';
 require_once __DIR__ . '/../classes/Auth.php';
+require_once __DIR__ . '/../classes/Item.php';
+require_once __DIR__ . '/../classes/Category.php';
 require_once __DIR__ . '/../includes/functions.php';
+
+// Get stats
+$itemObj = new Item();
+$categoryObj = new Category();
+$totalProducts = $itemObj->countItems();
+$totalMarkets = $itemObj->countMarkets();
+$totalCategories = count($categoryObj->getActiveCategories());
 
 $pageTitle = 'About Us';
 $metaDescription = 'Learn about MulyaSuchi - Nepal\'s premier price tracking platform bringing transparency to the marketplace.';
@@ -31,16 +40,16 @@ include __DIR__ . '/../includes/header_professional.php';
                 </p>
                 <div class="hero-stats">
                     <div class="stat">
-                        <div class="stat-number">1,245+</div>
+                        <div class="stat-number"><?php echo $totalProducts; ?>+</div>
                         <div class="stat-label">Products Tracked</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">50+</div>
+                        <div class="stat-number"><?php echo $totalMarkets; ?>+</div>
                         <div class="stat-label">Markets Covered</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">10K+</div>
-                        <div class="stat-label">Active Users</div>
+                        <div class="stat-number"><?php echo $totalCategories; ?></div>
+                        <div class="stat-label">Categories</div>
                     </div>
                 </div>
             </div>

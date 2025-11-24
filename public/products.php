@@ -46,8 +46,9 @@ if ($categoryInput) {
 $minPrice = isset($_GET['min_price']) ? floatval($_GET['min_price']) : null;
 $maxPrice = isset($_GET['max_price']) ? floatval($_GET['max_price']) : null;
 $sortBy = isset($_GET['sort']) ? $_GET['sort'] : 'name_asc';
-$currentPage = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-$itemsPerPage = 12;
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($currentPage < 1) $currentPage = 1;
+$itemsPerPage = 30;
 $offset = ($currentPage - 1) * $itemsPerPage;
 
 // Build the query based on filters
@@ -310,7 +311,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                 
                                 // Previous Page
                                 if ($currentPage > 1): 
-                                    $queryParams['page'] = $currentPage - 1;
+                                    $queryParams['page'] = (int)$currentPage - 1;
                                 ?>
                                     <li>
                                         <a href="?<?php echo http_build_query($queryParams); ?>" class="page-link">
@@ -327,8 +328,8 @@ include __DIR__ . '/../includes/header_professional.php';
 
                                 <!-- Page Numbers -->
                                 <?php
-                                $startPage = max(1, $currentPage - 2);
-                                $endPage = min($totalPages, $currentPage + 2);
+                                $startPage = max(1, (int)$currentPage - 2);
+                                $endPage = min($totalPages, (int)$currentPage + 2);
                                 
                                 for ($i = $startPage; $i <= $endPage; $i++):
                                     $queryParams['page'] = $i;
@@ -343,7 +344,7 @@ include __DIR__ . '/../includes/header_professional.php';
 
                                 <!-- Next Page -->
                                 <?php if ($currentPage < $totalPages): 
-                                    $queryParams['page'] = $currentPage + 1;
+                                    $queryParams['page'] = (int)$currentPage + 1;
                                 ?>
                                     <li>
                                         <a href="?<?php echo http_build_query($queryParams); ?>" class="page-link">
