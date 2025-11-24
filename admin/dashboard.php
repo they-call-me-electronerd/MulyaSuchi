@@ -19,6 +19,8 @@ require_once __DIR__ . '/../includes/functions.php';
 Auth::requireRole(ROLE_ADMIN, SITE_URL . '/admin/login.php');
 
 $pageTitle = 'Admin Dashboard';
+$additionalCSS = ['pages/auth-admin.css']; // Load specific styles
+include __DIR__ . '/../includes/header_professional.php';
 
 $validationObj = new Validation();
 $itemObj = new Item();
@@ -27,236 +29,126 @@ $userObj = new User();
 $pendingCount = $validationObj->countPendingValidations();
 $totalItems = $itemObj->countItems();
 $totalUsers = $userObj->countUsers();
-
-include __DIR__ . '/../includes/header.php';
 ?>
 
-<style>
-.admin-nav {
-    background: var(--gradient-secondary);
-    color: white;
-    padding: var(--spacing-md);
-}
-
-.admin-nav .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.admin-nav h2 {
-    margin: 0;
-    color: white;
-}
-
-.admin-nav a {
-    color: white;
-    margin-left: var(--spacing-md);
-}
-
-.dashboard-content {
-    padding: var(--spacing-xl);
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-2xl);
-}
-
-.stat-card {
-    background: white;
-    padding: var(--spacing-xl);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
-}
-
-.stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--gradient-primary);
-}
-
-.stat-card.warning::before {
-    background: var(--gradient-secondary);
-}
-
-.stat-card h3 {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    margin-bottom: var(--spacing-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.stat-card .value {
-    font-size: 3rem;
-    font-weight: 700;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: var(--spacing-xs);
-}
-
-.stat-card.warning .value {
-    background: var(--gradient-secondary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.quick-actions {
-    background: white;
-    padding: var(--spacing-xl);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-md);
-    margin-bottom: var(--spacing-xl);
-}
-
-.action-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-md);
-}
-
-.action-card {
-    padding: var(--spacing-lg);
-    background: var(--bg-lighter);
-    border-radius: var(--radius-lg);
-    text-align: center;
-    transition: all var(--transition-base);
-    border: 2px solid transparent;
-    text-decoration: none;
-    color: var(--text-primary);
-}
-
-.action-card:hover {
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-}
-
-.action-icon {
-    font-size: 2.5rem;
-    display: block;
-    margin-bottom: var(--spacing-sm);
-}
-
-.action-card h3 {
-    margin: 0 0 var(--spacing-xs) 0;
-    font-size: 1rem;
-}
-
-.action-card p {
-    margin: 0;
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-}
-</style>
-
-<nav class="admin-nav">
-    <div class="container">
-        <h2>⚡ Admin Control Panel</h2>
-        <div>
-            <a href="<?php echo SITE_URL; ?>/public/index.php">Public Site</a>
-            <a href="logout.php">Logout</a>
-        </div>
-    </div>
-</nav>
-
-<main class="dashboard-content">
-    <h1>Admin Dashboard</h1>
-    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-xl);">
-        Welcome, <?php echo htmlspecialchars(Auth::getUsername()); ?>! Manage the Mulyasuchi platform.
-    </p>
-    
-    <div class="stats-grid">
-        <div class="stat-card warning">
-            <h3>Pending Validations</h3>
-            <div class="value"><?php echo $pendingCount; ?></div>
-            <p style="color: var(--text-muted); font-size: 0.875rem;">Submissions awaiting review</p>
+<main class="dashboard-layout">
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div>
+                <h1 class="dashboard-title">Admin Dashboard</h1>
+                <p class="dashboard-subtitle">Welcome back, <?php echo htmlspecialchars(Auth::getUsername()); ?></p>
+            </div>
+            <div style="font-size: 0.875rem; color: var(--text-secondary);">
+                <i class="bi bi-calendar3"></i> <?php echo date('l, F j, Y'); ?>
+            </div>
         </div>
         
-        <div class="stat-card">
-            <h3>Total Items</h3>
-            <div class="value"><?php echo $totalItems; ?></div>
-            <p style="color: var(--text-muted); font-size: 0.875rem;">Active items in database</p>
+        <?php if ($pendingCount > 0): ?>
+        <div class="pending-alert">
+            <div class="pending-content">
+                <div class="pending-icon">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+                <div class="pending-text">
+                    You have <strong><?php echo $pendingCount; ?></strong> submission<?php echo $pendingCount != 1 ? 's' : ''; ?> pending validation.
+                </div>
+            </div>
+            <a href="validation_queue.php" class="btn-action-sm">
+                Review Queue <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+        <?php endif; ?>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-hourglass-split"></i>
+                </div>
+                <div class="stat-value"><?php echo $pendingCount; ?></div>
+                <div class="stat-label">Pending Reviews</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-box-seam"></i>
+                </div>
+                <div class="stat-value"><?php echo $totalItems; ?></div>
+                <div class="stat-label">Active Items</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+                <div class="stat-value"><?php echo $totalUsers; ?></div>
+                <div class="stat-label">Contributors</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-activity"></i>
+                </div>
+                <div class="stat-value">100%</div>
+                <div class="stat-label">System Status</div>
+            </div>
         </div>
         
-        <div class="stat-card">
-            <h3>Total Users</h3>
-            <div class="value"><?php echo $totalUsers; ?></div>
-            <p style="color: var(--text-muted); font-size: 0.875rem;">Registered contributors</p>
-        </div>
-        
-        <div class="stat-card">
-            <h3>System Status</h3>
-            <div class="value" style="font-size: 2rem;">✓</div>
-            <p style="color: var(--text-muted); font-size: 0.875rem;">All systems operational</p>
+        <div class="actions-section">
+            <h2 class="section-title">
+                <i class="bi bi-grid-fill" style="color: var(--brand-primary);"></i> Quick Actions
+            </h2>
+            
+            <div class="actions-grid">
+                <a href="validation_queue.php" class="action-card">
+                    <div class="action-card-icon" style="color: var(--brand-primary);">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <h3 class="action-card-title">Validation Queue</h3>
+                    <p class="action-card-desc">Review and approve price submissions</p>
+                </a>
+                
+                <a href="user_management.php" class="action-card">
+                    <div class="action-card-icon" style="color: var(--brand-secondary);">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <h3 class="action-card-title">Manage Users</h3>
+                    <p class="action-card-desc">Create, edit, or remove users</p>
+                </a>
+                
+                <a href="<?php echo SITE_URL; ?>/public/browse.php" class="action-card">
+                    <div class="action-card-icon" style="color: var(--brand-accent);">
+                        <i class="bi bi-collection-fill"></i>
+                    </div>
+                    <h3 class="action-card-title">View Items</h3>
+                    <p class="action-card-desc">Browse all published items</p>
+                </a>
+                
+                <a href="<?php echo SITE_URL; ?>/public/index.php" class="action-card">
+                    <div class="action-card-icon" style="color: var(--text-secondary);">
+                        <i class="bi bi-globe"></i>
+                    </div>
+                    <h3 class="action-card-title">Public Site</h3>
+                    <p class="action-card-desc">View the live website</p>
+                </a>
+                
+                <a href="#" class="action-card">
+                    <div class="action-card-icon" style="color: var(--text-tertiary);">
+                        <i class="bi bi-journal-text"></i>
+                    </div>
+                    <h3 class="action-card-title">System Logs</h3>
+                    <p class="action-card-desc">Audit trail (Coming Soon)</p>
+                </a>
+                
+                <a href="#" class="action-card">
+                    <div class="action-card-icon" style="color: var(--text-tertiary);">
+                        <i class="bi bi-gear-fill"></i>
+                    </div>
+                    <h3 class="action-card-title">Settings</h3>
+                    <p class="action-card-desc">Configuration (Coming Soon)</p>
+                </a>
+            </div>
         </div>
     </div>
-    
-    <div class="quick-actions">
-        <h2>Quick Actions</h2>
-        <div class="action-grid">
-            <a href="validation_queue.php" class="action-card">
-                <div class="action-icon">✓</div>
-                <h3>Validation Queue</h3>
-                <p>Review submissions</p>
-            </a>
-            
-            <a href="user_management.php" class="action-card">
-                <div class="action-icon">👥</div>
-                <h3>Manage Users</h3>
-                <p>Create & edit users</p>
-            </a>
-            
-            <a href="<?php echo SITE_URL; ?>/public/browse.php" class="action-card">
-                <div class="action-icon">📦</div>
-                <h3>View Items</h3>
-                <p>All published items</p>
-            </a>
-            
-            <a href="<?php echo SITE_URL; ?>/public/index.php" class="action-card">
-                <div class="action-icon">🌐</div>
-                <h3>Public Site</h3>
-                <p>View live website</p>
-            </a>
-            
-            <a href="dashboard.php" class="action-card">
-                <div class="action-icon">📊</div>
-                <h3>System Logs</h3>
-                <p>Audit trail (coming soon)</p>
-            </a>
-            
-            <a href="dashboard.php" class="action-card">
-                <div class="action-icon">⚙️</div>
-                <h3>Settings</h3>
-                <p>Configuration (coming soon)</p>
-            </a>
-        </div>
-    </div>
-    
-    <?php if ($pendingCount > 0): ?>
-    <div style="background: #fef3c7; padding: var(--spacing-lg); border-radius: var(--radius-lg); border-left: 4px solid #f59e0b;">
-        <h3 style="margin: 0 0 var(--spacing-xs) 0; color: #92400e;">⚠️ Action Required</h3>
-        <p style="margin: 0; color: #92400e;">
-            You have <strong><?php echo $pendingCount; ?></strong> submission<?php echo $pendingCount != 1 ? 's' : ''; ?> pending validation.
-            <a href="validation_queue.php" style="color: #92400e; text-decoration: underline; margin-left: var(--spacing-sm);">Review Now →</a>
-        </p>
-    </div>
-    <?php endif; ?>
 </main>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
