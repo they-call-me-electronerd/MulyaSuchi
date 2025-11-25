@@ -70,7 +70,14 @@ include __DIR__ . '/../includes/header_professional.php';
                     'grains' => 'bi-flower1',
                     'groceries' => 'bi-cart3',
                     'furniture' => 'bi-lamp',
-                    'sports-fitness' => 'bi-bicycle'
+                    'sports-fitness' => 'bi-bicycle',
+                    'household-items' => 'bi-box-seam',
+                    'electrical-appliances' => 'bi-lightning-charge',
+                    'study-material' => 'bi-book',
+                    'tools-hardware' => 'bi-wrench',
+                    'dairy-products' => 'bi-cup',
+                    'meat-fish' => 'bi-egg',
+                    'spices' => 'bi-flower1'
                 ];
                 
                 $isAdmin = Auth::isLoggedIn() && Auth::hasRole(ROLE_ADMIN);

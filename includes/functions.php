@@ -84,80 +84,88 @@ function uploadImage($file, $oldImagePath = null) {
         }
     }
     
-    // Process and optimize image
-    try {
-        $image = null;
-        switch ($imageInfo[2]) {
-            case IMAGETYPE_JPEG:
-                $image = imagecreatefromjpeg($file['tmp_name']);
-                break;
-            case IMAGETYPE_PNG:
-                $image = imagecreatefrompng($file['tmp_name']);
-                break;
-            case IMAGETYPE_WEBP:
-                $image = imagecreatefromwebp($file['tmp_name']);
-                break;
-            default:
-                return ['success' => false, 'error' => 'Unsupported image format'];
-        }
-        
-        if ($image === false) {
-            return ['success' => false, 'error' => 'Failed to process image'];
-        }
-        
-        // Get original dimensions
-        $origWidth = imagesx($image);
-        $origHeight = imagesy($image);
-        
-        // Resize if too large (max 1200px width)
-        $maxWidth = 1200;
-        if ($origWidth > $maxWidth) {
-            $newWidth = $maxWidth;
-            $newHeight = ($origHeight * $maxWidth) / $origWidth;
-            
-            $resized = imagecreatetruecolor($newWidth, $newHeight);
-            
-            // Preserve transparency for PNG
-            if ($imageInfo[2] === IMAGETYPE_PNG) {
-                imagealphablending($resized, false);
-                imagesavealpha($resized, true);
+    // Process and optimize image (if GD extension is available)
+    if (extension_loaded('gd')) {
+        try {
+            $image = null;
+            switch ($imageInfo[2]) {
+                case IMAGETYPE_JPEG:
+                    $image = imagecreatefromjpeg($file['tmp_name']);
+                    break;
+                case IMAGETYPE_PNG:
+                    $image = imagecreatefrompng($file['tmp_name']);
+                    break;
+                case IMAGETYPE_WEBP:
+                    $image = imagecreatefromwebp($file['tmp_name']);
+                    break;
+                default:
+                    return ['success' => false, 'error' => 'Unsupported image format'];
             }
             
-            imagecopyresampled($resized, $image, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
+            if ($image === false) {
+                return ['success' => false, 'error' => 'Failed to process image'];
+            }
+            
+            // Get original dimensions
+            $origWidth = imagesx($image);
+            $origHeight = imagesy($image);
+        
+            // Resize if too large (max 1200px width)
+            $maxWidth = 1200;
+            if ($origWidth > $maxWidth) {
+                $newWidth = $maxWidth;
+                $newHeight = ($origHeight * $maxWidth) / $origWidth;
+                
+                $resized = imagecreatetruecolor($newWidth, $newHeight);
+                
+                // Preserve transparency for PNG
+                if ($imageInfo[2] === IMAGETYPE_PNG) {
+                    imagealphablending($resized, false);
+                    imagesavealpha($resized, true);
+                }
+                
+                imagecopyresampled($resized, $image, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
+                imagedestroy($image);
+                $image = $resized;
+            }
+            
+            // Save optimized image (strips EXIF data)
+            $saved = false;
+            if ($extension === 'jpg' || $extension === 'jpeg') {
+                $saved = imagejpeg($image, $destination, 85); // 85% quality
+            } elseif ($extension === 'png') {
+                $saved = imagepng($image, $destination, 8); // Compression level 8
+            } elseif ($extension === 'webp') {
+                $saved = imagewebp($image, $destination, 85);
+            }
+            
             imagedestroy($image);
-            $image = $resized;
+            
+            if (!$saved) {
+                return ['success' => false, 'error' => 'Failed to save image'];
+            }
+            
+            // Set file permissions
+            chmod($destination, 0644);
+            
+        } catch (Exception $e) {
+            error_log('Image processing error: ' . $e->getMessage());
+            return ['success' => false, 'error' => 'Image processing failed'];
         }
-        
-        // Save optimized image (strips EXIF data)
-        $saved = false;
-        if ($extension === 'jpg' || $extension === 'jpeg') {
-            $saved = imagejpeg($image, $destination, 85); // 85% quality
-        } elseif ($extension === 'png') {
-            $saved = imagepng($image, $destination, 8); // Compression level 8
-        } elseif ($extension === 'webp') {
-            $saved = imagewebp($image, $destination, 85);
-        }
-        
-        imagedestroy($image);
-        
-        if (!$saved) {
+    } else {
+        // GD not available, just move the file without processing
+        if (!move_uploaded_file($file['tmp_name'], $destination)) {
             return ['success' => false, 'error' => 'Failed to save image'];
         }
-        
-        // Set file permissions
         chmod($destination, 0644);
-        
-        // Delete old image if exists
-        if ($oldImagePath && file_exists(UPLOAD_DIR . $oldImagePath)) {
-            @unlink(UPLOAD_DIR . $oldImagePath);
-        }
-        
-        return ['success' => true, 'filename' => $filename];
-        
-    } catch (Exception $e) {
-        error_log('Image upload error: ' . $e->getMessage());
-        return ['success' => false, 'error' => 'Image processing failed'];
     }
+    
+    // Delete old image if exists
+    if ($oldImagePath && file_exists(UPLOAD_DIR . $oldImagePath)) {
+        @unlink(UPLOAD_DIR . $oldImagePath);
+    }
+    
+    return ['success' => true, 'filename' => $filename];
 }
 
 /**

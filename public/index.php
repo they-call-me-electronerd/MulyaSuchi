@@ -277,9 +277,32 @@ include __DIR__ . '/../includes/header_professional.php';
                     'miscellaneous' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
                     'groceries' => ['from' => '#eab308', 'to' => '#ca8a04', 'bg' => '#fefce8'],
                     'furniture' => ['from' => '#dc2626', 'to' => '#b91c1c', 'bg' => '#fef2f2'],
-                    'sports-fitness' => ['from' => '#14b8a6', 'to' => '#0d9488', 'bg' => '#f0fdfa']
+                    'sports-fitness' => ['from' => '#14b8a6', 'to' => '#0d9488', 'bg' => '#f0fdfa'],
+                    'household-items' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
+                    'tools-hardware' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
+                    'dairy-products' => ['from' => '#60a5fa', 'to' => '#3b82f6', 'bg' => '#eff6ff'],
+                    'meat-fish' => ['from' => '#f87171', 'to' => '#ef4444', 'bg' => '#fef2f2'],
+                    'spices' => ['from' => '#fb923c', 'to' => '#f97316', 'bg' => '#fff7ed']
                 ];
-                $icons = ['vegetables'=>'🥦','fruits'=>'🍎','kitchen-appliances'=>'🍳','study-material'=>'📚','clothing'=>'👕','tools'=>'🔧','electrical-appliances'=>'💡','tech-gadgets'=>'📱','miscellaneous'=>'📦', 'groceries'=>'🛒', 'furniture'=>'🛋️', 'sports-fitness'=>'⚽'];
+                $icons = [
+                    'vegetables'=>'🥦',
+                    'fruits'=>'🍎',
+                    'kitchen-appliances'=>'🍳',
+                    'study-material'=>'📚',
+                    'clothing'=>'👕',
+                    'tools'=>'🔧',
+                    'electrical-appliances'=>'💡',
+                    'tech-gadgets'=>'📱',
+                    'miscellaneous'=>'📦', 
+                    'groceries'=>'🛒', 
+                    'furniture'=>'🛋️', 
+                    'sports-fitness'=>'⚽', 
+                    'household-items'=>'📦', 
+                    'tools-hardware'=>'🔧',
+                    'dairy-products'=>'🥛',
+                    'meat-fish'=>'🐟',
+                    'spices'=>'🌶️'
+                ];
                 foreach ($categories as $category): 
                     $slug = $category['slug'];
                     $colors = $categoryColors[$slug] ?? ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'];

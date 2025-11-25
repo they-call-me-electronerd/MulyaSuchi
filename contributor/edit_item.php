@@ -370,8 +370,20 @@ include __DIR__ . '/../includes/header_professional.php';
                             id="item_image" 
                             name="item_image" 
                             class="form-input"
-                            accept="image/jpeg,image/png,image/jpg,image/webp">
+                            accept="image/jpeg,image/png,image/jpg,image/webp"
+                            onchange="previewNewImage(this)">
                         <small class="form-help">Accepted formats: JPG, PNG, WEBP. Max size: 5MB. Leave empty to keep current image.</small>
+                        
+                        <!-- New Image Preview -->
+                        <div id="new-image-preview" style="margin-top: 1rem; display: none;">
+                            <label class="form-label" style="margin-bottom: 0.5rem;">
+                                <i class="bi bi-eye"></i> New Image Preview
+                            </label>
+                            <img id="new-preview-img" src="" alt="New Preview" style="max-width: 200px; max-height: 200px; border-radius: 12px; border: 2px solid var(--brand-primary); object-fit: cover; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);">
+                            <button type="button" onclick="clearNewImage()" style="display: block; margin-top: 0.5rem; padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.875rem; font-weight: 600;">
+                                <i class="bi bi-x-circle"></i> Remove New Image
+                            </button>
+                        </div>
                     </div>
 
                 </div>
@@ -526,5 +538,30 @@ include __DIR__ . '/../includes/header_professional.php';
     }
 }
 </style>
+
+<script>
+function previewNewImage(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            const previewContainer = document.getElementById('new-image-preview');
+            const previewImg = document.getElementById('new-preview-img');
+            
+            previewImg.src = e.target.result;
+            previewContainer.style.display = 'block';
+        };
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function clearNewImage() {
+    const input = document.getElementById('item_image');
+    input.value = '';
+    document.getElementById('new-image-preview').style.display = 'none';
+    document.getElementById('new-preview-img').src = '';
+}
+</script>
 
 <?php include __DIR__ . '/../includes/footer_professional.php'; ?>

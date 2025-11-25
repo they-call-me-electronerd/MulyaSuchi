@@ -47,12 +47,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Handle image upload
             $imagePath = null;
             if (isset($_FILES['item_image']) && $_FILES['item_image']['error'] === UPLOAD_ERR_OK) {
-                $uploadResult = uploadImage($_FILES['item_image'], UPLOAD_DIR);
+                $uploadResult = uploadImage($_FILES['item_image']);
                 if ($uploadResult['success']) {
                     $imagePath = $uploadResult['filename'];
+                    // Log successful upload
+                    error_log("Image uploaded successfully: " . $imagePath);
+                    error_log("Full path: " . UPLOAD_DIR . $imagePath);
+                    error_log("File exists: " . (file_exists(UPLOAD_DIR . $imagePath) ? 'YES' : 'NO'));
                 } else {
                     $error = $uploadResult['error'];
+                    error_log("Image upload failed: " . $uploadResult['error']);
                 }
+            } elseif (isset($_FILES['item_image'])) {
+                error_log("File upload error code: " . $_FILES['item_image']['error']);
             }
             
             if (!$error) {
@@ -334,12 +341,27 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 
                 <div class="form-group form-group-full">
                     <label for="item_image">Item Image (Optional)</label>
-                    <div class="file-upload-box">
+                    <div class="file-upload-box" id="upload-box">
                         <input type="file" id="item_image" name="item_image" accept="image/*" 
-                               style="display: none;" onchange="updateFileName(this)">
+                               style="display: none;" onchange="previewImage(this)">
                         <label for="item_image" style="cursor: pointer; margin: 0;">
-                            <div id="file-name">📁 Click to upload image (Max 5MB)</div>
+                            <div id="file-name" style="font-weight: 600; color: var(--text-primary);">
+                                <i class="bi bi-cloud-upload" style="font-size: 2rem; display: block; margin-bottom: 0.5rem; color: var(--brand-primary);"></i>
+                                Click to upload image (Max 5MB)
+                            </div>
                         </label>
+                    </div>
+                    <div id="image-preview" style="margin-top: 1rem; display: none; text-align: center;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">
+                            <i class="bi bi-eye"></i> Image Preview
+                        </p>
+                        <div style="display: inline-block; position: relative;">
+                            <img id="preview-img" src="" alt="Preview" style="max-width: 300px; max-height: 300px; border-radius: 12px; border: 3px solid var(--brand-primary); object-fit: contain; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); background: white; padding: 4px;">
+                            <button type="button" onclick="clearImage()" style="position: absolute; top: -10px; right: -10px; width: 36px; height: 36px; padding: 0; background: #ef4444; color: white; border: 3px solid white; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                        <p id="file-info" style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);"></p>
                     </div>
                 </div>
             </div>
@@ -354,9 +376,59 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 </main>
 
 <script>
-function updateFileName(input) {
-    const fileName = input.files[0]?.name || 'Click to upload image';
-    document.getElementById('file-name').textContent = '📁 ' + fileName;
+function previewImage(input) {
+    const fileNameDisplay = document.getElementById('file-name');
+    const uploadBox = document.getElementById('upload-box');
+    const previewContainer = document.getElementById('image-preview');
+    const previewImg = document.getElementById('preview-img');
+    const fileInfo = document.getElementById('file-info');
+    
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        
+        // Update filename display
+        fileNameDisplay.innerHTML = `<i class="bi bi-check-circle" style="font-size: 2rem; display: block; margin-bottom: 0.5rem; color: #10b981;"></i>Image selected: ${file.name}`;
+        uploadBox.style.borderColor = '#10b981';
+        uploadBox.style.background = 'linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, var(--bg-secondary) 100%)';
+        
+        // Show file info
+        const fileSizeKB = (file.size / 1024).toFixed(2);
+        const fileSizeMB = (file.size / 1048576).toFixed(2);
+        const sizeText = file.size > 1048576 ? `${fileSizeMB} MB` : `${fileSizeKB} KB`;
+        fileInfo.textContent = `File: ${file.name} | Size: ${sizeText} | Type: ${file.type}`;
+        
+        // Check file size
+        if (file.size > 5 * 1024 * 1024) {
+            alert('File size exceeds 5MB limit!');
+            clearImage();
+            return;
+        }
+        
+        // Show preview
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            previewContainer.style.display = 'block';
+        };
+        
+        reader.readAsDataURL(file);
+    }
+}
+
+function clearImage() {
+    const input = document.getElementById('item_image');
+    const fileNameDisplay = document.getElementById('file-name');
+    const uploadBox = document.getElementById('upload-box');
+    const previewContainer = document.getElementById('image-preview');
+    const previewImg = document.getElementById('preview-img');
+    
+    input.value = '';
+    fileNameDisplay.innerHTML = '<i class="bi bi-cloud-upload" style="font-size: 2rem; display: block; margin-bottom: 0.5rem; color: var(--brand-primary);"></i>Click to upload image (Max 5MB)';
+    uploadBox.style.borderColor = '';
+    uploadBox.style.background = '';
+    previewContainer.style.display = 'none';
+    previewImg.src = '';
 }
 </script>
 
