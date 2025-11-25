@@ -32,7 +32,7 @@ function setSecurityHeaders() {
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
         "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:",
         "img-src 'self' data: https: blob:",
-        "connect-src 'self'",
+        "connect-src 'self' https://cdn.jsdelivr.net",
         "frame-ancestors 'none'",
         "base-uri 'self'",
         "form-action 'self'"

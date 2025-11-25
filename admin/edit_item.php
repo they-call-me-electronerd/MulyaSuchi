@@ -485,10 +485,29 @@ include __DIR__ . '/../includes/header_professional.php';
 
 <script>
 function previewNewImage(input) {
+    console.log('previewNewImage called', input);
     if (input.files && input.files[0]) {
+        const file = input.files[0];
+        console.log('File selected:', file.name, file.size, file.type);
+        
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+            alert('Please select an image file!');
+            clearNewImage();
+            return;
+        }
+        
+        // Check file size (5MB limit)
+        if (file.size > 5 * 1024 * 1024) {
+            alert('File size exceeds 5MB limit!');
+            clearNewImage();
+            return;
+        }
+        
         const reader = new FileReader();
         
         reader.onload = function(e) {
+            console.log('FileReader onload triggered');
             const previewContainer = document.getElementById('new-image-preview');
             const previewImg = document.getElementById('new-preview-img');
             
@@ -496,7 +515,15 @@ function previewNewImage(input) {
             previewContainer.style.display = 'block';
         };
         
-        reader.readAsDataURL(input.files[0]);
+        reader.onerror = function(e) {
+            console.error('FileReader error:', e);
+            alert('Error reading file. Please try again.');
+        };
+        
+        reader.readAsDataURL(file);
+        console.log('FileReader.readAsDataURL called');
+    } else {
+        console.log('No file selected');
     }
 }
 
