@@ -39,7 +39,8 @@
             return path.substring(0, path.lastIndexOf('/public/') + 8);
         }
         // Otherwise, assume the current directory
-        return path.substring(0, path.lastIndexOf('/') + 1);
+        const currentDir = path.substring(0, path.lastIndexOf('/') + 1);
+        return currentDir;
     }
     
     const AJAX_BASE_PATH = getAjaxBasePath();
@@ -197,6 +198,15 @@
             currentPage = 1;
             fetchAndRenderProducts();
         });
+        
+        // Prevent header search form submission
+        const headerSearchForm = document.getElementById('headerSearchForm');
+        if (headerSearchForm) {
+            headerSearchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Search is already handled by input event
+            });
+        }
     }
     
     /**

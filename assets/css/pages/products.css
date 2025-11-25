@@ -1721,3 +1721,84 @@ h6 {
     background: rgba(249, 115, 22, 0.15);
     border-color: #f97316;
 }
+
+/* Additional Mobile Touch Enhancements */
+@media (max-width: 768px) {
+    /* Increase touch target sizes for mobile */
+    .filter-input,
+    .filter-select,
+    .btn-apply,
+    .btn-reset,
+    .btn-view {
+        min-height: 44px;
+        -webkit-tap-highlight-color: rgba(249, 115, 22, 0.1);
+    }
+    
+    /* Prevent zoom on input focus on iOS */
+    .filter-input,
+    .filter-select,
+    .header-search-input {
+        font-size: 16px;
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Better spacing for mobile cards */
+    .product-card {
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Optimize product images for mobile */
+    .product-image {
+        will-change: transform;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Fix for iOS Safari bottom bar */
+@supports (-webkit-touch-callout: none) {
+    .filter-sidebar.active {
+        height: -webkit-fill-available;
+    }
+}
+
+/* Improve scrolling performance */
+.filter-sidebar,
+.products-grid,
+.product-card {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Better focus states for accessibility */
+.filter-input:focus,
+.filter-select:focus,
+.btn-apply:focus,
+.btn-reset:focus,
+.btn-view:focus,
+.header-search-input:focus {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+}
+
+/* Skip focus outline on mouse users */
+.filter-input:focus:not(:focus-visible),
+.filter-select:focus:not(:focus-visible),
+.btn-apply:focus:not(:focus-visible),
+.btn-reset:focus:not(:focus-visible),
+.btn-view:focus:not(:focus-visible),
+.header-search-input:focus:not(:focus-visible) {
+    outline: none;
+}

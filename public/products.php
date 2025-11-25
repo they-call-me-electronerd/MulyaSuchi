@@ -79,7 +79,7 @@ include __DIR__ . '/../includes/header_professional.php';
         <div class="products-layout">
             <!-- Filter Sidebar -->
             <aside class="filter-sidebar">
-                <form method="GET" action="" id="filterForm">
+                <form id="filterForm">
                     <div class="filter-header">
                         <svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -101,6 +101,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                 placeholder="Search products..." 
                                 value="<?php echo htmlspecialchars($searchQuery); ?>"
                                 class="filter-input"
+                                autocomplete="off"
                             >
                         </div>
                     </div>
@@ -185,7 +186,7 @@ include __DIR__ . '/../includes/header_professional.php';
 
                     <!-- Header Search Bar -->
                     <div class="header-search-container">
-                        <form action="products.php" method="GET" class="header-search-form">
+                        <form class="header-search-form" id="headerSearchForm">
                             <div class="header-search-wrapper">
                                 <i class="bi bi-search search-icon"></i>
                                 <input type="text" name="search" class="header-search-input" placeholder="Search products..." value="<?php echo htmlspecialchars($searchQuery ?? ''); ?>" autocomplete="off">
@@ -195,9 +196,6 @@ include __DIR__ . '/../includes/header_professional.php';
                                     </a>
                                 <?php endif; ?>
                             </div>
-                            <!-- Preserve other filters -->
-                            <?php if ($categoryInput): ?><input type="hidden" name="category" value="<?php echo htmlspecialchars($categoryInput); ?>"><?php endif; ?>
-                            <?php if ($sortBy): ?><input type="hidden" name="sort" value="<?php echo htmlspecialchars($sortBy); ?>"><?php endif; ?>
                         </form>
                     </div>
 
@@ -364,7 +362,6 @@ include __DIR__ . '/../includes/header_professional.php';
     </section>
 
 <?php include __DIR__ . '/../includes/footer_professional.php'; ?>
-<!-- Temporarily disabled AJAX - using normal form submission for now -->
-<!-- <script src="<?php echo SITE_URL; ?>/assets/js/products.js"></script> -->
+<script src="<?php echo SITE_URL; ?>/assets/js/products.js"></script>
 </body>
 </html>

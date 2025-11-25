@@ -303,8 +303,11 @@ class Item {
             
             // Search by item name
             if (!empty($filters['search'])) {
-                $sql .= " AND (i.item_name LIKE :search OR i.item_name_nepali LIKE :search OR i.description LIKE :search)";
-                $params[':search'] = '%' . $filters['search'] . '%';
+                $sql .= " AND (i.item_name LIKE :search1 OR i.item_name_nepali LIKE :search2 OR i.description LIKE :search3)";
+                $searchTerm = '%' . $filters['search'] . '%';
+                $params[':search1'] = $searchTerm;
+                $params[':search2'] = $searchTerm;
+                $params[':search3'] = $searchTerm;
             }
             
             // Filter by category
@@ -350,10 +353,14 @@ class Item {
             }
             
             // Pagination
+            $limit = null;
+            $offset = null;
             if (isset($filters['limit'])) {
-                $sql .= " LIMIT :limit";
+                $limit = (int)$filters['limit'];
+                $sql .= " LIMIT " . $limit;
                 if (isset($filters['offset'])) {
-                    $sql .= " OFFSET :offset";
+                    $offset = (int)$filters['offset'];
+                    $sql .= " OFFSET " . $offset;
                 }
             }
             
@@ -365,14 +372,6 @@ class Item {
                     $stmt->bindValue($key, $value, PDO::PARAM_INT);
                 } else {
                     $stmt->bindValue($key, $value, PDO::PARAM_STR);
-                }
-            }
-            
-            // Bind limit and offset separately
-            if (isset($filters['limit'])) {
-                $stmt->bindValue(':limit', (int)$filters['limit'], PDO::PARAM_INT);
-                if (isset($filters['offset'])) {
-                    $stmt->bindValue(':offset', (int)$filters['offset'], PDO::PARAM_INT);
                 }
             }
             
@@ -402,8 +401,11 @@ class Item {
             
             // Search by item name
             if (!empty($filters['search'])) {
-                $sql .= " AND (i.item_name LIKE :search OR i.item_name_nepali LIKE :search OR i.description LIKE :search)";
-                $params[':search'] = '%' . $filters['search'] . '%';
+                $sql .= " AND (i.item_name LIKE :search1 OR i.item_name_nepali LIKE :search2 OR i.description LIKE :search3)";
+                $searchTerm = '%' . $filters['search'] . '%';
+                $params[':search1'] = $searchTerm;
+                $params[':search2'] = $searchTerm;
+                $params[':search3'] = $searchTerm;
             }
             
             // Filter by category
