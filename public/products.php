@@ -182,6 +182,25 @@ include __DIR__ . '/../includes/header_professional.php';
                         <span class="count"><?php echo $totalItems; ?></span> 
                         <?php echo $totalItems === 1 ? 'product' : 'products'; ?> found
                     </div>
+
+                    <!-- Header Search Bar -->
+                    <div class="header-search-container">
+                        <form action="products.php" method="GET" class="header-search-form">
+                            <div class="header-search-wrapper">
+                                <i class="bi bi-search search-icon"></i>
+                                <input type="text" name="search" class="header-search-input" placeholder="Search products..." value="<?php echo htmlspecialchars($searchQuery ?? ''); ?>" autocomplete="off">
+                                <?php if (!empty($searchQuery)): ?>
+                                    <a href="products.php" class="search-clear" title="Clear search">
+                                        <i class="bi bi-x"></i>
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                            <!-- Preserve other filters -->
+                            <?php if ($categoryInput): ?><input type="hidden" name="category" value="<?php echo htmlspecialchars($categoryInput); ?>"><?php endif; ?>
+                            <?php if ($sortBy): ?><input type="hidden" name="sort" value="<?php echo htmlspecialchars($sortBy); ?>"><?php endif; ?>
+                        </form>
+                    </div>
+
                     <div class="view-toggle">
                         <button class="view-btn active" data-view="grid" title="Grid View">
                             <i class="bi bi-grid-3x3-gap-fill"></i>
@@ -209,8 +228,12 @@ include __DIR__ . '/../includes/header_professional.php';
                             $status = $item['status'] ?? 'active';
                             $statusClass = $status === 'active' ? 'status-active' : 'status-inactive';
                             $statusLabel = $status === 'active' ? 'Available' : 'Out of Stock';
+                            
+                            // Get category slug for icon styling
+                            $categorySlug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', $item['category_name'] ?? 'general'));
+                            $categoryClass = 'category-' . trim($categorySlug, '-');
                         ?>
-                            <div class="product-card" style="animation-delay: <?php echo $delay; ?>s;">
+                            <div class="product-card <?php echo $categoryClass; ?>" style="animation-delay: <?php echo $delay; ?>s;">
                                 <div class="product-image">
                                     <span class="product-badge <?php echo $statusClass; ?>"><?php echo $statusLabel; ?></span>
                                     <?php if ($item['image_path'] && file_exists(__DIR__ . '/../assets/uploads/items/' . $item['image_path'])): ?>
@@ -218,7 +241,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                              alt="<?php echo htmlspecialchars($item['item_name']); ?>"
                                              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                                     <?php else: ?>
-                                        <div style="font-size: 4rem;">🛍️</div>
+                                        <div class="product-image-placeholder"></div>
                                     <?php endif; ?>
                                 </div>
 
@@ -227,7 +250,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                         <?php echo htmlspecialchars($item['category_name']); ?>
                                     </span>
                                     
-                                    <h3 class="product-name">
+                                    <h3 class="product-name" style="color: #000000;">
                                         <?php echo htmlspecialchars($item['item_name']); ?>
                                     </h3>
                                     
@@ -250,7 +273,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                         <?php endif; ?>
                                     </div>
 
-                                    <div class="product-price">
+                                    <div class="product-price" style="color: #000000;">
                                         NPR <?php echo number_format($item['current_price'], 2); ?>
                                     </div>
 
