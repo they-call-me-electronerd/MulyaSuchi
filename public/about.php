@@ -36,7 +36,10 @@ include __DIR__ . '/../includes/header_professional.php';
                 <div class="badge-tag">ABOUT SASTOMAHANGO</div>
                 <h1 class="hero-title">Bringing <span class="highlight">Transparency</span> to Nepal's Marketplace</h1>
                 <p class="hero-subtitle">
-                    SastoMahango (सस्तोमहँगो) is Nepal's first comprehensive price tracking platform that empowers consumers with real-time market information.
+                    SastoMahango (सस्तो महँगो) - translating to "Cheap or Expensive?" - is Nepal's first comprehensive marketplace intelligence and service platform. We answer the fundamental question every consumer asks: "Am I paying the right price?"
+                </p>
+                <p class="hero-subtitle" style="margin-top: 1rem;">
+                    Through our community-driven ecosystem, we bridge the gap between consumers, service providers, and market data, bringing unprecedented transparency to Nepal's marketplace.
                 </p>
                 <div class="hero-stats">
                     <div class="stat">
@@ -76,7 +79,7 @@ include __DIR__ . '/../includes/header_professional.php';
                         <i class="bi bi-bullseye"></i>
                     </div>
                     <h2>Our Mission</h2>
-                    <p>To empower every Nepali consumer with accurate, real-time price information, enabling informed purchasing decisions and promoting market transparency across the nation.</p>
+                    <p>To empower every Nepali consumer with accurate, real-time price information and service rates, enabling informed purchasing decisions and protecting them from price exploitation. We're solving the market's information asymmetry - where consumers lack access to current prices, cannot compare across markets without physical visits, and don't know standard service rates for repairs and professional services.</p>
                 </div>
             </div>
             <div class="col-md-6">
@@ -85,7 +88,86 @@ include __DIR__ . '/../includes/header_professional.php';
                         <i class="bi bi-eye"></i>
                     </div>
                     <h2>Our Vision</h2>
-                    <p>To become the most trusted source of market price information in Nepal, creating a fair and transparent marketplace where both consumers and sellers thrive.</p>
+                    <p>To become Nepal's most trusted marketplace intelligence platform, tracking 500+ items across 50+ markets and providing standard rates for 100+ services (plumbing, electrical, carpentry, repairs). We envision a fair marketplace where consumers can confidently answer: "Is this price fair?" and "What's the standard rate for this service?"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Problem & Solution -->
+<section class="mission-section" style="background: #f9fafb;">
+    <div class="container">
+        <div class="section-header text-center">
+            <div class="badge-tag">THE CHALLENGE</div>
+            <h2>Solving Nepal's Market Information Gap</h2>
+        </div>
+        <div class="row g-4 mt-4">
+            <div class="col-md-6">
+                <div class="mission-card" style="border-left: 4px solid #ef4444;">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+                    <h3>The Problem</h3>
+                    <ul style="text-align: left; margin-top: 1rem; color: #6b7280; line-height: 1.8;">
+                        <li><strong>Price Blindness:</strong> Consumers lack access to current market prices, relying solely on vendor claims</li>
+                        <li><strong>No Comparison Tools:</strong> Comparing prices requires time-consuming physical visits to multiple markets (Kalimati, Asan, New Road)</li>
+                        <li><strong>Missing Historical Context:</strong> No way to know if prices are seasonally high or low</li>
+                        <li><strong>Unknown Service Rates:</strong> Consumers don't know standard rates for services (plumbing, electrical, repairs), making them vulnerable to exploitation</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mission-card" style="border-left: 4px solid #22c55e;">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                        <i class="bi bi-lightbulb"></i>
+                    </div>
+                    <h3>Our Solution</h3>
+                    <ul style="text-align: left; margin-top: 1rem; color: #6b7280; line-height: 1.8;">
+                        <li><strong>Real-time Price Intelligence:</strong> Tracking 500+ items across 50+ markets with daily updates</li>
+                        <li><strong>Service Rate Information:</strong> Standard rates for 100+ services so consumers know fair pricing</li>
+                        <li><strong>Community-Driven Data:</strong> Network of registered agents updating prices and service rates on the ground</li>
+                        <li><strong>Historical Trends:</strong> Track price changes over time to make smart purchasing decisions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Target Audience -->
+<section class="mission-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <div class="badge-tag">WHO WE SERVE</div>
+            <h2>Built for Everyone in Nepal's Marketplace</h2>
+        </div>
+        <div class="row g-4 mt-4">
+            <div class="col-md-4">
+                <div class="mission-card text-center">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, #22c55e, #16a34a); margin: 0 auto 1.5rem;">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <h3>Everyday Consumers</h3>
+                    <p>Individuals looking to buy products or hire services at fair prices without getting scammed. Get instant answers to "Am I paying the right price?"</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mission-card text-center">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, #10b981, #059669); margin: 0 auto 1.5rem;">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <h3>Registered Agents</h3>
+                    <p>Market explorers who gather data and update prices and service rates, earning experience points and building their reputation in the community.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mission-card text-center">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, #14b8a6, #0d9488); margin: 0 auto 1.5rem;">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <h3>Businesses</h3>
+                    <p>Companies looking for advertising opportunities through banner placements and sponsored listings to reach engaged consumers actively searching for products.</p>
                 </div>
             </div>
         </div>
@@ -93,7 +175,7 @@ include __DIR__ . '/../includes/header_professional.php';
 </section>
 
 <!-- How It Works -->
-<section class="how-it-works">
+<section class="how-it-works" style="background: #f9fafb;">
     <div class="container">
         <div class="section-header text-center">
             <div class="badge-tag">HOW IT WORKS</div>
@@ -175,19 +257,68 @@ include __DIR__ . '/../includes/header_professional.php';
     </div>
 </section>
 
+<!-- Sustainability Model -->
+<section class="mission-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <div class="badge-tag">SUSTAINABILITY</div>
+            <h2>Building a Sustainable Platform</h2>
+            <p>We're committed to long-term service through multiple revenue streams</p>
+        </div>
+        <div class="row g-4 mt-4">
+            <div class="col-md-6">
+                <div class="mission-card" style="height: 100%;">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                        <i class="bi bi-megaphone"></i>
+                    </div>
+                    <h3>Business Partnerships</h3>
+                    <p style="margin-bottom: 1rem;">We partner with businesses to provide value to both companies and consumers:</p>
+                    <ul style="text-align: left; color: #6b7280; line-height: 1.8;">
+                        <li><strong>Sponsored Listings:</strong> Featured placement in hero sections with "Sponsored" tags appearing above normal search results</li>
+                        <li><strong>Banner Advertisements:</strong> Strategic placements for local businesses to reach targeted audiences</li>
+                        <li><strong>SEO-Driven Traffic:</strong> High-volume search terms (e.g., "gold price Nepal", "laptop repair Kathmandu") attract organic traffic, monetized via Google AdSense</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">Businesses interested in sponsorship can contact our admin team to negotiate custom contracts tailored to their needs.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mission-card" style="height: 100%;">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <i class="bi bi-heart-fill"></i>
+                    </div>
+                    <h3>Community Support</h3>
+                    <p style="margin-bottom: 1rem;">Our platform thrives on community participation:</p>
+                    <ul style="text-align: left; color: #6b7280; line-height: 1.8;">
+                        <li><strong>User Donations:</strong> Voluntary contributions from satisfied users who value the service</li>
+                        <li><strong>Contributor Network:</strong> Registered agents provide on-ground data collection, ensuring fresh and accurate information</li>
+                        <li><strong>Open Platform:</strong> Always free for consumers - no paywalls, no subscriptions</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">Your support, whether through contributions or donations, helps us maintain and expand this essential service for all Nepalis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Join Us CTA -->
 <section class="cta-section">
     <div class="container">
         <div class="cta-card">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6">
                     <h2>Become a Contributor</h2>
-                    <p>Help us build a transparent marketplace for Nepal. Join our network of verified contributors today.</p>
-                </div>
-                <div class="col-lg-4 text-end">
+                    <p>Help us build a transparent marketplace for Nepal. Join our network of verified contributors and earn reputation points.</p>
                     <a href="<?php echo SITE_URL; ?>/contributor/register.php" class="btn-cta">
-                        Join Now
+                        Join as Contributor
                         <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Support Our Mission</h2>
+                    <p>Love what we do? Help us maintain and expand this free service for all Nepalis through your voluntary support.</p>
+                    <a href="#" class="btn-cta" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        Support Us
+                        <i class="bi bi-heart-fill ms-2"></i>
                     </a>
                 </div>
             </div>

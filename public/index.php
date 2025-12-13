@@ -304,34 +304,38 @@ include __DIR__ . '/../includes/header_professional.php';
     </style>
 
     <!-- Categories Section -->
-    <section class="scroll-reveal section-padding categories-section" aria-label="Product Categories" style="position: relative; padding: 6rem 0;">
-        <!-- Decorative Elements -->
-        <div class="categories-decorative" style="position: absolute; top: 0; left: 0; right: 0; height: 200px; pointer-events: none;"></div>
+    <section class="scroll-reveal section-padding categories-section" aria-label="Product Categories" style="position: relative; padding: 6rem 0; background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 50%, #f0fdf4 100%); overflow: hidden;">
+        <!-- Decorative Background Pattern -->
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.4; z-index: 1; pointer-events: none;">
+            <div style="position: absolute; top: 10%; left: 5%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%); border-radius: 50%; filter: blur(60px);"></div>
+            <div style="position: absolute; top: 50%; right: 10%; width: 250px; height: 250px; background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%); border-radius: 50%; filter: blur(60px);"></div>
+            <div style="position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%); border-radius: 50%; filter: blur(80px);"></div>
+        </div>
         
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
-                <div class="categories-badge" style="display: inline-block; padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem; backdrop-filter: blur(10px);">
+                <div class="categories-badge" style="display: inline-block; background: rgba(255, 255, 255, 0.9); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem; backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1);">
                     <span style="background: linear-gradient(135deg, #22c55e, #16a34a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem; letter-spacing: 0.05em;">EXPLORE CATEGORIES</span>
                 </div>
-                <h2 class="categories-title" style="font-size: 2.75rem; font-weight: 800; margin-bottom: 1rem; font-family: 'Manrope', sans-serif;">Browse by Category</h2>
-                <p class="categories-subtitle" style="font-size: 1.125rem; max-width: 700px; margin: 0 auto; line-height: 1.7;">Find verified prices for thousands of products across different categories</p>
+                <h2 class="categories-title" style="font-size: 2.75rem; font-weight: 800; margin-bottom: 1rem; font-family: 'Manrope', sans-serif; color: #111827;">Browse by Category</h2>
+                <p class="categories-subtitle" style="font-size: 1.125rem; max-width: 700px; margin: 0 auto; line-height: 1.7; color: #374151;">Find verified prices for thousands of products across different categories</p>
             </div>
 
             <div class="row g-4">
                 <?php 
                 $categoryColors = [
-                    'vegetables' => ['from' => '#10b981', 'to' => '#059669', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => '#dcfce7'],
-                    'fruits' => ['from' => '#ef4444', 'to' => '#dc2626', 'bg' => 'rgba(254, 226, 226, 0.5)', 'light' => '#fee2e2'],
-                    'groceries' => ['from' => '#eab308', 'to' => '#ca8a04', 'bg' => 'rgba(254, 249, 195, 0.5)', 'light' => '#fef9c3'],
-                    'dairy-products' => ['from' => '#60a5fa', 'to' => '#3b82f6', 'bg' => 'rgba(219, 234, 254, 0.5)', 'light' => '#dbeafe'],
-                    'meat-fish' => ['from' => '#f87171', 'to' => '#ef4444', 'bg' => 'rgba(254, 226, 226, 0.5)', 'light' => '#fee2e2'],
-                    'spices' => ['from' => '#fb923c', 'to' => '#f97316', 'bg' => 'rgba(255, 237, 213, 0.5)', 'light' => '#ffedd5'],
-                    'kitchen-appliances' => ['from' => '#f59e0b', 'to' => '#d97706', 'bg' => 'rgba(254, 243, 199, 0.5)', 'light' => '#fef3c7'],
-                    'household-items' => ['from' => '#fb923c', 'to' => '#f97316', 'bg' => 'rgba(255, 237, 213, 0.5)', 'light' => '#ffedd5'],
-                    'electrical-appliances' => ['from' => '#8b5cf6', 'to' => '#7c3aed', 'bg' => 'rgba(237, 233, 254, 0.5)', 'light' => '#ede9fe'],
-                    'clothing' => ['from' => '#ec4899', 'to' => '#db2777', 'bg' => 'rgba(252, 231, 243, 0.5)', 'light' => '#fce7f3'],
-                    'study-material' => ['from' => '#3b82f6', 'to' => '#2563eb', 'bg' => 'rgba(219, 234, 254, 0.5)', 'light' => '#dbeafe'],
-                    'tools-hardware' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => 'rgba(255, 237, 213, 0.5)', 'light' => '#ffedd5']
+                    'vegetables' => ['from' => '#22c55e', 'to' => '#16a34a', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)'],
+                    'fruits' => ['from' => '#34d399', 'to' => '#10b981', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)'],
+                    'groceries' => ['from' => '#4ade80', 'to' => '#22c55e', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)'],
+                    'dairy-products' => ['from' => '#14b8a6', 'to' => '#0d9488', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)'],
+                    'meat-fish' => ['from' => '#10b981', 'to' => '#059669', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)'],
+                    'spices' => ['from' => '#84cc16', 'to' => '#65a30d', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)'],
+                    'kitchen-appliances' => ['from' => '#22c55e', 'to' => '#16a34a', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)'],
+                    'household-items' => ['from' => '#34d399', 'to' => '#10b981', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)'],
+                    'electrical-appliances' => ['from' => '#14b8a6', 'to' => '#0d9488', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)'],
+                    'clothing' => ['from' => '#10b981', 'to' => '#059669', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)'],
+                    'study-material' => ['from' => '#4ade80', 'to' => '#22c55e', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)'],
+                    'tools-hardware' => ['from' => '#84cc16', 'to' => '#65a30d', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => 'rgba(255, 255, 255, 0.95)']
                 ];
                 $icons = [
                     'vegetables' => '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10"/><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1"/></svg>',
@@ -356,46 +360,48 @@ include __DIR__ . '/../includes/header_professional.php';
                         <div class="modern-category-card" data-category="<?php echo $slug; ?>" style="
                             background: <?php echo $colors['light']; ?>;
                             backdrop-filter: blur(20px);
-                            border-radius: 24px;
+                            border-radius: 20px;
                             padding: 2rem 1.5rem;
                             text-align: left;
                             position: relative;
                             overflow: hidden;
-                            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
                             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                             cursor: pointer;
                             height: 320px;
                             display: flex;
                             flex-direction: column;
                             justify-content: space-between;
-                            border: 1px solid rgba(255, 255, 255, 0.8);
+                            border: 1px solid rgba(34, 197, 94, 0.1);
                         " 
-                        onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';"
-                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';">
+                        onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 24px rgba(34, 197, 94, 0.15), 0 4px 8px rgba(0, 0, 0, 0.05)'; this.style.borderColor='rgba(34, 197, 94, 0.2)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(34, 197, 94, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05)'; this.style.borderColor='rgba(34, 197, 94, 0.1)';">
                             
-                            <!-- Gradient Orb -->
-                            <div class="card-orb" style="position: absolute; top: -20%; right: -20%; width: 120px; height: 120px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); opacity: 0.1; border-radius: 50%; filter: blur(30px);"></div>
+                            <!-- Subtle Gradient Accent -->
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); opacity: 0.6;"></div>
                             
                             <div>
                                 <!-- Icon -->
-                                <div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;">
-                                    <?php echo $icons[$slug] ?? '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 16h6"/><path d="M16 20h6"/><path d="M6 20h.01"/><path d="M10 20h.01"/><rect width="16" height="16" x="2" y="4" rx="2"/></svg>'; ?>
+                                <div style="position: relative; z-index: 2; width: 72px; height: 72px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);">
+                                    <?php echo $icons[$slug] ?? '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 16h6"/><path d="M16 20h6"/><path d="M6 20h.01"/><path d="M10 20h.01"/><rect width="16" height="16" x="2" y="4" rx="2"/></svg>'; ?>
                                 </div>
                                 
                                 <!-- Title -->
-                                <h3 class="card-title" style="position: relative; z-index: 2; font-size: 1.075rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.3; height: 2.6rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><?php echo htmlspecialchars($category['category_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                <h3 class="card-title" style="position: relative; z-index: 2; font-size: 1.075rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.3; height: 2.6rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: #111827;"><?php echo htmlspecialchars($category['category_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
                                 
                                 <!-- Description -->
-                                <p class="card-description" style="position: relative; z-index: 2; font-size: 0.8rem; margin-bottom: 1rem; line-height: 1.5; height: 2.4rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><?php echo htmlspecialchars($category['description'], ENT_QUOTES, 'UTF-8'); ?></p>
+                                <p class="card-description" style="position: relative; z-index: 2; font-size: 0.8rem; margin-bottom: 1rem; line-height: 1.5; height: 2.4rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: #6b7280;"><?php echo htmlspecialchars($category['description'], ENT_QUOTES, 'UTF-8'); ?></p>
                             </div>
                             
                             <!-- Footer -->
                             <div style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;">
-                                <div class="card-badge" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 100px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
-                                    <div style="width: 6px; height: 6px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 50%;"></div>
-                                    <span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><?php echo $category['item_count'] > 0 ? $category['item_count'] . ' items' : 'Soon'; ?></span>
+                                <div class="card-badge" style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(34, 197, 94, 0.08); padding: 0.5rem 1rem; border-radius: 100px; border: 1px solid rgba(34, 197, 94, 0.15);">
+                                    <div style="width: 5px; height: 5px; background: <?php echo $colors['from']; ?>; border-radius: 50%;"></div>
+                                    <span style="font-weight: 600; font-size: 0.875rem; color: <?php echo $colors['from']; ?>;"><?php echo $category['item_count'] > 0 ? $category['item_count'] . ' items' : 'Soon'; ?></span>
                                 </div>
-                                <i class="bi bi-arrow-right" style="font-size: 1.25rem; color: <?php echo $colors['from']; ?>; transition: transform 0.3s;"></i>
+                                <div style="width: 32px; height: 32px; background: rgba(34, 197, 94, 0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-arrow-right" style="font-size: 1rem; color: <?php echo $colors['from']; ?>;"></i>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -414,8 +420,8 @@ include __DIR__ . '/../includes/header_professional.php';
     <section class="scroll-reveal section-padding" aria-label="Recent Price Updates" style="background: #f9fafb; position: relative;">
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
-                <div style="display: inline-block; background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;">
-                    <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">FRESH ARRIVALS</span>
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;">
+                    <span style="background: linear-gradient(135deg, #22c55e, #16a34a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">FRESH ARRIVALS</span>
                 </div>
                 <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">Recent Updates</h2>
                 <p style="font-size: 1.125rem; color: #6b7280; max-width: 600px; margin: 0 auto;">Latest price updates from markets near you</p>
@@ -459,7 +465,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                     </div>
                                     
                                     <div class="d-flex align-items-center gap-2 mb-1">
-                                        <span class="badge" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-weight: 500; font-size: 0.7rem; padding: 0.25rem 0.5rem; border-radius: 6px;">
+                                        <span class="badge" style="background: rgba(34, 197, 94, 0.1); color: #22c55e; font-weight: 500; font-size: 0.7rem; padding: 0.25rem 0.5rem; border-radius: 6px;">
                                             <?php echo htmlspecialchars($item['category_name']); ?>
                                         </span>
                                         <small style="color: #6b7280; font-size: 0.75rem;">
@@ -470,7 +476,7 @@ include __DIR__ . '/../includes/header_professional.php';
 
                                 <!-- Price -->
                                 <div class="text-end ps-2" style="min-width: 80px;">
-                                    <div style="font-weight: 700; color: #f97316; font-size: 1.125rem;">
+                                    <div style="font-weight: 700; color: #22c55e; font-size: 1.125rem;">
                                         <?php echo formatPrice($item['current_price']); ?>
                                     </div>
                                     <small style="color: #9ca3af; font-size: 0.75rem;">/ <?php echo $item['unit']; ?></small>
@@ -550,28 +556,148 @@ include __DIR__ . '/../includes/header_professional.php';
     </section>
     </section>
 
-    <!-- How It Works Section -->
-    <section class="scroll-reveal section-padding" aria-label="How It Works" style="background: white; position: relative;">
+    <!-- Our Network Section -->
+    <section class="scroll-reveal section-padding" aria-label="Our Network" style="background: white; position: relative;">
 
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
-                <div style="display: inline-block; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;"><span class="text-gradient-blue" style="font-weight: 700; font-size: 0.875rem;">PROCESS</span></div>
-                <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">How It Works</h2>
-                <p style="font-size: 1.125rem; color: #6b7280; max-width: 600px; margin: 0 auto;">Simple, transparent, and effective - here's how we bring you accurate prices</p>
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;"><span style="background: linear-gradient(135deg, #22c55e, #16a34a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">OUR NETWORK</span></div>
+                <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">Built for Everyone</h2>
+                <p style="font-size: 1.125rem; color: #6b7280; max-width: 600px; margin: 0 auto;">A comprehensive ecosystem serving consumers, agents, and businesses</p>
             </div>
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6">
-                    <div style="position: relative;">
-                        <div style="position: absolute; left: 32px; top: 80px; bottom: 80px; width: 2px; background: linear-gradient(180deg, #22c55e, #10b981, #14b8a6, #84cc16); opacity: 0.3;"></div>
-                        <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem; position: relative;"><div class="floating-card" style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #22c55e, #16a34a); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">1</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">Data Collection</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Our network of contributors visits local markets and collects price information for various products daily</p></div></div>
-                        <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem; position: relative;"><div class="floating-card" style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">2</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">Verification</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Each price entry is verified through multiple sources to ensure accuracy and reliability</p></div></div>
-                        <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem; position: relative;"><div class="floating-card" style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">3</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">Publishing</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Verified prices are published on our platform, making them accessible to everyone for free</p></div></div>
-                        <div style="display: flex; gap: 1.5rem; position: relative;"><div class="floating-card" style="flex-shrink: 0; width: 64px; height: 64px; background: linear-gradient(135deg, #84cc16, #65a30d); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(132, 204, 22, 0.4); position: relative; z-index: 1;"><span style="font-size: 1.5rem; font-weight: 800; color: white;">4</span></div><div style="flex: 1; padding-top: 0.5rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.75rem;">You Benefit</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Make informed decisions, compare prices, and shop smarter with real-time market data</p></div></div>
+            
+            <div class="row g-4">
+                <!-- For Consumers -->
+                <div class="col-lg-4">
+                    <div style="background: linear-gradient(135deg, #f0fdf4, #ffffff); border-radius: 24px; padding: 2.5rem; height: 100%; border: 2px solid transparent; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#22c55e'; this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(34, 197, 94, 0.2)';" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #22c55e, #16a34a); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);">
+                            <i class="bi bi-person-fill" style="font-size: 2.5rem; color: white;"></i>
+                        </div>
+                        <h3 style="font-size: 1.75rem; font-weight: 700; color: #111827; margin-bottom: 1.5rem;">For Consumers</h3>
+                        <p style="color: #6b7280; line-height: 1.8; margin-bottom: 2rem;">Everyday users looking to make informed purchasing decisions</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #22c55e; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">Real-Time Price Access</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Get instant access to current market prices across 500+ products</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #22c55e; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">Service Rate Information</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Know standard rates for 100+ services before hiring</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #22c55e; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">Price Comparison</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Compare prices across 50+ markets without leaving home</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #22c55e; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">100% Free Forever</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">No subscriptions, no paywalls, always free</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="floating-card" style="background: white; border-radius: 24px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
-                        <svg viewBox="0 0 400 400" style="width: 100%; height: auto;"><rect x="50" y="200" width="120" height="150" fill="#22c55e" rx="8"/><rect x="70" y="220" width="30" height="40" fill="#fff" opacity="0.8"/><rect x="120" y="220" width="30" height="40" fill="#fff" opacity="0.8"/><rect x="70" y="280" width="30" height="40" fill="#fff" opacity="0.8"/><rect x="120" y="280" width="30" height="40" fill="#fff" opacity="0.8"/><polygon points="50,200 110,160 170,200" fill="#16a34a"/><path d="M 180 275 L 220 275" stroke="#10b981" stroke-width="4" fill="none" stroke-dasharray="5,5"><animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/></path><polygon points="220,275 210,270 210,280" fill="#10b981"/><ellipse cx="280" cy="260" rx="50" ry="20" fill="#14b8a6"/><rect x="230" y="260" width="100" height="60" fill="#14b8a6"/><ellipse cx="280" cy="320" rx="50" ry="20" fill="#0d9488"/><rect x="245" y="275" width="70" height="5" fill="#fff" opacity="0.3"/><rect x="245" y="285" width="70" height="5" fill="#fff" opacity="0.3"/><rect x="245" y="295" width="70" height="5" fill="#fff" opacity="0.3"/><circle cx="110" cy="100" r="25" fill="#10b981"/><path d="M 110 125 L 110 160 M 95 140 L 125 140 M 110 160 L 95 190 M 110 160 L 125 190" stroke="#10b981" stroke-width="8" stroke-linecap="round"/><circle cx="280" cy="100" r="25" fill="#84cc16"/><path d="M 280 125 L 280 160 M 265 140 L 295 140 M 280 160 L 265 190 M 280 160 L 295 190" stroke="#84cc16" stroke-width="8" stroke-linecap="round"/><path d="M 110 190 L 110 200" stroke="#10b981" stroke-width="3" stroke-dasharray="5,5"><animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/></path><path d="M 280 190 Q 280 230 280 260" stroke="#84cc16" stroke-width="3" stroke-dasharray="5,5"><animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/></path><circle cx="200" cy="150" r="30" fill="#10b981" opacity="0.2"><animate attributeName="r" values="30;35;30" dur="2s" repeatCount="indefinite"/></circle><path d="M 185 150 L 195 160 L 215 140" stroke="#10b981" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+                <!-- For Agents -->
+                <div class="col-lg-4">
+                    <div style="background: linear-gradient(135deg, #f0fdfa, #ffffff); border-radius: 24px; padding: 2.5rem; height: 100%; border: 2px solid transparent; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#10b981'; this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(16, 185, 129, 0.2)';" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);">
+                            <i class="bi bi-people-fill" style="font-size: 2.5rem; color: white;"></i>
+                        </div>
+                        <h3 style="font-size: 1.75rem; font-weight: 700; color: #111827; margin-bottom: 1.5rem;">For Agents</h3>
+                        <p style="color: #6b7280; line-height: 1.8; margin-bottom: 2rem;">Registered contributors who gather and verify market data</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #10b981; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">Earn Reputation Points</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Build your profile with every verified contribution</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #10b981; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">Easy Data Submission</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Simple interface to update prices and service rates</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #10b981; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">Community Impact</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Help fellow Nepalis make informed decisions</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #10b981; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">Verification Badge</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Get recognized as a trusted community contributor</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="<?php echo SITE_URL; ?>/contributor/register.php" style="display: block; margin-top: 2rem; text-align: center; background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 0.875rem 1.5rem; border-radius: 12px; font-weight: 600; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            Become an Agent <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- For Businesses -->
+                <div class="col-lg-4">
+                    <div style="background: linear-gradient(135deg, #f0fdfa, #ffffff); border-radius: 24px; padding: 2.5rem; height: 100%; border: 2px solid transparent; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#14b8a6'; this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(20, 184, 166, 0.2)';" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #14b8a6, #0d9488); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; box-shadow: 0 8px 20px rgba(20, 184, 166, 0.3);">
+                            <i class="bi bi-building" style="font-size: 2.5rem; color: white;"></i>
+                        </div>
+                        <h3 style="font-size: 1.75rem; font-weight: 700; color: #111827; margin-bottom: 1.5rem;">For Businesses</h3>
+                        <p style="color: #6b7280; line-height: 1.8; margin-bottom: 2rem;">Companies looking to reach engaged consumers</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #14b8a6; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">Sponsored Listings</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Featured placement above search results with custom contracts</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #14b8a6; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">Banner Advertisements</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Strategic placements on high-traffic pages</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #14b8a6; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">Targeted Audience</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Reach consumers actively searching for products</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                <i class="bi bi-check-circle-fill" style="color: #14b8a6; font-size: 1.25rem; flex-shrink: 0; margin-top: 0.15rem;"></i>
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.25rem;">SEO Benefits</h4>
+                                    <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Benefit from our high-ranking search visibility</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="#" style="display: block; margin-top: 2rem; text-align: center; background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; padding: 0.875rem 1.5rem; border-radius: 12px; font-weight: 600; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(20, 184, 166, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            Partner With Us <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
                     </div>
                 </div>
             </div>

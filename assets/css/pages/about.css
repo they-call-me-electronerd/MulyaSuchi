@@ -2,25 +2,25 @@
 
 .badge-tag {
     display: inline-block;
-    background: var(--primary-gradient-soft);
-    color: var(--primary-orange-dark);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(22, 163, 74, 0.1));
+    color: #16a34a;
     padding: 0.625rem 1.75rem;
     border-radius: 2rem;
     font-weight: 700;
     font-size: 0.875rem;
     letter-spacing: 0.5px;
     margin-bottom: 1.5rem;
-    border: 1.5px solid var(--primary-orange-lighter);
+    border: 1.5px solid rgba(34, 197, 94, 0.3);
     text-transform: uppercase;
 }
 
 /* Hero Section */
 .about-hero {
     padding: 6rem 0;
-    background: var(--primary-gradient);
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
     position: relative;
     overflow: hidden;
-    color: white;
+    color: #111827;
 }
 
 .about-hero::before {
@@ -54,22 +54,22 @@
 .hero-title {
     font-size: 3.5rem;
     font-weight: 800;
-    color: white;
+    color: #111827;
     line-height: 1.1;
     margin-bottom: 1.5rem;
     position: relative;
     z-index: 1;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: none;
 }
 
 .hero-title .highlight {
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+    color: #16a34a;
+    text-shadow: none;
 }
 
 .hero-subtitle {
     font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.95);
+    color: #4b5563;
     line-height: 1.7;
     margin-bottom: 2rem;
     position: relative;
@@ -90,11 +90,11 @@
     min-width: 140px;
     text-align: center;
     padding: 2rem 1.5rem;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: 1.5rem;
-    border: 2px solid rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(34, 197, 94, 0.2);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -114,9 +114,9 @@
 
 .stat:hover {
     transform: translateY(-8px) scale(1.05);
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 1);
+    border-color: #22c55e;
+    box-shadow: 0 20px 40px rgba(34, 197, 94, 0.2);
 }
 
 .stat:hover::before {
@@ -126,17 +126,17 @@
 .stat-number {
     font-size: 3rem;
     font-weight: 900;
-    color: white;
+    color: #16a34a;
     display: block;
     margin-bottom: 0.5rem;
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    text-shadow: none;
     letter-spacing: -1px;
     position: relative;
 }
 
 .stat-label {
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.95);
+    color: #6b7280;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -188,19 +188,19 @@
 }
 
 .mission-card {
-    background: var(--bg-primary);
+    background: rgba(255, 255, 255, 0.95);
     padding: 3rem;
     border-radius: 1.5rem;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     height: 100%;
     transition: all 0.3s;
-    border: 2px solid var(--border-color);
+    border: 2px solid rgba(34, 197, 94, 0.15);
 }
 
 .mission-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-orange);
-    border-color: var(--primary-orange-lighter);
+    box-shadow: 0 12px 30px rgba(34, 197, 94, 0.15);
+    border-color: #22c55e;
 }
 
 .icon-wrapper {
@@ -263,18 +263,20 @@
 }
 
 .step-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
     padding: 2.5rem 2rem;
     border-radius: 1.5rem;
     text-align: center;
     position: relative;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 2px solid rgba(34, 197, 94, 0.15);
     transition: all 0.3s;
 }
 
 .step-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 30px rgba(34, 197, 94, 0.15);
+    border-color: #22c55e;
 }
 
 .step-number {
@@ -321,20 +323,20 @@
 }
 
 .value-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
     padding: 3rem 2rem;
     border-radius: 1.5rem;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     transition: all 0.3s;
     height: 100%;
-    border: 2px solid transparent;
+    border: 2px solid rgba(34, 197, 94, 0.15);
 }
 
 .value-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 30px rgba(34, 197, 94, 0.15);
-    border-color: #bbf7d0;
+    border-color: #22c55e;
 }
 
 .value-card i {
