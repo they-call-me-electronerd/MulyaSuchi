@@ -201,6 +201,103 @@ include __DIR__ . '/../includes/header_professional.php';
     })();
     </script>
 
+    <!-- Popular Products Marquee Ribbon -->
+    <div class="marquee-ribbon" style="padding: 1rem 0; overflow: hidden; position: relative;">
+        <div style="display: flex; align-items: center; max-width: 100%; margin: 0 auto;">
+            <!-- Trending Label -->
+            <div class="trending-label" style="padding: 0 2rem; flex-shrink: 0; font-weight: 700; font-size: 0.875rem; letter-spacing: 0.05em; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="bi bi-graph-up-arrow" style="font-size: 1rem;"></i>
+                TRENDING
+            </div>
+            
+            <!-- Marquee Container -->
+            <div class="marquee-container" style="overflow: hidden; position: relative; flex: 1;">
+                <div class="marquee-content" style="display: flex; gap: 2.5rem; animation: marquee 40s linear infinite; white-space: nowrap;">
+                    <?php 
+                    $popularItems = $itemObj->getActiveItems(12);
+                    $marqueeItems = array_merge($popularItems, $popularItems); // Duplicate for seamless loop
+                    foreach ($marqueeItems as $popularItem): 
+                        // Determine trend direction (random for demo, you can add logic based on price history)
+                        $trendUp = rand(0, 1) == 1;
+                        $trendIcon = $trendUp ? '↑' : '↓';
+                        $trendColor = $trendUp ? '#10b981' : '#ef4444';
+                    ?>
+                    <div class="marquee-item" style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.25rem 0; min-width: fit-content;">
+                        <div class="marquee-item-name" style="font-weight: 600; font-size: 0.9rem; white-space: nowrap;">
+                            <?php echo htmlspecialchars($popularItem['item_name']); ?>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span class="marquee-item-price" style="font-weight: 500; font-size: 0.85rem; white-space: nowrap;">
+                                <?php echo formatPrice($popularItem['current_price']); ?>
+                            </span>
+                            <span style="color: <?php echo $trendColor; ?>; font-weight: 700; font-size: 0.95rem;">
+                                <?php echo $trendIcon; ?>
+                            </span>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Marquee Ribbon Styles */
+        .marquee-ribbon {
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .trending-label {
+            color: #1f2937;
+        }
+        
+        .marquee-item-name {
+            color: #1f2937;
+        }
+        
+        .marquee-item-price {
+            color: #6b7280;
+        }
+        
+        /* Dark Theme Support */
+        [data-theme="dark"] .marquee-ribbon,
+        body.dark-mode .marquee-ribbon {
+            background: #1e293b;
+            border-top: 1px solid #334155;
+            border-bottom: 1px solid #334155;
+        }
+        
+        [data-theme="dark"] .trending-label,
+        body.dark-mode .trending-label {
+            color: #f1f5f9;
+        }
+        
+        [data-theme="dark"] .marquee-item-name,
+        body.dark-mode .marquee-item-name {
+            color: #f1f5f9;
+        }
+        
+        [data-theme="dark"] .marquee-item-price,
+        body.dark-mode .marquee-item-price {
+            color: #94a3b8;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .marquee-container:hover .marquee-content {
+            animation-play-state: paused;
+        }
+    </style>
+
     <!-- Categories Section -->
     <section class="scroll-reveal section-padding" aria-label="Product Categories" style="background: white; position: relative;">
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
@@ -450,168 +547,6 @@ include __DIR__ . '/../includes/header_professional.php';
             </div>
         </div>
     </section>
-
-
-    <!-- Categories Section -->
-    <section class="scroll-reveal section-padding" aria-label="Product Categories" style="background: #f9fafb; position: relative;">
-
-        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
-            <div style="text-align: center; margin-bottom: 4rem;">
-                <div style="display: inline-block; background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;">
-                    <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">EXPLORE</span>
-                </div>
-                <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">Browse by Category</h2>
-                <p style="font-size: 1.125rem; color: #6b7280; max-width: 700px; margin: 0 auto;">Find verified prices for thousands of products across different categories - from fresh produce to electronics</p>
-            </div>
-
-            <div class="row g-4">
-                <?php 
-                $categoryColors = [
-                    'vegetables' => ['from' => '#10b981', 'to' => '#059669', 'bg' => '#f0fdf4'],
-                    'fruits' => ['from' => '#ef4444', 'to' => '#dc2626', 'bg' => '#fef2f2'],
-                    'kitchen-appliances' => ['from' => '#f59e0b', 'to' => '#d97706', 'bg' => '#fffbeb'],
-                    'study-material' => ['from' => '#3b82f6', 'to' => '#2563eb', 'bg' => '#eff6ff'],
-                    'clothing' => ['from' => '#ec4899', 'to' => '#db2777', 'bg' => '#fdf2f8'],
-                    'tools' => ['from' => '#6366f1', 'to' => '#4f46e5', 'bg' => '#eef2ff'],
-                    'electrical-appliances' => ['from' => '#8b5cf6', 'to' => '#7c3aed', 'bg' => '#faf5ff'],
-                    'tech-gadgets' => ['from' => '#06b6d4', 'to' => '#0891b2', 'bg' => '#ecfeff'],
-                    'miscellaneous' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
-                    'groceries' => ['from' => '#eab308', 'to' => '#ca8a04', 'bg' => '#fefce8'],
-                    'furniture' => ['from' => '#dc2626', 'to' => '#b91c1c', 'bg' => '#fef2f2'],
-                    'sports-fitness' => ['from' => '#14b8a6', 'to' => '#0d9488', 'bg' => '#f0fdfa'],
-                    'household-items' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
-                    'tools-hardware' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
-                    'dairy-products' => ['from' => '#60a5fa', 'to' => '#3b82f6', 'bg' => '#eff6ff'],
-                    'meat-fish' => ['from' => '#f87171', 'to' => '#ef4444', 'bg' => '#fef2f2'],
-                    'spices' => ['from' => '#fb923c', 'to' => '#f97316', 'bg' => '#fff7ed']
-                ];
-                $icons = [
-                    'vegetables'=>'🥦',
-                    'fruits'=>'🍎',
-                    'kitchen-appliances'=>'🍳',
-                    'study-material'=>'📚',
-                    'clothing'=>'👕',
-                    'tools'=>'🔧',
-                    'electrical-appliances'=>'💡',
-                    'tech-gadgets'=>'📱',
-                    'miscellaneous'=>'📦', 
-                    'groceries'=>'🛒', 
-                    'furniture'=>'🛋️', 
-                    'sports-fitness'=>'⚽', 
-                    'household-items'=>'📦', 
-                    'tools-hardware'=>'🔧',
-                    'dairy-products'=>'🥛',
-                    'meat-fish'=>'🐟',
-                    'spices'=>'🌶️'
-                ];
-                foreach ($categories as $category): 
-                    $slug = $category['slug'];
-                    $colors = $categoryColors[$slug] ?? ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'];
-                    $categoryItems = $categoryObj->getItemsByCategory($category['category_id'], 5);
-                ?>
-                <div class="col-6 col-md-4 col-lg-2 category-card-animate">
-                    <a href="products.php?category=<?php echo $category['category_id']; ?>" style="text-decoration: none; display: block; height: 100%;">
-                        <div class="category-card-inner" style="background: <?php echo $colors['bg']; ?>; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; cursor: pointer; min-height: 320px; display: flex; flex-direction: column; justify-content: space-between;">
-                            <div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); opacity: 0.05; border-radius: 50%;"></div>
-                            <div>
-                                <div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;"><?php echo $icons[$slug] ?? '📦'; ?></span></div>
-                                <h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;"><?php echo htmlspecialchars($category['category_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                                <p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500; height: 2.5rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.25rem;"><?php echo htmlspecialchars($category['description'], ENT_QUOTES, 'UTF-8'); ?></p>
-                            </div>
-                            <div style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;">
-                                <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><?php echo $category['item_count'] > 0 ? $category['item_count'] . ' items' : 'Coming Soon'; ?></span></div>
-                                <i class="bi bi-arrow-right" style="font-size: 1.25rem; color: <?php echo $colors['from']; ?>; transition: transform 0.3s;"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <?php endforeach; ?>
-                
-
-            </div>
-            
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="products.php" style="display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, #f97316, #ea580c); color: white; padding: 1rem 2.5rem; border-radius: 3rem; font-weight: 700; font-size: 1.125rem; text-decoration: none; box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 15px 35px rgba(249, 115, 22, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(249, 115, 22, 0.3)';"><span>Explore All Categories</span><i class="bi bi-arrow-right" style="font-size: 1.25rem;"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <?php if (!empty($recentItems)): ?>
-    <!-- Recent Updates Section -->
-    <section class="scroll-reveal section-padding" aria-label="Recent Price Updates" style="background: white; position: relative;">
-
-        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
-            <div style="text-align: center; margin-bottom: 4rem;">
-                <div style="display: inline-block; background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;">
-                    <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">FRESH ARRIVALS</span>
-                </div>
-                <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">Recent Updates</h2>
-                <p style="font-size: 1.125rem; color: #6b7280; max-width: 600px; margin: 0 auto;">Latest price updates from markets near you</p>
-            </div>
-            <div class="row g-4">
-                <?php foreach ($recentItems as $item): ?>
-                <div class="col-md-6 col-lg-4">
-                    <a href="item.php?id=<?php echo $item['item_id']; ?>" class="text-decoration-none">
-                        <div class="card border-0 shadow-sm h-100" style="transition: all 0.2s ease; border-radius: 16px;"
-                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 20px -5px rgba(0, 0, 0, 0.1)';"
-                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 2px 0 rgba(0, 0, 0, 0.05)';">
-                            <div class="card-body p-3 d-flex align-items-center gap-3">
-                                <!-- Image/Icon -->
-                                <div style="width: 64px; height: 64px; flex-shrink: 0; border-radius: 12px; overflow: hidden; background: #f3f4f6; position: relative;">
-                                    <?php 
-                                        $recentHasImage = itemHasImage($item['image_path'] ?? null);
-                                        $recentImageUrl = $recentHasImage ? getItemImageUrl($item['image_path']) : null;
-                                    ?>
-                                    <?php if ($recentHasImage && $recentImageUrl): ?>
-                                        <img src="<?php echo $recentImageUrl; ?>" 
-                                             alt="<?php echo htmlspecialchars($item['item_name']); ?>" 
-                                             style="width: 100%; height: 100%; object-fit: cover;">
-                                    <?php else: ?>
-                                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #9ca3af; font-weight: 700; background: #f9fafb;">
-                                            <?php echo mb_substr($item['item_name'], 0, 1); ?>
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
-
-                                <!-- Content -->
-                                <div style="flex: 1; min-width: 0;">
-                                    <div class="d-flex justify-content-between align-items-start mb-1">
-                                        <h5 class="mb-0 text-truncate" style="font-size: 1rem; font-weight: 600; color: #111827; max-width: 100%;">
-                                            <?php echo htmlspecialchars($item['item_name']); ?>
-                                        </h5>
-                                        <?php if ($item['market_location']): ?>
-                                            <small style="color: #9ca3af; font-size: 0.75rem; white-space: nowrap; margin-left: 0.5rem;">
-                                                <i class="bi bi-geo-alt"></i> <?php echo htmlspecialchars($item['market_location']); ?>
-                                            </small>
-                                        <?php endif; ?>
-                                    </div>
-                                    
-                                    <div class="d-flex align-items-center gap-2 mb-1">
-                                        <span class="badge" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-weight: 500; font-size: 0.7rem; padding: 0.25rem 0.5rem; border-radius: 6px;">
-                                            <?php echo htmlspecialchars($item['category_name']); ?>
-                                        </span>
-                                        <small style="color: #6b7280; font-size: 0.75rem;">
-                                            <i class="bi bi-clock"></i> <?php echo timeAgo($item['updated_at']); ?>
-                                        </small>
-                                    </div>
-                                </div>
-
-                                <!-- Price -->
-                                <div class="text-end ps-2" style="min-width: 80px;">
-                                    <div style="font-weight: 700; color: #f97316; font-size: 1.125rem;">
-                                        <?php echo formatPrice($item['current_price']); ?>
-                                    </div>
-                                    <small style="color: #9ca3af; font-size: 0.75rem;">/ <?php echo $item['unit']; ?></small>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
-    <?php endif; ?>
 
     <!-- Professional Footer -->
     <footer class="professional-footer">
