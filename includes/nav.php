@@ -49,6 +49,26 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                         <span class="nav-text">Products</span>
                     </a>
                 </li>
+                
+                <!-- Search Box -->
+                <li class="nav-item nav-search-item">
+                    <div class="nav-search-box">
+                        <input type="text" 
+                               class="nav-search-input" 
+                               placeholder="Search by Inspiration" 
+                               id="navSearchInput">
+                        <button class="nav-search-btn" aria-label="Search">
+                            <span class="search-icon">🔍</span>
+                        </button>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="<?php echo SITE_URL; ?>/public/categories.php" class="nav-link <?php echo $currentPage == 'categories.php' ? 'active' : ''; ?>">
+                        <span class="nav-icon">📂</span>
+                        <span class="nav-text">Categories</span>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="<?php echo SITE_URL; ?>/public/about.php" class="nav-link <?php echo $currentPage == 'about.php' ? 'active' : ''; ?>">
                         <span class="nav-icon">ℹ️</span>

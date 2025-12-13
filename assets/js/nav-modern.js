@@ -18,6 +18,8 @@
             this.navLinks = document.querySelectorAll('.nav-link');
             this.themeToggle = document.querySelector('.theme-toggle');
             this.searchBtn = document.querySelector('.nav-actions .nav-action-btn:not(.theme-toggle)');
+            this.navSearchInput = document.getElementById('navSearchInput');
+            this.navSearchBtn = document.querySelector('.nav-search-btn');
             
             this.isMenuOpen = false;
             this.isScrolling = false;
@@ -77,6 +79,28 @@
                     this.closeMobileMenu();
                 }
             });
+            
+            // Nav search box functionality
+            if (this.navSearchBtn) {
+                this.navSearchBtn.addEventListener('click', () => this.performSearch());
+            }
+            
+            if (this.navSearchInput) {
+                this.navSearchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.performSearch();
+                    }
+                });
+                
+                // Add focus animation
+                this.navSearchInput.addEventListener('focus', () => {
+                    this.navSearchInput.parentElement.style.transform = 'translateY(-1px)';
+                });
+                
+                this.navSearchInput.addEventListener('blur', () => {
+                    this.navSearchInput.parentElement.style.transform = 'translateY(0)';
+                });
+            }
         }
 
         // ===================================================================
@@ -232,6 +256,26 @@
         // ===================================================================
         // SEARCH FUNCTIONALITY
         // ===================================================================
+        
+        performSearch() {
+            if (!this.navSearchInput) return;
+            
+            const searchQuery = this.navSearchInput.value.trim();
+            
+            if (searchQuery) {
+                // Animate search button
+                if (this.navSearchBtn) {
+                    this.navSearchBtn.style.animation = 'pulse 0.4s ease';
+                    setTimeout(() => {
+                        this.navSearchBtn.style.animation = '';
+                    }, 400);
+                }
+                
+                // Redirect to products page with search query
+                const searchUrl = `${window.location.origin}/public/products.php?search=${encodeURIComponent(searchQuery)}`;
+                window.location.href = searchUrl;
+            }
+        }
 
         openSearch() {
             // Create a simple search modal or dispatch custom event
