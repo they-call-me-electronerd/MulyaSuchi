@@ -44,20 +44,13 @@ if (Test-Path "admin/test_upload.php") {
 }
 
 # Clean up temporary database files
-Write-Host "Cleaning SQL backup files..." -ForegroundColor Yellow
-$sqlBackups = @(
-    "sql/items_fixed.sql",
-    "sql/fresh_500_products_part2.sql",
-    "sql/fresh_500_products_part3.sql",
-    "sql/seed_500_products_master.sql",
-    "sql/fix_nepali_text.php"
-)
+Write-Host "Cleaning temporary SQL files..." -ForegroundColor Yellow
+$sqlBackups = Get-ChildItem "sql/" -Filter "backup_*.sql"
+$sqlBackups += Get-ChildItem "sql/" -Filter "temp_*.sql"
 
 foreach ($file in $sqlBackups) {
-    if (Test-Path $file) {
-        Remove-Item $file -Force
-        Write-Host "  Removed: $file" -ForegroundColor DarkGray
-    }
+    Remove-Item $file.FullName -Force
+    Write-Host "  Removed: $($file.Name)" -ForegroundColor DarkGray
 }
 
 # Clean up logs (keep directory)
