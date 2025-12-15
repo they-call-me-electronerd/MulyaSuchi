@@ -99,13 +99,8 @@ MulyaSuchi/
 │   └── seed_new_categories.php
 │
 ├── sql/                   # Database files
-│   ├── schema.sql        # Database schema
-│   ├── seed_data.sql     # Initial data
-│   ├── items.sql         # Items data
-│   ├── fresh_500_products.sql
-│   ├── rebrand_database.sql
-│   ├── migration_add_item_edit_support.sql
-│   └── README.md         # SQL documentation
+│   ├── mulyasuchi_complete.sql  # Complete database (schema + data)
+│   └── README.md                # SQL documentation
 │
 ├── tests/                 # Testing files
 │   └── README.md         # Testing documentation
