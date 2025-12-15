@@ -1,12 +1,12 @@
-# MulyaSuchi - Project Structure
+# SastoMahango - Project Structure
 
 ## Overview
-MulyaSuchi is a comprehensive market intelligence platform for Nepal, providing real-time pricing information and market insights.
+SastoMahango is a comprehensive market intelligence platform for Nepal, providing real-time pricing information and market insights.
 
 ## Directory Structure
 
 ```
-MulyaSuchi/
+SastoMahango/
 ├── admin/                  # Admin panel files
 │   ├── dashboard.php       # Admin dashboard
 │   ├── login.php          # Admin authentication

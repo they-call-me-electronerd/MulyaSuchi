@@ -1,8 +1,8 @@
-# MulyaSuchi - Installation Guide
+# SastoMahango - Installation Guide
 
 ## Prerequisites
 
-Before installing MulyaSuchi, ensure you have:
+Before installing SastoMahango, ensure you have:
 
 - **Web Server**: Apache 2.4+ or Nginx 1.18+
 - **PHP**: Version 7.4 or higher
