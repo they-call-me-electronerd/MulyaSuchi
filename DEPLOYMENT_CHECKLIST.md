@@ -14,12 +14,11 @@
 
 ### 2. Database Setup
 - [ ] Create production database
-- [ ] Import `sql/schema.sql`
-- [ ] Import `sql/seed_data.sql`
-- [ ] Import product data (sql/fresh_500_products.sql)
-- [ ] Run any pending migrations
+- [ ] Import `sql/mulyasuchi_complete.sql` (contains everything)
 - [ ] Create database user with appropriate privileges
 - [ ] Test database connection
+- [ ] Verify all tables created successfully
+- [ ] Verify data imported correctly
 
 ### 3. File Permissions
 - [ ] Set `assets/uploads/` to 775 (writable by web server)
