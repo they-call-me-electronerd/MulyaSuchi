@@ -16,7 +16,7 @@ Experience the platform in action with real-time price data and full functionali
 
 ---
 
-> *"Sasto Mahango"* translates to **"Cheap & Expensive"** in Nepali - your ultimate tool for finding the best grocery deals in Kathmandu!
+> *"Sasto Mahango"* translates to **"Cheap & Expensive"** in Nepali - your ultimate tool for finding the best products deals in Kathmandu!
 
 ## 📋 Platform Overview
 
