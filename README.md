@@ -16,64 +16,110 @@ Experience the platform in action with real-time price data and full functionali
 
 ---
 
-> *"Sasto Mahango"* translates to **"Cheap & Expensive"** in Nepali - your ultimate tool for finding the best products deals in Kathmandu!
+## 💡 Basic Concept Summary
 
-## 📋 Platform Overview
-
-Sasto Mahango is a dynamic **Product and Price Index** platform designed to bring transparency to the marketplace. In a retail environment where shopkeepers may quote arbitrary prices and online stores often mark up goods ("over prize"), consumers frequently pay more than the item's true worth.
-
-**Our Mission:** To help users find the best products at **affordable and actual market rates** by providing fair price transparency.
-
-### How It Works
-
-*   **Fair Price Discovery:** We provide the **average or actual price** of products, helping you avoid overpaying. You can check the real market rate before you buy.
-*   **Empowered Agent Network:** Our data is crowdsourced and promoted by a diverse network of **Agents**—including students, shopkeepers, and wholesalers.
-*   **Business Promotion:** Agents can promote their own businesses and shops by adding items and prices to the platform.
-*   **Incentivized Contribution:** Agents earn specific incentives for completing data collection targets ("intensives") and expanding the product index.
-*   **Verified Trust:** Administrators and key contributors are **verified by Sponsors**, ensuring that the data on our web platform is reliable and trustworthy.
+Sasto Mahango is a crowd-powered price transparency platform that solves price blindness in local markets. By collecting real-time product and essential goods prices through verified agents and rewarding them with incentives, the platform enables users to check fair market prices before purchasing. The system benefits consumers by preventing overcharging, empowers contributors through rewards, and sustains itself via sponsored listings and targeted advertisements from companies.
 
 ---
 
-## 🚀 Key Features
+## 🚩 Problem Statement
 
-*   **Real-Time Price Comparison:** Instantly compare prices across multiple vendors.
-*   **Smart Search:** Find products quickly with our optimized search engine.
-*   **Agent Dashboard:** Tools for agents to manage product listings and track incentives.
-*   **Admin Verification:** Robust system for sponsors to verify admin and agent identities.
-*   **Responsive Design:** Seamless experience across desktop and mobile devices.
+In local markets, customers often suffer from **price blindness**. When a person goes to a shop to buy a product (for example, a room heater), the shopkeeper can quote any price. If the actual fair market price is NPR 1000, the customer may end up paying NPR 1800 simply due to lack of information.
 
+This issue becomes more serious for daily essential goods such as:
+*   Petrol and diesel
+*   Vegetables and fruits
+*   Household essentials
 
-### User Experience
-- 📱 **Responsive Design**
-  - Mobile-first approach
-  - Adaptive layouts for all screen sizes
-  - Touch-friendly interfaces
-  - Fast loading times
+Prices of these items vary significantly by location, and there is no single trusted platform where users can check real-time, location-wise prices. As a result, consumers are frequently overcharged without realizing it.
 
-- 🎨 **Modern UI/UX**
-  - Clean, intuitive interface
-  - Smooth animations and transitions
-  - Dark mode support
-  - Accessibility features
+### 📉 Core Problem
+*   **No transparent, real-time price reference** for products and essentials
+*   Customers cannot easily **verify fair market prices**
+*   **High price variation** across locations without justification
+*   Lack of a **reliable system** to track daily price changes
 
-- 📊 **Data Visualization**
-  - Interactive price charts
-  - Trend indicators
-  - Comparative analytics
-  - Visual price history
+---
 
-### Technical Features
-- ⚡ **Performance Optimized**
-  - Efficient data caching
-  - Lazy loading
-  - Optimized database queries
-  - CDN integration
+## ✅ Proposed Solution
 
-- 🔒 **Secure & Reliable**
-  - Firebase Authentication
-  - Secure data transmission
-  - Regular backups
-  - Error handling & logging
+**Sasto Mahango** is a community-driven price intelligence platform that provides real-time, verified market prices of products and daily essentials across different locations.
+
+The platform helps users:
+1.  **Know the fair price** before purchasing
+2.  **Compare prices** across nearby shops or markets
+3.  **Avoid overpaying** due to misinformation
+
+---
+
+## 🔄 Data Collection Model (Agent-Based System)
+
+Price data on the platform is collected through **agents**.
+
+### Who can be an Agent?
+*   Shopkeepers
+*   Wholesalers
+*   Students
+*   Customers buying products
+*   *Anyone who interacts with the market can contribute price data.*
+
+### How Agents Work:
+1.  Agents submit product prices with **location details**.
+2.  Submissions are tracked and **verified**.
+3.  Data accuracy is maintained through **admin validation** and cross-checking.
+
+---
+
+## 🎁 Incentive Mechanism
+
+To ensure active participation and reliable data:
+*   Agents receive **incentives based on their contribution rate and accuracy**.
+*   **Higher-quality and consistent submissions** earn better rewards.
+*   Incentives are distributed by the platform admin.
+
+This encourages continuous and honest data contribution.
+
+---
+
+## 🛡️ Admin Role
+
+*   **Verify** agent identities and submissions.
+*   Maintain **data quality** and prevent manipulation.
+*   Manage **incentives** and contributor rankings.
+*   Oversee **platform integrity**.
+
+---
+
+## 💼 Business Model
+
+### Revenue Sources
+1.  **Advertisements**
+    *   Companies promote products on the platform.
+    *   Ads are displayed contextually (e.g., earphone brands shown when users search for headphones).
+
+2.  **Sponsorships**
+    *   Brands and companies sponsor categories or featured listings.
+    *   Sponsored products gain higher visibility.
+
+### Value for Companies
+*   **Direct access** to users who already show purchase intent.
+*   **Higher conversion rates** due to targeted exposure.
+
+### Value for Users
+*   Access to **trusted price information**.
+*   **Better purchasing decisions**.
+*   Reduced risk of being overcharged.
+
+---
+
+## 💎 Value Proposition
+
+| Stakeholder | Benefit |
+| :--- | :--- |
+| **Consumers** | Fair pricing, transparency, savings |
+| **Agents** | Incentives for data contribution |
+| **Companies** | Targeted advertising, real buyers |
+| **Market** | Reduced exploitation, healthy competition |
 
 ---
 
