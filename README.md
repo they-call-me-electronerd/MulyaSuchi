@@ -486,8 +486,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Project Maintainer**: they-call-me-electronerd
 
 - 🐙 GitHub: [@they-call-me-electronerd](https://github.com/they-call-me-electronerd)
-- 📧 Email: [Your Email]
-- 🌐 Website: [Your Website]
+- 📧 Email: saskhyamxeetri@gmail.com
+- 🌐 Website: saskhyambastakoti.com.np
 
 **Project Link**: [https://github.com/they-call-me-electronerd/Sasto_Mahango](https://github.com/they-call-me-electronerd/Sasto_Mahango)
 
@@ -532,7 +532,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Made with ❤️ in Nepal**
+**Made with dedication by a nerd**
 
 ⭐ Star this repo if you find it helpful!
 
